@@ -7,6 +7,8 @@ import VideoInquiry from '../views/VideoInquiry.vue';
 import Academy from '../views/Academy.vue';
 import Franchise from '../views/Franchise.vue';
 import Location from '../views/Location.vue';
+import Contact from '../views/Contact.vue';
+import Faq from '../views/faq.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -17,6 +19,8 @@ const routes = [
   { path: '/academy', name: 'Academy', component: Academy },
   { path: '/franchise', name: 'Franchise', component: Franchise },
   { path: '/location', name: 'Location', component: Location },
+  { path: '/contact', name: 'Contact', component: Contact },
+  { path: '/faq', name: 'Faq', component: Faq },
 ];
 
 const router = createRouter({

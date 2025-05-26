@@ -1,56 +1,97 @@
 <template>
   <!-- 푸터 -->
-  <footer class="bg-gray-800 text-white py-8 mt-auto">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <footer class="bg-gray-800 text-white py-8 sm:py-10 md:py-12 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+      >
         <!-- 회사 정보 -->
-        <div>
-          <h3 class="text-lg font-semibold mb-4">회사 정보</h3>
-          <div class="space-y-2 text-sm text-gray-300">
-            <p><span class="font-medium">회사명:</span> 공명짐</p>
-            <p><span class="font-medium">대표자:</span> 고종관</p>
-            <p><span class="font-medium">사업자등록번호:</span> 459-23-01817</p>
-            <p><span class="font-medium">개인정보책임자:</span> 고종관</p>
+        <div class="text-center sm:text-left">
+          <h3
+            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
+          >
+            회사 정보
+          </h3>
+          <div
+            class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-300"
+          >
+            <p><span class="font-medium text-gray-200">회사명:</span> 공명짐</p>
+            <p><span class="font-medium text-gray-200">대표자:</span> 고종관</p>
+            <p>
+              <span class="font-medium text-gray-200">사업자등록번호:</span>
+              459-23-01817
+            </p>
+            <p>
+              <span class="font-medium text-gray-200">개인정보책임자:</span>
+              고종관
+            </p>
           </div>
         </div>
 
         <!-- 연락처 정보 -->
-        <div>
-          <h3 class="text-lg font-semibold mb-4">연락처</h3>
-          <div class="space-y-2 text-sm text-gray-300">
-            <p><span class="font-medium">전화:</span> 02-715-0607</p>
-            <p><span class="font-medium">이메일:</span> cprh7677@naver.com</p>
+        <div class="text-center sm:text-left">
+          <h3
+            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
+          >
+            연락처
+          </h3>
+          <div
+            class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-300"
+          >
             <p>
-              <span class="font-medium">주소:</span> (13647) 경기도 성남시
-              수정구 창곡동 555, B1호
+              <span class="font-medium text-gray-200">전화:</span> 02-715-0607
+            </p>
+            <p>
+              <span class="font-medium text-gray-200">이메일:</span>
+              cprh7677@naver.com
+            </p>
+            <p class="leading-relaxed">
+              <span class="font-medium text-gray-200">주소:</span> (13647)
+              경기도 성남시 수정구 창곡동 555, B1호
             </p>
           </div>
         </div>
 
         <!-- 계좌 정보 -->
-        <div>
-          <h3 class="text-lg font-semibold mb-4">입금 계좌</h3>
-          <div class="space-y-2 text-sm text-gray-300">
-            <p><span class="font-medium">국민은행</span></p>
-            <p>229101-04-339256</p>
+        <div class="text-center sm:text-left">
+          <h3
+            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
+          >
+            입금 계좌
+          </h3>
+          <div
+            class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-300"
+          >
+            <p><span class="font-medium text-gray-200">국민은행</span></p>
+            <p class="font-mono text-sm sm:text-base text-blue-300">
+              229101-04-339256
+            </p>
             <p>예금주: 고종관</p>
           </div>
         </div>
 
         <!-- 소셜 미디어 -->
-        <div>
-          <h3 class="text-lg font-semibold mb-4">소셜 미디어</h3>
-          <div class="flex space-x-4">
+        <div class="text-center sm:text-left">
+          <h3
+            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
+          >
+            소셜 미디어
+          </h3>
+
+          <!-- 소셜 아이콘들 -->
+          <div
+            class="flex justify-center sm:justify-start space-x-3 sm:space-x-4 mb-4"
+          >
             <!-- 인스타그램 -->
             <a
               href="https://instagram.com/gongmyungjim"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-200"
+              class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 rounded-xl flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-300"
               aria-label="인스타그램"
             >
               <svg
-                class="w-6 h-6 text-white"
+                class="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -65,11 +106,11 @@
               href="https://open.kakao.com/o/your-openchat-link"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-200"
+              class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-400 rounded-xl flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-300"
               aria-label="카카오톡"
             >
               <svg
-                class="w-6 h-6 text-black"
+                class="w-5 h-5 sm:w-6 sm:h-6 text-black"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -83,14 +124,14 @@
             </a>
           </div>
 
-          <!-- 연락처 링크 -->
-          <div class="mt-4 space-y-2">
+          <!-- 연락처 빠른 링크 -->
+          <div class="space-y-2">
             <a
               href="tel:02-715-0607"
-              class="flex items-center text-sm text-gray-300 hover:text-white transition-colors duration-200"
+              class="flex items-center justify-center sm:justify-start text-xs sm:text-sm text-gray-300 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-gray-700"
             >
               <svg
-                class="w-4 h-4 mr-2"
+                class="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -102,14 +143,14 @@
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 ></path>
               </svg>
-              전화 걸기
+              <span class="font-medium">전화 걸기</span>
             </a>
             <a
               href="mailto:cprh7677@naver.com"
-              class="flex items-center text-sm text-gray-300 hover:text-white transition-colors duration-200"
+              class="flex items-center justify-center sm:justify-start text-xs sm:text-sm text-gray-300 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-gray-700"
             >
               <svg
-                class="w-4 h-4 mr-2"
+                class="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -121,16 +162,30 @@
                   d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 ></path>
               </svg>
-              이메일 보내기
+              <span class="font-medium">이메일 보내기</span>
             </a>
           </div>
         </div>
       </div>
 
-      <div
-        class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400"
-      >
-        <p>&copy; {{ currentYear }} 공명짐. All rights reserved.</p>
+      <!-- 구분선 및 카피라이트 -->
+      <div class="border-t border-gray-700 mt-6 sm:mt-8 pt-4 sm:pt-6">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0"
+        >
+          <p class="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
+            &copy; {{ currentYear }} 공명짐. All rights reserved.
+          </p>
+          <div class="flex space-x-4 text-xs text-gray-500">
+            <a href="/privacy" class="hover:text-gray-300 transition-colors"
+              >개인정보처리방침</a
+            >
+            <span>|</span>
+            <a href="/terms" class="hover:text-gray-300 transition-colors"
+              >이용약관</a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </footer>
