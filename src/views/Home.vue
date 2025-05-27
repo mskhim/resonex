@@ -8,11 +8,11 @@
       <div class="absolute inset-0 z-0">
         <!-- 로딩 중 배경 이미지 (동영상 로딩 전까지 표시) -->
         <div
-          class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500"
           :style="{
-            backgroundImage: '../img/video-poster.jpg',
+            backgroundImage: 'url(../img/video-poster.jpg)',
             backgroundSize: 'cover',
-            opacity: videoLoaded ? 0 : 1,
+            opacity: videoLoaded && videoPlaying ? 0 : 1,
           }"
         ></div>
 
@@ -23,11 +23,19 @@
           muted
           loop
           playsinline
+          webkit-playsinline
+          x5-playsinline
           preload="auto"
-          class="w-full h-full object-cover"
-          :class="{ 'opacity-0': !videoLoaded, 'opacity-100': videoLoaded }"
+          class="w-full h-full object-cover transition-opacity duration-500"
+          :class="{
+            'opacity-0': !videoLoaded || !videoPlaying,
+            'opacity-100': videoLoaded && videoPlaying,
+          }"
           @loadeddata="handleVideoLoaded"
           @canplay="handleVideoCanPlay"
+          @canplaythrough="handleVideoCanPlayThrough"
+          @play="handleVideoPlay"
+          @playing="handleVideoPlaying"
           @error="handleVideoError"
         >
           <!-- 비디오를 지원하지 않는 브라우저용 대체 이미지 -->
@@ -37,22 +45,23 @@
             class="w-full h-full object-cover"
           />
         </video>
+
         <!-- 어두운 오버레이 -->
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/60 z-5"></div>
       </div>
 
       <!-- 메인 콘텐츠 -->
       <div
-        class="absolute z-10 text-center text-white px-4 max-w-4xl mx-auto transition-opacity duration-1000"
+        class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto transition-opacity duration-1000"
         :class="{ 'opacity-0': !contentVisible, 'opacity-100': contentVisible }"
       >
         <span
-          class="text-3xl sm:text-4xl md:text-4xl font-bold mb-6 text-white logo-korean whitespace-nowrap"
+          class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 text-white logo-korean leading-tight"
         >
           [공명-共鳴] : 함께 공, 울 명
         </span>
         <h2
-          class="text-3xl sm:text-4xl md:text-4xl font-bold mb-6 text-white logo-korean"
+          class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 text-white logo-korean leading-tight"
         >
           "함께 울리는, 더 큰 울림"
         </h2>
@@ -60,7 +69,7 @@
 
       <!-- 스크롤 인디케이터 -->
       <div
-        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10"
       >
         <svg
           class="w-6 h-6 text-white/60"
@@ -308,7 +317,10 @@ export default {
   data() {
     return {
       videoLoaded: false,
+      videoPlaying: false,
       contentVisible: false,
+      retryCount: 0,
+      maxRetries: 5,
       programs: [
         {
           image:
@@ -421,21 +433,34 @@ export default {
   },
   methods: {
     setupVideoPlayback() {
-      // 모바일에서 비디오 재생 강제 실행
       const video = this.$refs.heroVideo;
-      if (video) {
-        // 사용자 상호작용 없이도 재생 시도
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              console.log('Video autoplay started');
-            })
-            .catch((error) => {
-              console.log('Autoplay failed:', error);
-              // 자동재생 실패시 대체 이미지 사용
-              this.videoLoaded = false;
-            });
+      if (!video) return;
+
+      // 비디오 로드 시작
+      video.load();
+
+      // 자동 재생 시도
+      this.attemptAutoplay();
+    },
+
+    async attemptAutoplay() {
+      const video = this.$refs.heroVideo;
+      if (!video) return;
+
+      try {
+        // 재생 시도
+        await video.play();
+        console.log('Video autoplay successful');
+        this.videoPlaying = true;
+      } catch (error) {
+        console.log('Autoplay attempt failed:', error);
+
+        // 재시도
+        if (this.retryCount < this.maxRetries) {
+          this.retryCount++;
+          setTimeout(() => {
+            this.attemptAutoplay();
+          }, 500);
         }
       }
     },
@@ -443,24 +468,43 @@ export default {
     handleVideoLoaded() {
       console.log('Video loaded');
       this.videoLoaded = true;
+
+      // 로드 완료 후 즉시 재생 시도
+      setTimeout(() => {
+        this.attemptAutoplay();
+      }, 100);
     },
 
     handleVideoCanPlay() {
       console.log('Video can play');
       this.videoLoaded = true;
 
-      // 모바일에서 재생 재시도
-      const video = this.$refs.heroVideo;
-      if (video && video.paused) {
-        video.play().catch(() => {
-          console.log('Mobile video play failed - using fallback image');
-        });
-      }
+      // canplay 이벤트 후 재생 시도
+      this.attemptAutoplay();
+    },
+
+    handleVideoCanPlayThrough() {
+      console.log('Video can play through');
+      this.videoLoaded = true;
+
+      // 충분히 버퍼링된 후 재생 시도
+      this.attemptAutoplay();
+    },
+
+    handleVideoPlay() {
+      console.log('Video play event');
+      this.videoPlaying = true;
+    },
+
+    handleVideoPlaying() {
+      console.log('Video playing event');
+      this.videoPlaying = true;
     },
 
     handleVideoError(error) {
       console.log('Video error:', error);
       this.videoLoaded = false;
+      this.videoPlaying = false;
     },
 
     setupScrollAnimation() {
@@ -579,6 +623,12 @@ export default {
 
 .animate-slide-in-up {
   animation: slide-in-up 0.6s ease-out forwards;
+}
+
+/* 반응형 텍스트 */
+.logo-korean {
+  word-break: keep-all;
+  line-height: 1.2;
 }
 
 /* 호버 효과 */
