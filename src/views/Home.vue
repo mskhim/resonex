@@ -6,17 +6,17 @@
     >
       <!-- 배경 비디오 -->
       <div class="absolute inset-0 z-0">
-        <!-- 로딩 중 배경 이미지 (동영상 로딩 전까지 표시) -->
+        <!-- 로딩 중 배경 이미지 -->
         <div
           class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500"
           :style="{
             backgroundImage: 'url(../img/video-poster.jpg)',
             backgroundSize: 'cover',
-            opacity: videoLoaded && videoPlaying ? 0 : 1,
+            opacity: videoLoaded ? 0 : 1,
           }"
         ></div>
 
-        <!-- 데스크톱/모바일 공용 비디오 (단순화) -->
+        <!-- 비디오 (심플 버전) -->
         <video
           ref="heroVideo"
           src="../video/mainVideo.mp4"
@@ -29,37 +29,12 @@
           preload="auto"
           class="w-full h-full object-cover transition-opacity duration-500"
           :class="{
-            'opacity-0': !videoLoaded || !videoPlaying,
-            'opacity-100': videoLoaded && videoPlaying,
+            'opacity-0': !videoLoaded,
+            'opacity-100': videoLoaded,
           }"
-          @loadeddata="handleVideoLoaded"
-          @canplay="handleVideoCanPlay"
-          @canplaythrough="handleVideoCanPlayThrough"
-          @play="handleVideoPlay"
-          @playing="handleVideoPlaying"
-          @error="handleVideoError"
+          @canplay="videoLoaded = true"
+          @error="videoLoaded = false"
         ></video>
-
-        <!-- 모바일 터치 영역 (전체 화면) -->
-        <div
-          v-if="isMobile && !videoPlaying"
-          class="absolute inset-0 z-20 flex items-center justify-center"
-          @click="forceVideoPlayback"
-          @touchstart="forceVideoPlayback"
-        >
-          <div
-            class="bg-black/60 rounded-full p-6 cursor-pointer hover:bg-black/80 transition-colors backdrop-blur-sm"
-          >
-            <svg
-              class="w-12 h-12 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            <p class="text-white text-xs mt-2 text-center">터치하여 재생</p>
-          </div>
-        </div>
 
         <!-- 어두운 오버레이 -->
         <div class="absolute inset-0 bg-black/60 z-5"></div>
@@ -332,12 +307,7 @@ export default {
   data() {
     return {
       videoLoaded: false,
-      videoPlaying: false,
       contentVisible: false,
-      retryCount: 0,
-      maxRetries: 5,
-      isMobile: false,
-      userInteracted: false,
       programs: [
         {
           image:
@@ -440,140 +410,14 @@ export default {
     };
   },
   mounted() {
-    this.detectMobile();
     this.setupScrollAnimation();
-    this.setupVideoPlayback();
 
     // DOM 로드 후 텍스트 표시
     setTimeout(() => {
       this.contentVisible = true;
     }, 500);
-
-    // 모바일에서 즉시 재생 시도 (스크롤 없이)
-    if (this.isMobile) {
-      setTimeout(() => {
-        this.forceVideoPlayback();
-      }, 1000);
-    }
   },
   methods: {
-    detectMobile() {
-      this.isMobile =
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        ) || window.innerWidth <= 768;
-
-      console.log('Mobile detected:', this.isMobile);
-    },
-
-    async forceVideoPlayback() {
-      console.log('Forcing video playback...');
-      const video = this.$refs.heroVideo;
-      if (!video) return;
-
-      try {
-        // 비디오 요소에 포커스
-        video.focus();
-
-        // 강제 로드
-        video.load();
-
-        // 여러 번 재생 시도
-        for (let i = 0; i < 3; i++) {
-          try {
-            await video.play();
-            console.log(`Video playback success on attempt ${i + 1}`);
-            this.videoPlaying = true;
-            break;
-          } catch (error) {
-            console.log(`Playback attempt ${i + 1} failed:`, error);
-            if (i < 2) {
-              await new Promise((resolve) => setTimeout(resolve, 200));
-            }
-          }
-        }
-      } catch (error) {
-        console.log('Force video playback failed:', error);
-      }
-    },
-
-    setupVideoPlayback() {
-      const video = this.$refs.heroVideo;
-      if (!video) return;
-
-      // 비디오 로드 시작
-      video.load();
-
-      // 데스크톱에서만 자동 재생 시도
-      if (!this.isMobile) {
-        this.attemptAutoplay();
-      }
-    },
-
-    async attemptAutoplay() {
-      const video = this.$refs.heroVideo;
-      if (!video) return;
-
-      try {
-        // 재생 시도
-        await video.play();
-        console.log('Video autoplay successful');
-        this.videoPlaying = true;
-      } catch (error) {
-        console.log('Autoplay attempt failed:', error);
-
-        // 재시도
-        if (this.retryCount < this.maxRetries) {
-          this.retryCount++;
-          setTimeout(() => {
-            this.attemptAutoplay();
-          }, 500);
-        }
-      }
-    },
-
-    handleVideoLoaded() {
-      console.log('Video loaded');
-      this.videoLoaded = true;
-
-      // 로드 완료 후 즉시 재생 시도
-      setTimeout(() => {
-        this.attemptAutoplay();
-      }, 100);
-    },
-
-    handleVideoCanPlay() {
-      console.log('Video can play');
-      this.videoLoaded = true;
-
-      // canplay 이벤트 후 재생 시도
-      this.attemptAutoplay();
-    },
-
-    handleVideoCanPlayThrough() {
-      console.log('Video can play through');
-      this.videoLoaded = true;
-
-      // 충분히 버퍼링된 후 재생 시도
-      this.attemptAutoplay();
-    },
-
-    handleVideoPlay() {
-      console.log('Video play event');
-      this.videoPlaying = true;
-    },
-
-    handleVideoPlaying() {
-      console.log('Video playing event');
-      this.videoPlaying = true;
-    },
-
-    handleVideoError(error) {
-      console.log('Video error:', error);
-      this.videoLoaded = false;
-      this.videoPlaying = false;
-    },
-
     setupScrollAnimation() {
       const observer = new IntersectionObserver(
         (entries) => {
