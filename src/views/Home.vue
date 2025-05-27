@@ -24,9 +24,6 @@
           muted
           loop
           playsinline
-          webkit-playsinline
-          x5-playsinline
-          preload="auto"
           class="w-full h-full object-cover transition-opacity duration-500"
           :class="{
             'opacity-0': !videoLoaded,
