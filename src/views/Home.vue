@@ -46,13 +46,13 @@
         class="absolute z-10 text-center text-white px-4 max-w-4xl mx-auto transition-opacity duration-1000"
         :class="{ 'opacity-0': !contentVisible, 'opacity-100': contentVisible }"
       >
-        <h2
-          class="text-4xl sm:text-5xl md:text-5xl font-bold mb-6 text-white logo-korean"
+        <span
+          class="text-3xl sm:text-4xl md:text-4xl font-bold mb-6 text-white logo-korean whitespace-nowrap"
         >
           [공명-共鳴] : 함께 공, 울 명
-        </h2>
+        </span>
         <h2
-          class="text-4xl sm:text-5xl md:text-5xl font-bold mb-6 text-white logo-korean"
+          class="text-3xl sm:text-4xl md:text-4xl font-bold mb-6 text-white logo-korean"
         >
           "함께 울리는, 더 큰 울림"
         </h2>
