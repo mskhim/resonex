@@ -70,7 +70,7 @@
             ㅣ
           </div>
 
-          <!-- Products 메뉴 -->
+          <!-- 제품판매 메뉴 -->
           <div class="relative group">
             <button
               data-menu="products"
@@ -145,6 +145,9 @@
           <!-- Support 메뉴 -->
           <div class="relative group">
             <button
+              data-menu="support"
+              @mouseenter="showMegaMenu('support')"
+              @mouseleave="hideMegaMenu"
               :class="[
                 'px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ease-in-out transform hover:scale-105 flex items-center',
                 isScrolled
@@ -214,24 +217,6 @@
             >
               위치 안내
             </RouterLink>
-          </div>
-
-          <!-- Products 메가메뉴 -->
-          <div
-            v-if="activeMegaMenu === 'products'"
-            class="flex items-center justify-center py-4 space-x-8"
-          >
-            <RouterLink
-              to="/products"
-              :class="[
-                'px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium',
-                isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
-              ]"
-            >
-              제품 판매
-            </RouterLink>
             <div
               :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
             ></div>
@@ -245,6 +230,108 @@
               ]"
             >
               논문 리스트
+            </RouterLink>
+          </div>
+
+          <!-- 제품판매 메가메뉴 -->
+          <div
+            v-if="activeMegaMenu === 'products'"
+            class="flex items-center justify-center py-4 space-x-4 overflow-x-auto"
+          >
+            <RouterLink
+              to="/products/powerplate"
+              :class="[
+                'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
+                isScrolled
+                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+              ]"
+            >
+              파워플레이트
+            </RouterLink>
+            <div
+              :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
+            ></div>
+            <RouterLink
+              to="/products/oxygen"
+              :class="[
+                'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
+                isScrolled
+                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+              ]"
+            >
+              산소캡슐
+            </RouterLink>
+            <div
+              :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
+            ></div>
+            <RouterLink
+              to="/products/sasom7"
+              :class="[
+                'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
+                isScrolled
+                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+              ]"
+            >
+              SasoM7
+            </RouterLink>
+            <div
+              :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
+            ></div>
+            <RouterLink
+              to="/products/ace-body"
+              :class="[
+                'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
+                isScrolled
+                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+              ]"
+            >
+              에이스바디 타워풀리
+            </RouterLink>
+            <div
+              :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
+            ></div>
+            <RouterLink
+              to="/products/align-pilates"
+              :class="[
+                'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
+                isScrolled
+                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+              ]"
+            >
+              얼라인필라테스
+            </RouterLink>
+            <div
+              :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
+            ></div>
+            <RouterLink
+              to="/products/fitness"
+              :class="[
+                'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
+                isScrolled
+                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+              ]"
+            >
+              헬스 기구
+            </RouterLink>
+            <div
+              :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
+            ></div>
+            <RouterLink
+              to="/products/trigger-point"
+              :class="[
+                'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
+                isScrolled
+                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+              ]"
+            >
+              트리거포인트
             </RouterLink>
           </div>
 
@@ -383,102 +470,220 @@
       <!-- 모바일 드롭다운 메뉴 -->
       <div
         v-if="menuOpen"
-        class="absolute top-full right-0 left-0 bg-white/95 backdrop-blur-lg border-t border-gray-200/50 shadow-lg z-50 transform transition-all duration-300 ease-in-out"
+        class="absolute top-full right-0 left-0 bg-white/95 backdrop-blur-lg border-t border-gray-200/50 shadow-lg z-50 transform transition-all duration-300 ease-in-out max-h-96 overflow-y-auto"
         :class="
           menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         "
       >
         <nav class="py-2">
           <!-- About Section -->
-          <div
-            class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100"
-          >
-            About
+          <div>
+            <button
+              @click="toggleMobileSection('about')"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between"
+            >
+              About
+              <svg
+                class="w-4 h-4 transition-transform duration-200"
+                :class="{ 'rotate-180': expandedSections.about }"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div v-if="expandedSections.about" class="bg-gray-50">
+              <RouterLink
+                @click="closeMenu"
+                to="/about"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                회사 소개
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/location"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                위치 안내
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/papers"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                논문 리스트
+              </RouterLink>
+            </div>
           </div>
-          <RouterLink
-            @click="closeMenu"
-            to="/about"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200"
-          >
-            회사 소개
-          </RouterLink>
-          <RouterLink
-            @click="closeMenu"
-            to="/location"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200 border-b border-gray-100"
-          >
-            위치 안내
-          </RouterLink>
 
-          <!-- Products Section -->
-          <div
-            class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-          >
-            Products
+          <!-- 제품판매 Section -->
+          <div>
+            <button
+              @click="toggleMobileSection('products')"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between"
+            >
+              제품판매
+              <svg
+                class="w-4 h-4 transition-transform duration-200"
+                :class="{ 'rotate-180': expandedSections.products }"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div v-if="expandedSections.products" class="bg-gray-50">
+              <RouterLink
+                @click="closeMenu"
+                to="/products/powerplate"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                파워플레이트
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/products/oxygen"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                산소캡슐
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/products/sasom7"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                SasoM7
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/products/ace-body"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                에이스바디 타워풀리
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/products/align-pilates"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                얼라인필라테스
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/products/fitness"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                헬스 기구
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/products/trigger-point"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                트리거포인트
+              </RouterLink>
+            </div>
           </div>
-          <RouterLink
-            @click="closeMenu"
-            to="/products"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200"
-          >
-            제품 판매
-          </RouterLink>
-          <RouterLink
-            @click="closeMenu"
-            to="/papers"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200 border-b border-gray-100"
-          >
-            논문 리스트
-          </RouterLink>
 
           <!-- Programs Section -->
-          <div
-            class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-          >
-            Programs
+          <div>
+            <button
+              @click="toggleMobileSection('programs')"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between"
+            >
+              Programs
+              <svg
+                class="w-4 h-4 transition-transform duration-200"
+                :class="{ 'rotate-180': expandedSections.programs }"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div v-if="expandedSections.programs" class="bg-gray-50">
+              <RouterLink
+                @click="closeMenu"
+                to="/academy"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                교육 아카데미
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/franchise"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                공명짐 체인점 문의
+              </RouterLink>
+            </div>
           </div>
-          <RouterLink
-            @click="closeMenu"
-            to="/academy"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200"
-          >
-            교육 아카데미
-          </RouterLink>
-          <RouterLink
-            @click="closeMenu"
-            to="/franchise"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200 border-b border-gray-100"
-          >
-            공명짐 체인점 문의
-          </RouterLink>
 
           <!-- Support Section -->
-          <div
-            class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-          >
-            Support
+          <div>
+            <button
+              @click="toggleMobileSection('support')"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider hover:bg-gray-50 flex items-center justify-between"
+            >
+              Support
+              <svg
+                class="w-4 h-4 transition-transform duration-200"
+                :class="{ 'rotate-180': expandedSections.support }"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div v-if="expandedSections.support" class="bg-gray-50">
+              <RouterLink
+                @click="closeMenu"
+                to="/video-inquiry"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                영상 홍보 촬영 문의
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/contact"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                고객 문의
+              </RouterLink>
+              <RouterLink
+                @click="closeMenu"
+                to="/faq"
+                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+              >
+                자주 묻는 질문
+              </RouterLink>
+            </div>
           </div>
-          <RouterLink
-            @click="closeMenu"
-            to="/video-inquiry"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200"
-          >
-            영상 홍보 촬영 문의
-          </RouterLink>
-          <RouterLink
-            @click="closeMenu"
-            to="/contact"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200"
-          >
-            고객 문의
-          </RouterLink>
-          <RouterLink
-            @click="closeMenu"
-            to="/faq"
-            class="block px-6 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-700 transition-colors duration-200"
-          >
-            자주 묻는 질문
-          </RouterLink>
         </nav>
       </div>
     </div>
@@ -510,32 +715,49 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
 
 const menuOpen = ref(false);
 const isScrolled = ref(false);
 const showBackToTop = ref(false);
 const activeMegaMenu = ref(null);
+const expandedSections = reactive({
+  about: false,
+  products: false,
+  programs: false,
+  support: false,
+});
+
 let megaMenuTimeout = null;
 
 // 스크롤 이벤트 핸들러
 const handleScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-  // 헤더 배경 변화 (50px 이상 스크롤시)
   isScrolled.value = scrollTop > 50;
-
-  // Back to Top 버튼 표시 (300px 이상 스크롤시)
   showBackToTop.value = scrollTop > 300;
 };
 
 // 메뉴 토글
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
+  if (!menuOpen.value) {
+    // 메뉴 닫을 때 모든 섹션 닫기
+    Object.keys(expandedSections).forEach((key) => {
+      expandedSections[key] = false;
+    });
+  }
 };
 
 const closeMenu = () => {
   menuOpen.value = false;
+  Object.keys(expandedSections).forEach((key) => {
+    expandedSections[key] = false;
+  });
+};
+
+// 모바일 섹션 토글
+const toggleMobileSection = (section) => {
+  expandedSections[section] = !expandedSections[section];
 };
 
 // 메가메뉴 컨트롤
@@ -585,37 +807,3 @@ onUnmounted(() => {
   }
 });
 </script>
-
-<style scoped>
-/* 로고 필터 클래스 */
-.filter {
-  filter: brightness(0) invert(1);
-}
-
-.brightness-0 {
-  filter: brightness(0);
-}
-
-.invert {
-  filter: invert(1);
-}
-
-/* Back to Top 버튼 애니메이션 */
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(20px) scale(0.9);
-}
-
-/* 백드롭 블러 지원이 없는 브라우저 대응 */
-@supports not (backdrop-filter: blur(16px)) {
-  header.bg-white\/95 {
-    background-color: rgba(255, 255, 255, 0.98);
-  }
-}
-</style>

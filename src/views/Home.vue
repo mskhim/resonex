@@ -46,10 +46,14 @@
         class="absolute z-10 text-center text-white px-4 max-w-4xl mx-auto transition-opacity duration-1000"
         :class="{ 'opacity-0': !contentVisible, 'opacity-100': contentVisible }"
       >
-        <h2 class="text-4xl sm:text-6xl md:text-5xl font-bold mb-6 text-white">
+        <h2
+          class="text-4xl sm:text-5xl md:text-5xl font-bold mb-6 text-white logo-korean"
+        >
           [공명-共鳴] : 함께 공, 울 명
         </h2>
-        <h2 class="text-4xl sm:text-6xl md:text-5xl font-bold mb-6 text-white">
+        <h2
+          class="text-4xl sm:text-5xl md:text-5xl font-bold mb-6 text-white logo-korean"
+        >
           "함께 울리는, 더 큰 울림"
         </h2>
       </div>
@@ -515,6 +519,13 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap');
+
+.logo-korean {
+  font-family: 'Noto Serif KR', serif !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.02em;
+}
 /* 애니메이션 정의 */
 @keyframes fade-in-up {
   from {
