@@ -12,14 +12,15 @@
       <!-- 배경 비디오 -->
       <div class="absolute inset-0 z-0">
         <!-- 로딩 중 배경 이미지 -->
-        <div
-          class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500"
-          :style="{
-            backgroundImage: 'url(video-poster.jpg)',
-            backgroundSize: 'cover',
-            opacity: videoCanPlay ? 0 : 1,
+        <img
+          src="../img/video-poster.jpg"
+          alt="Video poster"
+          class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+          :class="{
+            'opacity-100': !videoPlaying,
+            'opacity-0': videoPlaying,
           }"
-        ></div>
+        />
 
         <!-- 비디오 (심플 버전) -->
         <video
