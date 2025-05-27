@@ -15,15 +15,10 @@
 
           <!-- 텍스트 내용 -->
           <div class="absolute inset-0 flex items-center justify-center z-10">
-            <div class="text-center max-w-4xl mx-auto px-4">
+            <div class="text-center max-w-4xl mx-auto px-4 mt-30">
               <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">
                 찾아오시는 길
               </h1>
-              <p
-                class="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
-              >
-                공명짐으로 오시는 방법을 안내해드립니다
-              </p>
             </div>
           </div>
         </div>
