@@ -519,13 +519,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap');
-
-.logo-korean {
-  font-family: 'Noto Serif KR', serif !important;
-  font-weight: 300 !important;
-  letter-spacing: -0.02em;
-}
 /* 애니메이션 정의 */
 @keyframes fade-in-up {
   from {

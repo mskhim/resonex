@@ -83,7 +83,7 @@
                   : 'text-white hover:text-blue-200',
               ]"
             >
-              Products
+              제품판매
               <svg
                 class="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
                 fill="none"
@@ -180,7 +180,7 @@
           'absolute top-full left-0 right-0 transition-all duration-300 ease-in-out overflow-hidden',
           isScrolled
             ? 'bg-white/95 backdrop-blur-lg shadow-lg border-t border-gray-200/50'
-            : 'bg-black/80 backdrop-blur-lg border-t border-white/20',
+            : 'bg-gradient-to-b from-black/10 via-black/30 to-black/60 backdrop-blur-md border-white/10',
           activeMegaMenu ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0',
         ]"
         @mouseenter="keepMegaMenuOpen"
@@ -198,7 +198,7 @@
                 'px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium',
                 isScrolled
                   ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+                  : 'text-gray-100 hover:bg-white/15 hover:text-blue-200 drop-shadow-sm',
               ]"
             >
               회사 소개
@@ -212,7 +212,7 @@
                 'px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium',
                 isScrolled
                   ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+                  : 'text-gray-100 hover:bg-white/15 hover:text-blue-200 drop-shadow-sm',
               ]"
             >
               위치 안내
@@ -226,7 +226,7 @@
                 'px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium',
                 isScrolled
                   ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+                  : 'text-gray-100 hover:bg-white/15 hover:text-blue-200 drop-shadow-sm',
               ]"
             >
               논문 리스트
@@ -244,7 +244,7 @@
                 'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
                 isScrolled
                   ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+                  : 'text-gray-100 hover:bg-white/15 hover:text-blue-200 drop-shadow-sm',
               ]"
             >
               파워플레이트
@@ -258,7 +258,7 @@
                 'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
                 isScrolled
                   ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+                  : 'text-gray-100 hover:bg-white/15 hover:text-blue-200 drop-shadow-sm',
               ]"
             >
               산소캡슐
@@ -346,7 +346,7 @@
                 'px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium',
                 isScrolled
                   ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
+                  : 'text-gray-100 hover:bg-white/15 hover:text-blue-200 drop-shadow-sm',
               ]"
             >
               교육 아카데미

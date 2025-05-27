@@ -19,10 +19,12 @@
           class="absolute inset-0 flex items-center justify-center z-10 mt-30"
         >
           <div class="text-center">
-            <h1 class="text-3xl md:text-5xl font-bold mb-4 text-white">
+            <h1
+              class="text-3xl md:text-5xl font-bold mb-4 text-white logo-korean"
+            >
               [공명-共鳴]
             </h1>
-            <p class="text-lg md:text-xl text-gray-200">
+            <p class="text-lg md:text-xl text-gray-200 logo-korean">
               함께 공, 울 명 - 함께 울리는, 더 큰 울림
             </p>
           </div>
