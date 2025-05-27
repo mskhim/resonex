@@ -6,15 +6,29 @@
     >
       <!-- 배경 비디오 -->
       <div class="absolute inset-0 z-0">
+        <!-- 로딩 중 배경 이미지 (동영상 로딩 전까지 표시) -->
+        <div
+          class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          :style="{
+            backgroundImage:
+              'url(https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)',
+            opacity: videoLoaded ? 0 : 1,
+          }"
+        ></div>
+
         <video
+          ref="heroVideo"
           src="../video/mainVideo.mp4"
           autoplay
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="auto"
           class="w-full h-full object-cover"
-          poster="../img/video-poster.jpg"
+          :class="{ 'opacity-0': !videoLoaded, 'opacity-100': videoLoaded }"
+          @loadeddata="handleVideoLoaded"
+          @canplay="handleVideoCanPlay"
+          @error="handleVideoError"
         >
           <!-- 비디오를 지원하지 않는 브라우저용 대체 이미지 -->
           <img
@@ -23,45 +37,21 @@
             class="w-full h-full object-cover"
           />
         </video>
-        <!-- 어두운 오버레이 (헤더 텍스트가 잘 보이도록) -->
+        <!-- 어두운 오버레이 -->
         <div class="absolute inset-0 bg-black/60"></div>
       </div>
 
-      메인 콘텐츠
-      <div class="absolute z-10 text-center text-white px-4 max-w-4xl mx-auto">
+      <!-- 메인 콘텐츠 -->
+      <div
+        class="absolute z-10 text-center text-white px-4 max-w-4xl mx-auto transition-opacity duration-1000"
+        :class="{ 'opacity-0': !contentVisible, 'opacity-100': contentVisible }"
+      >
         <h2 class="text-4xl sm:text-6xl md:text-5xl font-bold mb-6 text-white">
           [공명-共鳴] : 함께 공, 울 명
         </h2>
         <h2 class="text-4xl sm:text-6xl md:text-5xl font-bold mb-6 text-white">
           "함께 울리는, 더 큰 울림"
         </h2>
-        <!--
-        <p
-          class="text-xl sm:text-2xl md:text-3xl font-light mb-8 text-gray-100"
-        >
-          진동운동의 혁신적 경험
-        </p>
-        <p
-          class="text-base sm:text-lg mb-12 text-gray-200 max-w-2xl mx-auto leading-relaxed"
-        >
-          과학적으로 입증된 진동운동으로 건강한 변화를 시작하세요
-        </p> -->
-
-        <!-- CTA 버튼들 -->
-        <!-- <div
-          class="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <button
-            class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold text-white transition-all duration-300 hover:scale-105"
-          >
-            체험하기
-          </button>
-          <button
-            class="px-8 py-4 border-2 border-white/80 rounded-lg font-semibold text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
-          >
-            프로그램
-          </button>
-        </div>-->
       </div>
 
       <!-- 스크롤 인디케이터 -->
@@ -91,10 +81,11 @@
           <h2
             class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            운동 프로그램
+            맞춤형 운동 프로그램
           </h2>
           <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            개인 맞춤형 진동운동으로 최대의 효과를 경험하세요
+            전문가가 직접 설계한 프리미엄 운동 솔루션으로 건강한 변화를
+            경험하세요
           </p>
         </div>
 
@@ -122,7 +113,7 @@
               <div class="absolute inset-0 bg-black/20"></div>
             </div>
 
-            <div class="p-6">
+            <div class="p-6 pb-4 flex flex-col h-full">
               <h3 class="text-xl font-bold text-gray-900 mb-3">
                 {{ program.title }}
               </h3>
@@ -144,7 +135,7 @@
               </ul>
 
               <button
-                class="mt-6 w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors duration-300"
+                class="mt-auto mb-4 w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors duration-300"
               >
                 자세히 보기
               </button>
@@ -154,42 +145,46 @@
       </div>
     </section>
 
-    <!-- 운동 효과 섹션 -->
+    <!-- 건강기기 체험 섹션 -->
     <section class="py-20 sm:py-32 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2
             class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            과학적 효과
+            프리미엄 기기 체험
           </h2>
           <p class="text-lg sm:text-xl text-gray-600">
-            진동운동의 입증된 건강 효과
+            검증된 헬스케어 기기를 직접 체험하고 전문가 상담을 받아보세요
           </p>
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
           <div
-            v-for="(effect, index) in exerciseEffects"
+            v-for="(effect, index) in healthcareServices"
             :key="index"
             ref="effectCards"
             :class="[
-              'effect-card text-center p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-center',
+              'effect-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1',
               isVisible.effectCards
                 ? 'animate-fade-in-up'
                 : 'opacity-0 translate-y-4',
             ]"
             :style="{
               animationDelay: `${index * 150}ms`,
-              height: '200px',
-              minHeight: '200px',
             }"
           >
-            <div class="text-4xl mb-4">{{ effect.icon }}</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2 flex-grow">
-              {{ effect.title }}
-            </h3>
-            <p class="text-sm text-gray-600">{{ effect.description }}</p>
+            <img
+              :src="effect.image"
+              :alt="effect.title"
+              class="w-full h-32 object-cover"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-gray-900 mb-2">
+                {{ effect.title }}
+              </h3>
+              <p class="text-sm text-gray-600">{{ effect.description }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -202,10 +197,10 @@
           <h2
             class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            운동 현장
+            공명짐 현장
           </h2>
           <p class="text-lg sm:text-xl text-gray-600">
-            공명짐에서의 실제 운동 모습과 최신 장비들을 확인하세요
+            실제 운동 현장과 최신 시설을 확인해보세요
           </p>
         </div>
 
@@ -257,10 +252,10 @@
           <h2
             class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            전문 장비
+            위탁판매 서비스
           </h2>
           <p class="text-lg sm:text-xl text-gray-600">
-            전문 운동기구 및 건강 관리 제품을 합리적인 가격으로 제공합니다
+            전문가가 선별한 프리미엄 건강기기를 합리적인 가격으로 만나보세요
           </p>
         </div>
 
@@ -293,7 +288,7 @@
               <button
                 class="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
               >
-                문의하기
+                상담 문의
               </button>
             </div>
           </div>
@@ -308,59 +303,73 @@ export default {
   name: 'Home',
   data() {
     return {
+      videoLoaded: false,
+      contentVisible: false,
       programs: [
         {
           image:
             'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          title: '진동운동 기초',
-          description: '진동운동의 기본 원리와 자세를 배우는 초보자 프로그램',
+          title: '공명점 운동',
+          description:
+            '신체 균형과 에너지 흐름을 개선하는 전통적인 공명점 운동법으로 몸과 마음의 조화를 이룹니다',
           benefits: [
-            '근력 강화',
-            '균형감각 향상',
-            '혈액순환 개선',
-            '저충격 운동',
+            '에너지 순환 개선',
+            '자세 교정 및 밸런스 향상',
+            '스트레스 완화',
+            '집중력 증진',
           ],
         },
         {
           image:
             'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          title: '체중 관리',
-          description: '효율적인 칼로리 소모와 체중 감량을 위한 맞춤 프로그램',
+          title: '필라테스',
+          description:
+            '코어 근육 강화와 신체 정렬에 중점을 둔 전문 필라테스 프로그램으로 건강한 체형을 만들어갑니다',
           benefits: [
-            '체지방 감소',
-            '신진대사 촉진',
-            '근육량 증가',
-            '체형 개선',
+            '코어 근력 강화',
+            '유연성 및 근력 향상',
+            '재활 및 컨디셔닝',
+            '체형 교정',
           ],
         },
         {
           image:
             'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          title: '재활 운동',
-          description: '부상 회복과 근육 강화를 위한 안전한 재활 운동 프로그램',
-          benefits: ['관절 가동성 향상', '근육 회복', '통증 완화', '재활 촉진'],
+          title: '파워플레이트',
+          description:
+            '3차원 진동 기술을 활용한 혁신적인 운동법으로 짧은 시간에 최대의 운동 효과를 경험하세요',
+          benefits: [
+            '근력 및 근지구력 향상',
+            '체지방 감소 및 순환 개선',
+            '시간 효율적인 운동',
+            '관절 부담 최소화',
+          ],
         },
       ],
-      exerciseEffects: [
+      healthcareServices: [
         {
-          icon: '💪',
-          title: '근력 강화',
-          description: '진동 자극을 통한 효과적인 근육 발달',
+          title: '무료 체험 서비스',
+          description: '최신 건강기기를 실제로 체험하고 효과를 직접 확인하세요',
+          image:
+            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
         },
         {
-          icon: '🔥',
-          title: '지방 연소',
-          description: '높은 칼로리 소모로 체중 감량 효과',
+          title: '전문가 맞춤 상담',
+          description: '개인의 건강 상태와 목표에 맞는 최적의 솔루션 제안',
+          image:
+            'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
         },
         {
-          icon: '⚖️',
-          title: '균형감각',
-          description: '코어 근육 강화와 신체 균형 개선',
+          title: '위탁판매 서비스',
+          description: '검증된 프리미엄 제품을 합리적인 가격으로 만나보세요',
+          image:
+            'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
         },
         {
-          icon: '💓',
-          title: '혈액순환',
-          description: '진동으로 인한 혈액순환 및 림프순환 촉진',
+          title: '사후관리 서비스',
+          description: '구매 후에도 지속적인 사용법 안내와 관리 서비스 제공',
+          image:
+            'https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
         },
       ],
       galleryImages: [
@@ -377,16 +386,16 @@ export default {
         {
           image:
             'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-          name: '파워플레이트',
+          name: '파워플레이트 프리미엄',
           description:
-            '전신 진동운동을 위한 전문 장비로 근력강화와 체중감량에 효과적입니다.',
+            '전신 진동운동을 위한 최신형 파워플레이트로 근력강화와 체중감량에 탁월한 효과를 제공합니다.',
         },
         {
           image:
             'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
           name: '고압산소 치료기기',
           description:
-            '산소농도를 높여 피로회복과 면역력 강화에 도움을 주는 건강관리 장비입니다.',
+            '산소농도를 높여 피로회복과 면역력 강화에 도움을 주며, 운동 후 빠른 회복을 지원하는 건강관리 장비입니다.',
         },
       ],
       isVisible: {
@@ -399,8 +408,57 @@ export default {
   },
   mounted() {
     this.setupScrollAnimation();
+    this.setupVideoPlayback();
+
+    // DOM 로드 후 텍스트 표시
+    setTimeout(() => {
+      this.contentVisible = true;
+    }, 500);
   },
   methods: {
+    setupVideoPlayback() {
+      // 모바일에서 비디오 재생 강제 실행
+      const video = this.$refs.heroVideo;
+      if (video) {
+        // 사용자 상호작용 없이도 재생 시도
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log('Video autoplay started');
+            })
+            .catch((error) => {
+              console.log('Autoplay failed:', error);
+              // 자동재생 실패시 대체 이미지 사용
+              this.videoLoaded = false;
+            });
+        }
+      }
+    },
+
+    handleVideoLoaded() {
+      console.log('Video loaded');
+      this.videoLoaded = true;
+    },
+
+    handleVideoCanPlay() {
+      console.log('Video can play');
+      this.videoLoaded = true;
+
+      // 모바일에서 재생 재시도
+      const video = this.$refs.heroVideo;
+      if (video && video.paused) {
+        video.play().catch(() => {
+          console.log('Mobile video play failed - using fallback image');
+        });
+      }
+    },
+
+    handleVideoError(error) {
+      console.log('Video error:', error);
+      this.videoLoaded = false;
+    },
+
     setupScrollAnimation() {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -531,5 +589,10 @@ export default {
 
 .gallery-item:hover {
   transform: scale(1.05);
+}
+
+/* 부드러운 전환 효과 */
+video {
+  transition: opacity 0.5s ease-in-out;
 }
 </style>
