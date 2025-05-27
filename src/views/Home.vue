@@ -15,7 +15,7 @@
         <div
           class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500"
           :style="{
-            backgroundImage: 'url(../img/video-poster.jpg)',
+            backgroundImage: 'url(video-poster.jpg)',
             backgroundSize: 'cover',
             opacity: videoCanPlay ? 0 : 1,
           }"
@@ -60,7 +60,6 @@
             >
               <path d="M8 5v14l11-7z" />
             </svg>
-            <p class="text-white text-sm mt-2 text-center">동영상 재생</p>
           </div>
         </div>
 
