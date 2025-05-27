@@ -32,7 +32,10 @@
           <!-- 지도 영역 -->
           <div class="order-2 lg:order-1">
             <div class="bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
-              <div id="map" class="w-full h-96 md:h-[500px]"></div>
+              <div
+                id="map"
+                class="w-full h-96 md:h-[500px] cursor-pointer"
+              ></div>
             </div>
 
             <!-- 지도 하단 정보 -->
@@ -44,7 +47,7 @@
                   <div>
                     <div class="font-medium text-gray-900">지하철</div>
                     <div class="text-sm text-gray-600">
-                      분당선 수내역 1번 출구에서 도보 10분
+                      8호선 남위례역 3번 출구에서 도보 5분
                     </div>
                   </div>
                 </div>
@@ -78,7 +81,7 @@
                   공명짐 <span class="text-slate-700">위치정보</span>
                 </h2>
                 <p class="text-lg text-gray-600 leading-relaxed">
-                  성남시 수정구 창곡동에 위치한 공명짐은 분당선 수내역에서
+                  성남시 수정구 창곡동에 위치한 공명짐은 8호선 남위례역에서
                   가까워 대중교통 이용이 편리합니다.
                 </p>
               </div>
@@ -157,23 +160,17 @@
                           >
                         </div>
                         <div class="flex justify-between">
-                          <span class="text-gray-600">토요일</span>
+                          <span class="text-gray-600">토 - 일</span>
                           <span class="font-medium text-gray-900"
-                            >08:00 - 21:00</span
-                          >
-                        </div>
-                        <div class="flex justify-between">
-                          <span class="text-gray-600">일요일</span>
-                          <span class="font-medium text-gray-900"
-                            >10:00 - 19:00</span
+                            >08:00 - 20:00</span
                           >
                         </div>
                         <div
                           class="flex justify-between pt-2 border-t border-gray-200"
                         >
-                          <span class="text-gray-600">휴무일</span>
+                          <span class="text-gray-600">연중무류</span>
                           <span class="font-medium text-red-600"
-                            >매월 둘째, 넷째 일요일</span
+                            >설 명절 정상영업</span
                           >
                         </div>
                       </div>
@@ -268,10 +265,18 @@ export default {
     return {
       map: null,
       marker: null,
+      // 실제 공명짐 위치 좌표 (위도: 37.4669221, 경도: 127.1390431)
+      gymPosition: {
+        lat: 37.4669221,
+        lng: 127.1390431,
+      },
+      // 네이버 지도 URL
+      naverMapUrl:
+        'https://map.naver.com/p/entry/place/1058817891?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.1390431&lat=37.4669221',
     };
   },
   mounted() {
-    console.log('Location 컴포넌트 마운트됨 - 완전 새로운 코드');
+    console.log('Location 컴포넌트 마운트됨 - 실제 좌표 적용');
     window.scrollTo(0, 0);
     this.setupMap();
   },
@@ -312,7 +317,7 @@ export default {
     },
 
     renderMap() {
-      console.log('renderMap 시작');
+      console.log('renderMap 시작 - 실제 좌표:', this.gymPosition);
 
       try {
         if (!window.naver?.maps) {
@@ -327,26 +332,86 @@ export default {
           return;
         }
 
-        const position = new window.naver.maps.LatLng(37.4465, 127.1378);
+        // 실제 공명짐 위치 좌표 사용
+        const position = new window.naver.maps.LatLng(
+          this.gymPosition.lat,
+          this.gymPosition.lng
+        );
 
         this.map = new window.naver.maps.Map('map', {
           center: position,
-          zoom: 16,
+          zoom: 17, // 좀 더 확대하여 정확한 위치 표시
           mapTypeControl: true,
           zoomControl: true,
+          scaleControl: true,
         });
 
+        // 마커 생성 및 클릭 이벤트 추가
         this.marker = new window.naver.maps.Marker({
           position: position,
           map: this.map,
-          title: '공명짐',
+          title: '공명짐 - 클릭하여 네이버 지도에서 보기',
+          icon: {
+            url:
+              'data:image/svg+xml;base64,' +
+              btoa(`
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#dc2626">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            `),
+            scaledSize: new window.naver.maps.Size(40, 40),
+            anchor: new window.naver.maps.Point(20, 40),
+          },
         });
 
-        console.log('지도 생성 성공!');
+        // 마커 클릭 이벤트 - 네이버 지도 팝업
+        window.naver.maps.Event.addListener(this.marker, 'click', () => {
+          this.openNaverMap();
+        });
+
+        // 지도 클릭 이벤트도 추가
+        window.naver.maps.Event.addListener(this.map, 'click', () => {
+          this.openNaverMap();
+        });
+
+        // 정보창 생성
+        const infoWindow = new window.naver.maps.InfoWindow({
+          content: `
+            <div style="padding: 15px; min-width: 200px; text-align: center;">
+              <h3 style="margin: 0 0 8px 0; color: #1f2937; font-weight: bold;">공명짐</h3>
+              <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 14px;">경기도 성남시 수정구 창곡동 555, B1호</p>
+              <button onclick="window.open('${this.naverMapUrl}', '_blank')" 
+                      style="background: #1e40af; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                네이버 지도에서 보기
+              </button>
+            </div>
+          `,
+          maxWidth: 300,
+          backgroundColor: '#fff',
+          borderColor: '#ccc',
+          borderWidth: 1,
+          anchorSize: new window.naver.maps.Size(10, 10),
+          pixelOffset: new window.naver.maps.Point(0, -10),
+        });
+
+        // 마커 hover 이벤트로 정보창 표시
+        window.naver.maps.Event.addListener(this.marker, 'mouseover', () => {
+          infoWindow.open(this.map, this.marker);
+        });
+
+        window.naver.maps.Event.addListener(this.marker, 'mouseout', () => {
+          infoWindow.close();
+        });
+
+        console.log('지도 생성 성공! 위치:', this.gymPosition);
       } catch (error) {
         console.error('지도 생성 오류:', error);
         this.showFallback();
       }
+    },
+
+    openNaverMap() {
+      window.open(this.naverMapUrl, '_blank');
     },
 
     showFallback() {
@@ -361,8 +426,8 @@ export default {
               <p style="margin-bottom: 0.5rem;"><strong>전화:</strong> 02-715-0607</p>
               <p style="margin-bottom: 1rem;"><strong>교통:</strong> 분당선 수내역 1번 출구 도보 10분</p>
               <button 
-                onclick="window.open('https://map.naver.com/v5/search/경기도%20성남시%20수정구%20창곡동%20555', '_blank')"
-                style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer;"
+                onclick="window.open('${this.naverMapUrl}', '_blank')"
+                style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-size: 16px;"
               >
                 네이버 지도에서 보기
               </button>
@@ -396,6 +461,12 @@ export default {
 <style scoped>
 #map {
   border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+#map:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
