@@ -85,34 +85,12 @@
                 </div>
               </div>
 
-              <!-- 가격 -->
-              <div
-                class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl"
-              >
-                <div v-if="product.originalPrice" class="mb-2">
-                  <span class="text-lg text-gray-500 line-through">{{
-                    product.originalPrice
-                  }}</span>
-                  <span
-                    class="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm font-bold"
-                  >
-                    {{ product.discount }}
-                  </span>
-                </div>
-                <p class="text-2xl lg:text-3xl font-bold text-blue-800">
-                  {{ product.price }}
-                </p>
-                <p v-if="product.note" class="text-sm text-blue-600 mt-1">
-                  {{ product.note }}
-                </p>
-              </div>
-
               <!-- 문의 버튼 -->
               <button
                 @click="handleInquiry(product.name)"
                 class="w-full lg:w-auto bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-700 transition-colors duration-200"
               >
-                제품 문의하기
+                스마트 스토어 방문
               </button>
             </div>
           </div>
