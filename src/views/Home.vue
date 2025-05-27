@@ -25,7 +25,7 @@
         <video
           ref="heroVideo"
           src="../video/mainVideo.mp4"
-          poster="../images/video-poster.jpg"
+          poster="../img/video-poster.jpg"
           autoplay
           muted
           loop
