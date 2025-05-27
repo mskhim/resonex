@@ -41,7 +41,7 @@
             체험하기
           </button>
           <button
-            class="px-8 py-4 border-2 border-white/80 rounded-lg font-semibold text-white hover:bg-white/10 transition-all duration-300"
+            class="px-8 py-4 border-2 border-white/80 rounded-lg font-semibold text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
           >
             프로그램
           </button>
@@ -158,15 +158,19 @@
             :key="index"
             ref="effectCards"
             :class="[
-              'effect-card text-center p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all duration-300 hover:-translate-y-1',
+              'effect-card text-center p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-center',
               isVisible.effectCards
                 ? 'animate-fade-in-up'
                 : 'opacity-0 translate-y-4',
             ]"
-            :style="{ animationDelay: `${index * 150}ms` }"
+            :style="{
+              animationDelay: `${index * 150}ms`,
+              height: '200px',
+              minHeight: '200px',
+            }"
           >
             <div class="text-4xl mb-4">{{ effect.icon }}</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">
+            <h3 class="text-lg font-bold text-gray-900 mb-2 flex-grow">
               {{ effect.title }}
             </h3>
             <p class="text-sm text-gray-600">{{ effect.description }}</p>
@@ -271,7 +275,7 @@
                 {{ product.description }}
               </p>
               <button
-                class="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
+                class="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
               >
                 문의하기
               </button>
@@ -317,7 +321,7 @@ export default {
           image:
             'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
           title: '재활 운동',
-          description: '부상 회복과 근육 강화를 위한 안전한 재활 운동',
+          description: '부상 회복과 근육 강화를 위한 안전한 재활 운동 프로그램',
           benefits: ['관절 가동성 향상', '근육 회복', '통증 완화', '재활 촉진'],
         },
       ],
