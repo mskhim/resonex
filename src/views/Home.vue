@@ -16,6 +16,7 @@
           }"
         ></div>
 
+        <!-- 데스크톱/모바일 공용 비디오 (단순화) -->
         <video
           ref="heroVideo"
           src="../video/mainVideo.mp4"
@@ -37,14 +38,28 @@
           @play="handleVideoPlay"
           @playing="handleVideoPlaying"
           @error="handleVideoError"
+        ></video>
+
+        <!-- 모바일 터치 영역 (전체 화면) -->
+        <div
+          v-if="isMobile && !videoPlaying"
+          class="absolute inset-0 z-20 flex items-center justify-center"
+          @click="forceVideoPlayback"
+          @touchstart="forceVideoPlayback"
         >
-          <!-- 비디오를 지원하지 않는 브라우저용 대체 이미지 -->
-          <img
-            src="../img/video-poster.jpg"
-            alt="진동운동 배경"
-            class="w-full h-full object-cover"
-          />
-        </video>
+          <div
+            class="bg-black/60 rounded-full p-6 cursor-pointer hover:bg-black/80 transition-colors backdrop-blur-sm"
+          >
+            <svg
+              class="w-12 h-12 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            <p class="text-white text-xs mt-2 text-center">터치하여 재생</p>
+          </div>
+        </div>
 
         <!-- 어두운 오버레이 -->
         <div class="absolute inset-0 bg-black/60 z-5"></div>
@@ -321,6 +336,8 @@ export default {
       contentVisible: false,
       retryCount: 0,
       maxRetries: 5,
+      isMobile: false,
+      userInteracted: false,
       programs: [
         {
           image:
@@ -423,6 +440,7 @@ export default {
     };
   },
   mounted() {
+    this.detectMobile();
     this.setupScrollAnimation();
     this.setupVideoPlayback();
 
@@ -430,8 +448,55 @@ export default {
     setTimeout(() => {
       this.contentVisible = true;
     }, 500);
+
+    // 모바일에서 즉시 재생 시도 (스크롤 없이)
+    if (this.isMobile) {
+      setTimeout(() => {
+        this.forceVideoPlayback();
+      }, 1000);
+    }
   },
   methods: {
+    detectMobile() {
+      this.isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) || window.innerWidth <= 768;
+
+      console.log('Mobile detected:', this.isMobile);
+    },
+
+    async forceVideoPlayback() {
+      console.log('Forcing video playback...');
+      const video = this.$refs.heroVideo;
+      if (!video) return;
+
+      try {
+        // 비디오 요소에 포커스
+        video.focus();
+
+        // 강제 로드
+        video.load();
+
+        // 여러 번 재생 시도
+        for (let i = 0; i < 3; i++) {
+          try {
+            await video.play();
+            console.log(`Video playback success on attempt ${i + 1}`);
+            this.videoPlaying = true;
+            break;
+          } catch (error) {
+            console.log(`Playback attempt ${i + 1} failed:`, error);
+            if (i < 2) {
+              await new Promise((resolve) => setTimeout(resolve, 200));
+            }
+          }
+        }
+      } catch (error) {
+        console.log('Force video playback failed:', error);
+      }
+    },
+
     setupVideoPlayback() {
       const video = this.$refs.heroVideo;
       if (!video) return;
@@ -439,8 +504,10 @@ export default {
       // 비디오 로드 시작
       video.load();
 
-      // 자동 재생 시도
-      this.attemptAutoplay();
+      // 데스크톱에서만 자동 재생 시도
+      if (!this.isMobile) {
+        this.attemptAutoplay();
+      }
     },
 
     async attemptAutoplay() {
