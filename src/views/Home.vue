@@ -14,7 +14,7 @@
           playsinline
           preload="metadata"
           class="w-full h-full object-cover"
-          poster="../images/video-poster.jpg"
+          poster="../imag/video-poster.jpg"
         >
           <!-- 비디오를 지원하지 않는 브라우저용 대체 이미지 -->
           <img
