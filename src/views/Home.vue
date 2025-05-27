@@ -1,5 +1,10 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div
+    class="min-h-screen bg-white"
+    @click="enableAutoplay"
+    @scroll="enableAutoplay"
+    @touchstart="enableAutoplay"
+  >
     <!-- 풀스크린 히어로 섹션 -->
     <section
       class="relative h-screen flex items-center justify-center overflow-hidden"
@@ -12,7 +17,7 @@
           :style="{
             backgroundImage: 'url(../img/video-poster.jpg)',
             backgroundSize: 'cover',
-            opacity: videoLoaded ? 0 : 1,
+            opacity: videoCanPlay ? 0 : 1,
           }"
         ></div>
 
@@ -24,14 +29,40 @@
           muted
           loop
           playsinline
+          webkit-playsinline
+          x5-playsinline
+          preload="auto"
           class="w-full h-full object-cover transition-opacity duration-500"
           :class="{
-            'opacity-0': !videoLoaded,
-            'opacity-100': videoLoaded,
+            'opacity-0': !videoCanPlay || !videoPlaying,
+            'opacity-100': videoCanPlay && videoPlaying,
           }"
-          @canplay="videoLoaded = true"
-          @error="videoLoaded = false"
+          @loadeddata="handleVideoLoaded"
+          @canplay="handleVideoCanPlay"
+          @play="handleVideoPlay"
+          @pause="handleVideoPause"
+          @error="handleVideoError"
         ></video>
+
+        <!-- 재생 버튼 (자동재생 실패시) -->
+        <div
+          v-if="showPlayButton"
+          class="absolute inset-0 z-20 flex items-center justify-center"
+          @click="playVideo"
+        >
+          <div
+            class="bg-black/60 rounded-full p-8 cursor-pointer hover:bg-black/80 transition-colors backdrop-blur-sm"
+          >
+            <svg
+              class="w-16 h-16 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            <p class="text-white text-sm mt-2 text-center">동영상 재생</p>
+          </div>
+        </div>
 
         <!-- 어두운 오버레이 -->
         <div class="absolute inset-0 bg-black/60 z-5"></div>
@@ -304,6 +335,9 @@ export default {
   data() {
     return {
       videoLoaded: false,
+      videoCanPlay: false,
+      videoPlaying: false,
+      showPlayButton: false,
       contentVisible: false,
       programs: [
         {
@@ -413,8 +447,76 @@ export default {
     setTimeout(() => {
       this.contentVisible = true;
     }, 500);
+
+    // 전역 이벤트 리스너 추가 (더 확실한 감지)
+    window.addEventListener('scroll', this.enableAutoplay, { once: true });
+    window.addEventListener('click', this.enableAutoplay, { once: true });
+    window.addEventListener('touchstart', this.enableAutoplay, { once: true });
+  },
+
+  beforeUnmount() {
+    // 이벤트 리스너 정리
+    window.removeEventListener('scroll', this.enableAutoplay);
+    window.removeEventListener('click', this.enableAutoplay);
+    window.removeEventListener('touchstart', this.enableAutoplay);
   },
   methods: {
+    handleVideoLoaded() {
+      console.log('Video loaded');
+      this.videoLoaded = true;
+    },
+
+    handleVideoCanPlay() {
+      console.log('Video can play');
+      this.videoCanPlay = true;
+
+      // 자동재생 시도
+      this.attemptAutoplay();
+    },
+
+    handleVideoPlay() {
+      console.log('Video playing');
+      this.videoPlaying = true;
+      this.showPlayButton = false;
+    },
+
+    handleVideoPause() {
+      console.log('Video paused');
+      this.videoPlaying = false;
+    },
+
+    handleVideoError(error) {
+      console.log('Video error:', error);
+      this.videoLoaded = false;
+      this.videoCanPlay = false;
+      this.showPlayButton = true;
+    },
+
+    async attemptAutoplay() {
+      const video = this.$refs.heroVideo;
+      if (!video) return;
+
+      try {
+        await video.play();
+        console.log('Autoplay successful');
+      } catch (error) {
+        console.log('Autoplay blocked:', error.name);
+        // 자동재생이 차단되면 재생 버튼 표시
+        this.showPlayButton = true;
+      }
+    },
+
+    async playVideo() {
+      const video = this.$refs.heroVideo;
+      if (!video) return;
+
+      try {
+        await video.play();
+        console.log('Manual play successful');
+      } catch (error) {
+        console.log('Manual play failed:', error);
+      }
+    },
     setupScrollAnimation() {
       const observer = new IntersectionObserver(
         (entries) => {
