@@ -28,10 +28,14 @@
       </div>
 
       메인 콘텐츠
-      <!-- <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+      <div class="absolute z-10 text-center text-white px-4 max-w-4xl mx-auto">
         <h2 class="text-4xl sm:text-6xl md:text-5xl font-bold mb-6 text-white">
-          '함께 울리는, 더 큰 울림'
+          [공명-共鳴] : 함께 공, 울 명
         </h2>
+        <h2 class="text-4xl sm:text-6xl md:text-5xl font-bold mb-6 text-white">
+          "함께 울리는, 더 큰 울림"
+        </h2>
+        <!--
         <p
           class="text-xl sm:text-2xl md:text-3xl font-light mb-8 text-gray-100"
         >
@@ -43,8 +47,8 @@
           과학적으로 입증된 진동운동으로 건강한 변화를 시작하세요
         </p> -->
 
-      <!-- CTA 버튼들 -->
-      <!-- <div
+        <!-- CTA 버튼들 -->
+        <!-- <div
           class="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <button
@@ -57,8 +61,8 @@
           >
             프로그램
           </button>
-        </div>
-      </div> -->
+        </div>-->
+      </div>
 
       <!-- 스크롤 인디케이터 -->
       <div
