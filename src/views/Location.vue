@@ -16,8 +16,8 @@
           <!-- 텍스트 내용 -->
           <div class="absolute inset-0 flex items-center justify-center z-10">
             <div class="text-center max-w-4xl mx-auto px-4 mt-30">
-              <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">
-                찾아오시는 길
+              <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+                오시는 길
               </h1>
             </div>
           </div>
