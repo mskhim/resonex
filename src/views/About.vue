@@ -19,7 +19,7 @@
           class="absolute inset-0 flex items-center justify-center z-10 mt-30"
         >
           <h1 class="text-3xl md:text-5xl font-bold mb-6 text-white">
-            공명짐과 함께하는 <br class="md:hidden" />
+            운동과 함께하는 <br class="md:hidden" />
             <span class="text-gray-200">건강한 삶</span>
           </h1>
         </div>

@@ -272,14 +272,11 @@ export default {
     };
   },
   mounted() {
-    console.log('Location 컴포넌트 마운트됨 - 실제 좌표 적용');
     window.scrollTo(0, 0);
     this.setupMap();
   },
   methods: {
     setupMap() {
-      console.log('setupMap 함수 시작');
-
       // 기존 스크립트 제거
       const existingScripts = document.querySelectorAll(
         'script[src*="openapi.map.naver.com"]'
@@ -292,20 +289,16 @@ export default {
       }
 
       const clientId = import.meta.env.VITE_APP_NAVER_MAPS_CLIENT_ID;
-      console.log('Client ID:', clientId);
-
       const script = document.createElement('script');
       script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}`;
 
       script.onload = () => {
-        console.log('네이버 지도 API 로드 완료');
         setTimeout(() => {
           this.renderMap();
         }, 800);
       };
 
       script.onerror = () => {
-        console.error('네이버 지도 API 로드 실패');
         this.showFallback();
       };
 
@@ -313,18 +306,14 @@ export default {
     },
 
     renderMap() {
-      console.log('renderMap 시작 - 실제 좌표:', this.gymPosition);
-
       try {
         if (!window.naver?.maps) {
-          console.error('네이버 지도 객체 없음');
           this.showFallback();
           return;
         }
 
         const mapElement = document.getElementById('map');
         if (!mapElement) {
-          console.error('지도 DOM 요소 없음');
           return;
         }
 
@@ -336,12 +325,12 @@ export default {
 
         this.map = new window.naver.maps.Map('map', {
           center: position,
-          zoom: 17, // 좀 더 확대하여 정확한 위치 표시
-          mapTypeControl: false, // 지도 타입 컨트롤 비활성화
-          zoomControl: false, // 줌 컨트롤 비활성화
-          scaleControl: false, // 스케일 컨트롤 비활성화
-          logoControl: false, // 네이버 로고 비활성화
-          mapDataControl: false, // 지도 데이터 컨트롤 비활성화
+          zoom: 17,
+          mapTypeControl: false,
+          zoomControl: false,
+          scaleControl: false,
+          logoControl: false,
+          mapDataControl: false,
         });
 
         // 마커 생성 및 클릭 이벤트 추가
@@ -378,7 +367,6 @@ export default {
             <div style="padding: 15px; min-width: 200px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
               <h3 style="margin: 0 0 8px 0; color: #1f2937; font-weight: bold; font-size: 16px;">공명짐</h3>
               <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 13px; line-height: 1.4;">경기도 성남시 수정구 창곡동 555, B1호</p>
-         
               <button 
                 onclick="window.open('${this.naverMapUrl}', '_blank')" 
                 style="background: #1e40af; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; transition: background-color 0.2s;"
@@ -400,17 +388,13 @@ export default {
         // 정보창을 기본적으로 열어두기
         this.infoWindow.open(this.map, this.marker);
 
-        // 마커 hover 이벤트는 유지 (추가 상호작용을 위해)
+        // 마커 hover 이벤트는 유지
         window.naver.maps.Event.addListener(this.marker, 'mouseover', () => {
-          // 이미 열려있지만 혹시 닫혀있다면 다시 열기
           if (!this.infoWindow.getMap()) {
             this.infoWindow.open(this.map, this.marker);
           }
         });
-
-        console.log('지도 생성 성공! 위치:', this.gymPosition);
       } catch (error) {
-        console.error('지도 생성 오류:', error);
         this.showFallback();
       }
     },
@@ -468,7 +452,7 @@ export default {
   border-radius: 1rem;
   transition: all 0.3s ease;
   position: relative;
-  z-index: 1; /* 헤더보다 낮은 z-index 설정 */
+  z-index: 1;
 }
 
 #map:hover {
@@ -482,7 +466,7 @@ export default {
 #map .nmap-logo,
 #map .nmap-control-maptype,
 #map .nmap-control-zoom {
-  z-index: 10 !important; /* 헤더보다 낮게 설정 */
+  z-index: 10 !important;
 }
 
 @media (max-width: 768px) {
