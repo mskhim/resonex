@@ -168,7 +168,7 @@
                         <div
                           class="flex justify-between pt-2 border-t border-gray-200"
                         >
-                          <span class="text-gray-600">연중무류</span>
+                          <span class="text-gray-600">연중무휴</span>
                           <span class="font-medium text-red-600"
                             >설 명절 정상영업</span
                           >

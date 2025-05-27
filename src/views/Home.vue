@@ -4,22 +4,34 @@
     <section
       class="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      <!-- 배경 이미지 -->
+      <!-- 배경 비디오 -->
       <div class="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-          alt="진동운동 배경"
+        <video
+          src="../video/mainVideo.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
           class="w-full h-full object-cover"
-        />
+          poster="../images/video-poster.jpg"
+        >
+          <!-- 비디오를 지원하지 않는 브라우저용 대체 이미지 -->
+          <img
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+            alt="진동운동 배경"
+            class="w-full h-full object-cover"
+          />
+        </video>
         <!-- 어두운 오버레이 (헤더 텍스트가 잘 보이도록) -->
         <div class="absolute inset-0 bg-black/60"></div>
       </div>
 
-      <!-- 메인 콘텐츠 -->
-      <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 text-white">
-          ---
-        </h1>
+      메인 콘텐츠
+      <!-- <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+        <h2 class="text-4xl sm:text-6xl md:text-5xl font-bold mb-6 text-white">
+          '함께 울리는, 더 큰 울림'
+        </h2>
         <p
           class="text-xl sm:text-2xl md:text-3xl font-light mb-8 text-gray-100"
         >
@@ -29,10 +41,10 @@
           class="text-base sm:text-lg mb-12 text-gray-200 max-w-2xl mx-auto leading-relaxed"
         >
           과학적으로 입증된 진동운동으로 건강한 변화를 시작하세요
-        </p>
+        </p> -->
 
-        <!-- CTA 버튼들 -->
-        <div
+      <!-- CTA 버튼들 -->
+      <!-- <div
           class="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <button
@@ -46,7 +58,7 @@
             프로그램
           </button>
         </div>
-      </div>
+      </div> -->
 
       <!-- 스크롤 인디케이터 -->
       <div
