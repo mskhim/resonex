@@ -10,8 +10,8 @@
         <div
           class="absolute inset-0 bg-cover bg-center bg-no-repeat"
           :style="{
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)',
+            backgroundImage: '../img/video-poster.jpg',
+            backgroundSize: 'cover',
             opacity: videoLoaded ? 0 : 1,
           }"
         ></div>
@@ -32,7 +32,7 @@
         >
           <!-- 비디오를 지원하지 않는 브라우저용 대체 이미지 -->
           <img
-            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+            src="../img/video-poster.jpg"
             alt="진동운동 배경"
             class="w-full h-full object-cover"
           />
