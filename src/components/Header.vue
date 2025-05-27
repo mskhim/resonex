@@ -529,7 +529,7 @@
               @click="toggleMobileSection('products')"
               class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between"
             >
-              제품판매
+              Products
               <svg
                 class="w-4 h-4 transition-transform duration-200"
                 :class="{ 'rotate-180': expandedSections.products }"
