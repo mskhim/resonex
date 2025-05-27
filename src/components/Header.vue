@@ -83,7 +83,7 @@
                   : 'text-white hover:text-blue-200',
               ]"
             >
-              제품판매
+              Products
               <svg
                 class="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
                 fill="none"
