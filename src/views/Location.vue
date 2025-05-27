@@ -160,7 +160,7 @@
                           >
                         </div>
                         <div class="flex justify-between">
-                          <span class="text-gray-600">토 - 일</span>
+                          <span class="text-gray-600">토-일</span>
                           <span class="font-medium text-gray-900"
                             >08:00 - 20:00</span
                           >
@@ -206,11 +206,6 @@
               <!-- CTA 버튼 -->
               <div class="mt-8 pt-6 border-t border-gray-200">
                 <div class="flex flex-col sm:flex-row gap-3">
-                  <button
-                    class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200"
-                  >
-                    <i class="fas fa-calendar-plus mr-2"></i>방문 예약
-                  </button>
                   <button
                     class="flex-1 border-2 border-slate-800 text-slate-800 hover:bg-slate-800 hover:text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200"
                   >
@@ -265,6 +260,7 @@ export default {
     return {
       map: null,
       marker: null,
+      infoWindow: null,
       // 실제 공명짐 위치 좌표 (위도: 37.4669221, 경도: 127.1390431)
       gymPosition: {
         lat: 37.4669221,
@@ -341,9 +337,11 @@ export default {
         this.map = new window.naver.maps.Map('map', {
           center: position,
           zoom: 17, // 좀 더 확대하여 정확한 위치 표시
-          mapTypeControl: true,
-          zoomControl: true,
-          scaleControl: true,
+          mapTypeControl: false, // 지도 타입 컨트롤 비활성화
+          zoomControl: false, // 줌 컨트롤 비활성화
+          scaleControl: false, // 스케일 컨트롤 비활성화
+          logoControl: false, // 네이버 로고 비활성화
+          mapDataControl: false, // 지도 데이터 컨트롤 비활성화
         });
 
         // 마커 생성 및 클릭 이벤트 추가
@@ -374,33 +372,40 @@ export default {
           this.openNaverMap();
         });
 
-        // 정보창 생성
-        const infoWindow = new window.naver.maps.InfoWindow({
+        // 정보창 생성 - 기본적으로 표시
+        this.infoWindow = new window.naver.maps.InfoWindow({
           content: `
-            <div style="padding: 15px; min-width: 200px; text-align: center;">
-              <h3 style="margin: 0 0 8px 0; color: #1f2937; font-weight: bold;">공명짐</h3>
-              <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 14px;">경기도 성남시 수정구 창곡동 555, B1호</p>
-              <button onclick="window.open('${this.naverMapUrl}', '_blank')" 
-                      style="background: #1e40af; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px;">
+            <div style="padding: 15px; min-width: 200px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+              <h3 style="margin: 0 0 8px 0; color: #1f2937; font-weight: bold; font-size: 16px;">공명짐</h3>
+              <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 13px; line-height: 1.4;">경기도 성남시 수정구 창곡동 555, B1호</p>
+         
+              <button 
+                onclick="window.open('${this.naverMapUrl}', '_blank')" 
+                style="background: #1e40af; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; transition: background-color 0.2s;"
+                onmouseover="this.style.background='#1d4ed8'"
+                onmouseout="this.style.background='#1e40af'"
+              >
                 네이버 지도에서 보기
               </button>
             </div>
           `,
-          maxWidth: 300,
+          maxWidth: 280,
           backgroundColor: '#fff',
-          borderColor: '#ccc',
+          borderColor: '#e5e7eb',
           borderWidth: 1,
           anchorSize: new window.naver.maps.Size(10, 10),
           pixelOffset: new window.naver.maps.Point(0, -10),
         });
 
-        // 마커 hover 이벤트로 정보창 표시
-        window.naver.maps.Event.addListener(this.marker, 'mouseover', () => {
-          infoWindow.open(this.map, this.marker);
-        });
+        // 정보창을 기본적으로 열어두기
+        this.infoWindow.open(this.map, this.marker);
 
-        window.naver.maps.Event.addListener(this.marker, 'mouseout', () => {
-          infoWindow.close();
+        // 마커 hover 이벤트는 유지 (추가 상호작용을 위해)
+        window.naver.maps.Event.addListener(this.marker, 'mouseover', () => {
+          // 이미 열려있지만 혹시 닫혀있다면 다시 열기
+          if (!this.infoWindow.getMap()) {
+            this.infoWindow.open(this.map, this.marker);
+          }
         });
 
         console.log('지도 생성 성공! 위치:', this.gymPosition);
@@ -424,7 +429,7 @@ export default {
             <div style="font-size: 1rem; line-height: 1.6;">
               <p style="margin-bottom: 0.5rem;"><strong>주소:</strong> 경기도 성남시 수정구 창곡동 555, B1호</p>
               <p style="margin-bottom: 0.5rem;"><strong>전화:</strong> 02-715-0607</p>
-              <p style="margin-bottom: 1rem;"><strong>교통:</strong> 분당선 수내역 1번 출구 도보 10분</p>
+              <p style="margin-bottom: 1rem;"><strong>교통:</strong> 8호선 남위례역 3번 출구 도보 5분</p>
               <button 
                 onclick="window.open('${this.naverMapUrl}', '_blank')"
                 style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-size: 16px;"
@@ -462,11 +467,22 @@ export default {
 #map {
   border-radius: 1rem;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1; /* 헤더보다 낮은 z-index 설정 */
 }
 
 #map:hover {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
+}
+
+/* 네이버 지도 컨트롤 요소들의 z-index 강제 조정 */
+#map .nmap_control_panel,
+#map .nmap-control-scale,
+#map .nmap-logo,
+#map .nmap-control-maptype,
+#map .nmap-control-zoom {
+  z-index: 10 !important; /* 헤더보다 낮게 설정 */
 }
 
 @media (max-width: 768px) {
