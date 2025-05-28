@@ -78,11 +78,11 @@
             <div class="sticky top-8">
               <div class="mb-8">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  공명짐 <span class="text-slate-700">위치정보</span>
+                  <span class="text-slate-700">위치정보</span>
                 </h2>
                 <p class="text-lg text-gray-600 leading-relaxed">
-                  성남시 수정구 창곡동에 위치한 공명짐은 8호선 남위례역에서
-                  가까워 대중교통 이용이 편리합니다.
+                  8호선 남위례역과 가까운 위치에 있어 대중교통 이용이
+                  편리합니다.
                 </p>
               </div>
 
@@ -133,7 +133,7 @@
                           href="tel:02-715-0607"
                           class="hover:text-blue-600 transition-colors"
                         >
-                          02-715-0607
+                          010-4429-2889
                         </a>
                       </p>
                     </div>
@@ -160,7 +160,7 @@
                           >
                         </div>
                         <div class="flex justify-between">
-                          <span class="text-gray-600">토-일</span>
+                          <span class="text-gray-600">토 - 일</span>
                           <span class="font-medium text-gray-900"
                             >08:00 - 20:00</span
                           >
@@ -200,17 +200,6 @@
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- CTA 버튼 -->
-              <div class="mt-8 pt-6 border-t border-gray-200">
-                <div class="flex flex-col sm:flex-row gap-3">
-                  <button
-                    class="flex-1 border-2 border-slate-800 text-slate-800 hover:bg-slate-800 hover:text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200"
-                  >
-                    <i class="fas fa-phone mr-2"></i>전화 문의
-                  </button>
                 </div>
               </div>
             </div>

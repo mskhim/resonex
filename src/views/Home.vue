@@ -113,12 +113,8 @@
           <h2
             class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            맞춤형 운동 프로그램
+            맞춤형 프로그램
           </h2>
-          <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            전문가가 직접 설계한 프리미엄 운동 솔루션으로 건강한 변화를
-            경험하세요
-          </p>
         </div>
 
         <!-- 카드들 -->
@@ -140,7 +136,7 @@
               <img
                 :src="program.image"
                 :alt="program.title"
-                class="w-full h-48 object-cover"
+                class="w-full h-80 object-cover"
               />
               <div class="absolute inset-0 bg-black/20"></div>
             </div>
@@ -165,12 +161,6 @@
                   <span class="text-sm">{{ benefit }}</span>
                 </li>
               </ul>
-
-              <button
-                class="mt-auto mb-4 w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors duration-300"
-              >
-                자세히 보기
-              </button>
             </div>
           </div>
         </div>
@@ -229,10 +219,10 @@
           <h2
             class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            공명짐 현장
+            현장 갤러리
           </h2>
           <p class="text-lg sm:text-xl text-gray-600">
-            실제 운동 현장과 최신 시설을 확인해보세요
+            실제 트레이닝 현장과 최신 시설을 확인해보세요
           </p>
         </div>
 
@@ -257,21 +247,7 @@
             />
             <div
               class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center"
-            >
-              <svg
-                class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
@@ -344,14 +320,14 @@ export default {
         {
           image:
             'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          title: '공명점 운동',
+          title: '퍼스널 트레이닝',
           description:
-            '신체 균형과 에너지 흐름을 개선하는 전통적인 공명점 운동법으로 몸과 마음의 조화를 이룹니다',
+            '개인 맞춤형 운동 프로그램으로 체형 교정과 체력 향상을 도와드립니다',
           benefits: [
-            '에너지 순환 개선',
-            '자세 교정 및 밸런스 향상',
-            '스트레스 완화',
-            '집중력 증진',
+            '개인 맞춤형 운동 계획',
+            '체형 교정 및 체력 향상',
+            '전문 트레이너의 1:1 지도',
+            '목표 달성을 위한 지속적인 관리',
           ],
         },
         {
@@ -368,8 +344,7 @@ export default {
           ],
         },
         {
-          image:
-            'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/main/powerPlate.jpg',
           title: '파워플레이트',
           description:
             '3차원 진동 기술을 활용한 혁신적인 운동법으로 짧은 시간에 최대의 운동 효과를 경험하세요',
@@ -385,8 +360,7 @@ export default {
         {
           title: '무료 체험 서비스',
           description: '최신 건강기기를 실제로 체험하고 효과를 직접 확인하세요',
-          image:
-            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+          image: '/main/card/service.jpg',
         },
         {
           title: '전문가 맞춤 상담',
@@ -408,14 +382,12 @@ export default {
         },
       ],
       galleryImages: [
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+        `/main/mainImg1.jpg`,
+        `/main/mainImg2.jpg`,
+        `/main/mainImg3.jpg`,
+        `/main/mainImg4.jpg`,
+        `/main/mainImg5.jpg`,
+        `/main/mainImg6.jpg`,
       ],
       products: [
         {
