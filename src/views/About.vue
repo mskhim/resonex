@@ -31,56 +31,6 @@
         </div>
       </div>
     </section>
-
-    <!-- 메인 소개 섹션 -->
-    <section class="py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-          <!-- 텍스트 영역 -->
-          <div>
-            <div
-              class="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium text-sm mb-6"
-            >
-              ABOUT GONGMYUNGJIM
-            </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              함께 울리는 더 큰 울림,<br />
-              <span class="text-slate-700">공명</span>
-            </h2>
-            <p
-              class="text-gray-600 text-sm md:text-base lg:text-lg leading-relaxed mb-8"
-            >
-              공명짐은 운동 공간을 넘어선 특별한 헬스케어 공간입니다.<br />
-              회원 한 분 한 분의 건강한 삶을 위한 맞춤형 솔루션과<br />
-              전문 트레이닝, 최신식 장비로 건강한 일상을 함께 만듭니다.
-            </p>
-            <div class="flex-col flex-wrap gap-4">
-              <div class="flex items-center gap-2 text-gray-700">
-                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
-                <span class="font-medium">맞춤형 트레이닝 솔루션</span>
-              </div>
-              <div class="flex items-center gap-2 text-gray-700">
-                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
-                <span class="font-medium">프리미엄 헬스케어 기기 체험</span>
-              </div>
-              <div class="flex items-center gap-2 text-gray-700">
-                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
-                <span class="font-medium">전문가 건강 상담</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 이미지 영역 -->
-          <div class="relative">
-            <img
-              src="/about/profile2.png"
-              alt="공명짐 운동 공간"
-              class="rounded-2xl shadow-2xl w-full h-96 object-cover"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
     <!-- 대표 소개 영역 -->
     <section class="py-20 bg-white">
       <div class="max-w-6xl mx-auto px-4">
@@ -183,6 +133,56 @@
         </div>
       </div>
     </section>
+    <!-- 메인 소개 섹션 -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <!-- 텍스트 영역 -->
+          <div>
+            <div
+              class="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium text-sm mb-6"
+            >
+              ABOUT GONGMYUNGJIM
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              함께 울리는 더 큰 울림,<br />
+              <span class="text-slate-700">공명</span>
+            </h2>
+            <p
+              class="text-gray-600 text-sm md:text-base lg:text-lg leading-relaxed mb-8"
+            >
+              공명짐은 운동 공간을 넘어선 특별한 헬스케어 공간입니다.<br />
+              회원 한 분 한 분의 건강한 삶을 위한 맞춤형 솔루션과<br />
+              전문 트레이닝, 최신식 장비로 건강한 일상을 함께 만듭니다.
+            </p>
+            <div class="flex-col flex-wrap gap-4">
+              <div class="flex items-center gap-2 text-gray-700">
+                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
+                <span class="font-medium">맞춤형 트레이닝 솔루션</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-700">
+                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
+                <span class="font-medium">프리미엄 헬스케어 기기 체험</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-700">
+                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
+                <span class="font-medium">전문가 건강 상담</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 이미지 영역 -->
+          <div class="relative">
+            <img
+              src="/about/profile2.png"
+              alt="공명짐 운동 공간"
+              class="rounded-2xl shadow-2xl w-full h-96 object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 서비스 영역 -->
     <section class="py-20 bg-gray-50">
       <div class="max-w-6xl mx-auto px-4">
