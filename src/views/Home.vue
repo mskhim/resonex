@@ -339,7 +339,7 @@ export default {
             'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
           title: '필라테스',
           description:
-            '코어 근육 강화와 신체 정렬에 중점을 둔 전문 필라테스 프로그램으로 건강한 체형을 만들어갑니다',
+            '코어 근육 강화와 신체 정렬에 중점을 둔 전문 필라테스 프로그램입니다',
           benefits: [
             '코어 근력 강화',
             '유연성 및 근력 향상',
