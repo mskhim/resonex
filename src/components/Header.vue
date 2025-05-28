@@ -220,17 +220,6 @@
             <div
               :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
             ></div>
-            <RouterLink
-              to="/papers"
-              :class="[
-                'px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium',
-                isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-100 hover:bg-white/15 hover:text-blue-200 drop-shadow-sm',
-              ]"
-            >
-              논문 리스트
-            </RouterLink>
           </div>
 
           <!-- 제품판매 메가메뉴 -->
@@ -386,20 +375,7 @@
             <div
               :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
             ></div>
-            <RouterLink
-              to="/contact"
-              :class="[
-                'px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium',
-                isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                  : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
-              ]"
-            >
-              고객 문의
-            </RouterLink>
-            <div
-              :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
-            ></div>
+
             <RouterLink
               to="/faq"
               :class="[
@@ -512,13 +488,6 @@
                 class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
               >
                 위치 안내
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/papers"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                논문 리스트
               </RouterLink>
             </div>
           </div>
@@ -668,13 +637,7 @@
               >
                 영상 홍보 촬영 문의
               </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/contact"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                고객 문의
-              </RouterLink>
+
               <RouterLink
                 @click="closeMenu"
                 to="/faq"

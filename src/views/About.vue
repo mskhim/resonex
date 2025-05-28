@@ -7,7 +7,7 @@
         <!-- 대형 이미지 -->
         <div class="mb-6">
           <img
-            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80"
+            src="/about/profile1.png"
             alt="공명짐 헬스장"
             class="w-full h-64 md:h-80 object-cover shadow-2xl"
           />
@@ -45,13 +45,14 @@
             </div>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               함께 울리는 더 큰 울림,<br />
-              <span class="text-slate-700">공명짐</span>
+              <span class="text-slate-700">공명</span>
             </h2>
-            <p class="text-gray-600 text-lg leading-relaxed mb-8">
-              공명짐은 단순한 운동 공간을 넘어, 회원 한 분 한 분의 건강한 삶을
-              위한 맞춤형 솔루션을 제공합니다. 전문 트레이닝과 최신식 장비,
-              그리고 선별된 헬스케어 기기 체험 및 안내 서비스로 고객의 건강한
-              일상을 함께 만듭니다.
+            <p
+              class="text-gray-600 text-sm md:text-base lg:text-lg leading-relaxed mb-8"
+            >
+              공명짐은 운동 공간을 넘어선 특별한 헬스케어 공간입니다.<br />
+              회원 한 분 한 분의 건강한 삶을 위한 맞춤형 솔루션과<br />
+              전문 트레이닝, 최신식 장비로 건강한 일상을 함께 만듭니다.
             </p>
             <div class="flex-col flex-wrap gap-4">
               <div class="flex items-center gap-2 text-gray-700">
@@ -72,7 +73,7 @@
           <!-- 이미지 영역 -->
           <div class="relative">
             <img
-              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+              src="/about/profile2.png"
               alt="공명짐 운동 공간"
               class="rounded-2xl shadow-2xl w-full h-96 object-cover"
             />
@@ -80,7 +81,108 @@
         </div>
       </div>
     </section>
+    <!-- 대표 소개 영역 -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <!-- 사진 영역 -->
+          <div class="relative">
+            <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+              <img
+                src="/about/ceo-profile.png"
+                alt="공명짐 대표"
+                class="w-full h-96 md:h-[500px] object-cover object-top"
+              />
+              <!-- 그라데이션 오버레이 -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+              ></div>
+            </div>
+            <!-- 장식적 요소 -->
+            <div
+              class="absolute -top-4 -right-4 w-24 h-24 bg-slate-100 rounded-full opacity-50 -z-10"
+            ></div>
+            <div
+              class="absolute -bottom-6 -left-6 w-32 h-32 bg-slate-50 rounded-full opacity-30 -z-10"
+            ></div>
+          </div>
 
+          <!-- 텍스트 영역 -->
+          <div class="space-y-6">
+            <div>
+              <div
+                class="inline-block px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-medium text-sm mb-4"
+              >
+                CEO MESSAGE
+              </div>
+              <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                건강한 삶을 향한<br />
+                <span class="text-slate-700">진정한 동반자</span>
+              </h2>
+              <div class="w-16 h-1 bg-slate-600 mb-6"></div>
+            </div>
+
+            <div class="space-y-4">
+              <p class="text-gray-600 text-lg leading-relaxed">
+                <!-- 여기에 대표 인사말 내용이 들어갑니다 -->
+                공명짐을 찾아주신 모든 분들께 진심으로 감사드립니다.
+              </p>
+              <p class="text-gray-600 leading-relaxed">
+                <!-- 추가 내용 -->
+                저희는 단순한 운동 공간이 아닌, 여러분의 건강한 변화를<br />
+                함께 만들어가는 파트너가 되고자 합니다.
+              </p>
+              <p class="text-gray-600 leading-relaxed">
+                <!-- 추가 내용 -->
+                한 분 한 분의 소중한 건강 여정에 최선을 다하겠습니다.
+              </p>
+            </div>
+
+            <!-- 대표 정보 -->
+            <div class="pt-6 border-t border-gray-200">
+              <div class="flex items-center gap-4">
+                <div>
+                  <h4 class="text-xl font-bold text-gray-900">고종관</h4>
+                  <p class="text-slate-600 font-medium">공명짐 대표</p>
+                </div>
+                <div class="flex gap-3 ml-auto">
+                  <!-- 소셜 링크 또는 자격증 뱃지 -->
+                  <div
+                    class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors cursor-pointer"
+                  >
+                    <i class="fas fa-certificate text-slate-600 text-sm"></i>
+                  </div>
+                  <div
+                    class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors cursor-pointer"
+                  >
+                    <i class="fas fa-award text-slate-600 text-sm"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 전문 분야 태그 -->
+            <div class="flex flex-wrap gap-2 pt-4">
+              <span
+                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+              >
+                #퍼스널트레이닝
+              </span>
+              <span
+                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+              >
+                #체형교정
+              </span>
+              <span
+                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+              >
+                #건강관리
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- 서비스 영역 -->
     <section class="py-20 bg-gray-50">
       <div class="max-w-6xl mx-auto px-4">
@@ -89,8 +191,8 @@
             공명짐의 <span class="text-slate-700">핵심 서비스</span>
           </h2>
           <p class="text-gray-600 max-w-2xl mx-auto">
-            전문 트레이닝부터 프리미엄 헬스케어 기기 체험까지, 건강과 관련된
-            모든 것을 한 곳에서 만나보세요
+            전문 트레이닝부터 프리미엄 헬스케어 기기 체험까지,<br />
+            건강과 관련된 모든 것을 한 곳에서 만나보세요
           </p>
         </div>
 
@@ -159,103 +261,6 @@
                 <span>개인별 건강 솔루션 안내</span>
               </li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 특별 서비스 섹션 -->
-    <section class="py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            <span class="text-slate-700">검증된 제품</span> 체험 서비스
-          </h2>
-          <p class="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
-            전문가가 직접 고른 프리미엄 건강기기 솔루션으로 건강 여정을 함께
-            상담해 드립니다. 검증된 제품을 직접 체험해 보시고 필요한 제품을
-            문의해 보세요.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center p-6 bg-gray-50 rounded-xl">
-            <div
-              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <i class="fas fa-search text-2xl text-blue-600"></i>
-            </div>
-            <h3 class="font-bold text-gray-900 mb-2">전문가 선별</h3>
-            <p class="text-sm text-gray-600">
-              엄선된 프리미엄 건강기기만을 선별하여 소개합니다
-            </p>
-          </div>
-          <div class="text-center p-6 bg-gray-50 rounded-xl">
-            <div
-              class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <i class="fas fa-hands text-2xl text-green-600"></i>
-            </div>
-            <h3 class="font-bold text-gray-900 mb-2">직접 체험</h3>
-            <p class="text-sm text-gray-600">
-              구매 전 제품을 직접 체험해보실 수 있습니다
-            </p>
-          </div>
-          <div class="text-center p-6 bg-gray-50 rounded-xl">
-            <div
-              class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <i class="fas fa-comments text-2xl text-purple-600"></i>
-            </div>
-            <h3 class="font-bold text-gray-900 mb-2">전문 상담</h3>
-            <p class="text-sm text-gray-600">
-              개인별 건강 상태에 맞는 맞춤형 상담을 제공합니다
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 비전 섹션 -->
-    <section
-      class="py-20 bg-gradient-to-r from-blue-600 to-purple-700 text-white"
-    >
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-8">
-          공명짐의 <span class="text-blue-200">비전</span>
-        </h2>
-        <p class="text-xl text-blue-100 leading-relaxed mb-12">
-          "회원 한 분 한 분의 건강한 삶을 위해, 함께 울리는 더 큰 울림으로
-          최고의 건강 솔루션을 제공합니다."
-        </p>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <i class="fas fa-trophy text-2xl"></i>
-            </div>
-            <h3 class="font-bold mb-2">전문성</h3>
-            <p class="text-sm text-blue-200">검증된 전문 지식과 경험</p>
-          </div>
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <i class="fas fa-handshake text-2xl"></i>
-            </div>
-            <h3 class="font-bold mb-2">맞춤형</h3>
-            <p class="text-sm text-blue-200">개인별 특성에 맞는 솔루션</p>
-          </div>
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <i class="fas fa-heart text-2xl"></i>
-            </div>
-            <h3 class="font-bold mb-2">동반성장</h3>
-            <p class="text-sm text-blue-200">함께하는 건강한 여정</p>
           </div>
         </div>
       </div>

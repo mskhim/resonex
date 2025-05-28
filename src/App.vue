@@ -28,4 +28,11 @@ export default {
   font-weight: 300 !important;
   letter-spacing: -0.02em;
 }
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Square:wght@700&display=swap');
+
+.program-title {
+  font-family: 'Nanum Square', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
 </style>

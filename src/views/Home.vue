@@ -111,10 +111,13 @@
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2
-            class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 program-title"
           >
             맞춤형 프로그램
           </h2>
+          <p class="text-lg sm:text-xl text-gray-600">
+            <span>개인에 맞는 맞춤형 트레이닝을 제공합니다</span>
+          </p>
         </div>
 
         <!-- 카드들 -->
@@ -168,7 +171,7 @@
     </section>
 
     <!-- 건강기기 체험 섹션 -->
-    <section class="py-20 sm:py-32 bg-white">
+    <!-- <section class="py-20 sm:py-32 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2
@@ -210,14 +213,14 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- 갤러리 섹션 -->
     <section class="py-20 sm:py-32 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2
-            class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 program-title"
           >
             현장 갤러리
           </h2>
@@ -258,7 +261,7 @@
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2
-            class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 program-title"
           >
             위탁판매 서비스
           </h2>
@@ -283,7 +286,7 @@
             <img
               :src="product.image"
               :alt="product.name"
-              class="w-full h-48 object-cover"
+              class="w-full h-80 object-cover object-top"
             />
 
             <div class="p-6">
@@ -294,9 +297,10 @@
                 {{ product.description }}
               </p>
               <button
-                class="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
+                class="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
+                @click="$router.push(product.route)"
               >
-                상담 문의
+                제품 보기
               </button>
             </div>
           </div>
@@ -391,18 +395,18 @@ export default {
       ],
       products: [
         {
-          image:
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+          image: '/main/card/powerPlate.jpg',
           name: '파워플레이트 프리미엄',
           description:
             '전신 진동운동을 위한 최신형 파워플레이트로 근력강화와 체중감량에 탁월한 효과를 제공합니다.',
+          route: '/products/powerPlate',
         },
         {
-          image:
-            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+          image: '/main/card/oxygen.png',
           name: '고압산소 치료기기',
           description:
             '산소농도를 높여 피로회복과 면역력 강화에 도움을 주며, 운동 후 빠른 회복을 지원하는 건강관리 장비입니다.',
+          route: '/products/oxygen',
         },
       ],
       isVisible: {
