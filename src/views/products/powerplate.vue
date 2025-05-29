@@ -60,7 +60,7 @@
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="w-full h-80 object-cover rounded-2xl shadow-lg"
+                class="w-full h-80 object-contain rounded-2xl shadow-lg"
               />
             </div>
 
@@ -178,8 +178,7 @@ export default {
             '상업용 최적화',
           ],
           price: '₩15,340,000',
-          image:
-            'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/powerplate/pro5hp.png', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 6,
@@ -210,8 +209,7 @@ export default {
           price: '₩18,480,000',
           discount: '20% 할인',
           note: '신제품 할인중',
-          image:
-            'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/powerplate/pro8.png', // 실제 이미지 URL로 변경 필요
         },
       ],
     };
