@@ -6,18 +6,21 @@
         <!-- 대형 이미지 with 오버레이 -->
         <div class="mb-6 relative">
           <img
-            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80"
+            src="/products/align/hero.png"
             alt="공명짐 제품"
-            class="w-full h-64 md:h-80 object-cover shadow-2xl"
+            class="w-full h-64 md:h-80 object-cover object-bottom shadow-2xl"
           />
           <!-- 어두운 오버레이 -->
           <div class="absolute inset-0 bg-black/60"></div>
 
           <!-- 텍스트 내용 -->
           <div class="absolute inset-0 flex items-center justify-center z-10">
-            <div class="text-center max-w-4xl mx-auto px-4 mt-30">
-              <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
-                제품 소개
+            <div class="text-center max-w-4xl mx-auto px-4 mt-12 md:mt-30">
+              <span class="text-1xl md:text-2xl text-white"> Pilates </span>
+              <h1
+                class="text-4xl md:text-5xl font-bold mt-5 mb-6 text-white program-title"
+              >
+                필라테스
               </h1>
             </div>
           </div>
@@ -29,13 +32,12 @@
     <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            PowerPlate <span class="text-blue-600">진동 플랫폼</span>
-          </h2>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            전 세계적으로 인정받은 파워플레이트의 진동 기술로 효과적인 운동과
-            재활을 경험하세요.
-          </p>
+          <img
+            src="/products/align/alignpilateslogo.svg"
+            alt="Align Pilates Logo"
+            class="w-50 mx-auto mb-4"
+          />
+
           <div class="mt-6 p-4 bg-blue-50 rounded-lg">
             <p class="text-sm text-blue-800">
               ※ 품절유무, 할인유무, 상세페이지 내용은 링크접속하여 확인
@@ -58,7 +60,7 @@
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="w-full h-80 object-cover rounded-2xl shadow-lg"
+                class="w-full h-90 object-cover rounded-2xl shadow-lg"
               />
             </div>
 
@@ -68,9 +70,6 @@
                 <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
                   {{ product.name }}
                 </h3>
-                <p class="text-gray-600 leading-relaxed">
-                  {{ product.description }}
-                </p>
               </div>
 
               <!-- 특징 -->
@@ -108,128 +107,60 @@ export default {
       powerPlateProducts: [
         {
           id: 1,
-          name: 'PowerPlate MOVE',
+          name: 'A2 Full Pilates Cadillac',
           description:
             '개인용 진동 플랫폼으로 가정에서 간편하게 사용할 수 있는 컴팩트한 모델입니다.',
           features: [
-            '가정용 최적화',
-            '간편한 조작',
-            '효과적인 전신 운동',
-            '컴팩트 디자인',
+            '풀 스테인리스 프레임',
+            '조절 가능한 팔걸이',
+            '효과적인 다섯 가지 포지션',
+            '높이 조절 가능',
           ],
           price: '₩2,900,000',
-          image:
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/align/a2.png', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 2,
-          name: 'PowerPlate MY7',
+          name: 'A8-Pro Pilates Reformer With Half Cadillac',
           description:
             '중급 사용자를 위한 다기능 진동 플랫폼으로 다양한 운동 프로그램을 제공합니다.',
           features: [
-            '다양한 운동 프로그램',
-            '터치스크린 인터페이스',
-            '프리미엄 디자인',
-            '개인 맞춤 설정',
+            '레이피드 체인지 스프링 바 장착',
+            '편안한 라지 사이즈 베드',
+            '플랫 포지션을 포함해 6가지의 풋바 포지션',
+            '간편한 로프 조절 시스템',
           ],
           price: '₩7,700,000',
-          image:
-            'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/align/a8.png', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 3,
-          name: 'PowerPlate MY8',
+          name: 'Combo Chair III – Flat Packed',
           description: '최신 기술이 적용된 신제품으로 현재 특가 할인 중입니다.',
           features: [
-            '최신 기술 적용',
-            '고급 마감',
-            '전문가용 기능',
-            '신제품 출시',
+            '완벽한 견고함',
+            '팔 운동을 위한 저항 밴드 연결 가능',
+            '부드러운 움직임',
+            '핸들로 추가적인 운동 동작 수행',
           ],
           originalPrice: '₩12,100,000',
           price: '₩9,680,000',
           discount: '20% 할인',
           note: '신제품 할인중',
-          image:
-            'https://images.unsplash.com/photo-1593079831268-3381b0db4a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/align/combo.jpg', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 4,
-          name: 'PowerPlate Pro5',
+          name: 'Ladder Barrel RC',
           description:
             '전문 트레이너와 피트니스 센터를 위한 프로페셔널 모델입니다.',
           features: [
-            '전문가용 설계',
-            '내구성 강화',
-            '상업용 등급',
-            '고성능 모터',
+            '더 발전된 안정성과 내구성',
+            '메이플우드 소재의 사다리 디딤대',
+            '부드러운 촉감의 발디딤대',
           ],
           price: '₩10,340,000',
-          image:
-            'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 5,
-          name: 'PowerPlate Pro5HP',
-          description:
-            'Pro5의 고성능 버전으로 더욱 강력한 진동과 다양한 기능을 제공합니다.',
-          features: [
-            '고성능 모터',
-            '강화된 진동',
-            '프리미엄 기능',
-            '상업용 최적화',
-          ],
-          price: '₩15,340,000',
-          image:
-            'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 6,
-          name: 'PowerPlate Pro7',
-          description:
-            '상업용 고급 진동 플랫폼으로 최고의 성능과 내구성을 제공합니다.',
-          features: [
-            '상업용 최적화',
-            '최고 성능',
-            '프리미엄 기능',
-            '장기 내구성',
-          ],
-          price: '₩17,500,000',
-          image:
-            'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 7,
-          name: 'PowerPlate Pro8',
-          description:
-            '최상급 프로페셔널 모델로 신제품 출시 기념 특가 할인 중입니다.',
-          features: [
-            '최상급 성능',
-            '최신 기술',
-            '전문가 추천',
-            '프리미엄 설계',
-          ],
-          originalPrice: '₩23,100,000',
-          price: '₩18,480,000',
-          discount: '20% 할인',
-          note: '신제품 할인중',
-          image:
-            'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 8,
-          name: 'PowerPlate REV',
-          description:
-            '혁신적인 진동 싸이클로 새로운 차원의 운동 경험을 제공합니다.',
-          features: [
-            '진동 싸이클',
-            '혁신적 디자인',
-            '독특한 운동 경험',
-            '전신 운동',
-          ],
-          price: '₩4,950,000',
-          image:
-            'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/align/barrel.jpg', // 실제 이미지 URL로 변경 필요
         },
       ],
       accessories: [

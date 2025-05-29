@@ -16,7 +16,7 @@
         <div class="absolute inset-0 bg-black/50"></div>
         <!-- 텍스트 내용 -->
         <div
-          class="absolute inset-0 flex items-center justify-center z-10 mt-30"
+          class="absolute inset-0 flex items-center justify-center z-10 mt-10 md:mt-30"
         >
           <div
             class="text-center transition-all duration-1000"

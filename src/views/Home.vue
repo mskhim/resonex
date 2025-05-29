@@ -156,7 +156,7 @@
     </section>
 
     <!-- 와이드 임팩트 섹션 -->
-    <section class="relative h-screen bg-black overflow-hidden">
+    <section class="mt-15 relative h-screen bg-black overflow-hidden">
       <!-- 배경 이미지 -->
       <div class="absolute inset-0">
         <img
@@ -447,7 +447,7 @@
                 <img
                   :src="image"
                   :alt="`갤러리 ${index + 1}`"
-                  class="w-full h-64 md:h-80 object-cover"
+                  class="w-full h-64 md:h-100 object-cover"
                 />
                 <div class="absolute inset-0 bg-black/10"></div>
 

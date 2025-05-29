@@ -15,9 +15,11 @@
 
           <!-- 텍스트 내용 -->
           <div class="absolute inset-0 flex items-center justify-center z-10">
-            <div class="text-center max-w-4xl mx-auto px-4 mt-30">
+            <div class="text-center max-w-4xl mx-auto px-4 mt-12 md:mt-30">
               <span class="text-1xl md:text-2xl text-white"> Fitness </span>
-              <h1 class="text-4xl md:text-5xl font-bold mt-5 mb-6 text-white program-title">
+              <h1
+                class="text-4xl md:text-5xl font-bold mt-5 mb-6 text-white program-title"
+              >
                 피트니스
               </h1>
             </div>

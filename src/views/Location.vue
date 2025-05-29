@@ -15,7 +15,7 @@
 
           <!-- 텍스트 내용 -->
           <div class="absolute inset-0 flex items-center justify-center z-10">
-            <div class="text-center max-w-4xl mx-auto px-4 mt-30">
+            <div class="text-center max-w-4xl mx-auto px-4 mt-10 md:mt-30">
               <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
                 오시는 길
               </h1>
@@ -51,15 +51,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex items-start gap-3">
-                  <i class="fas fa-bus text-green-600 mt-1"></i>
-                  <div>
-                    <div class="font-medium text-gray-900">버스</div>
-                    <div class="text-sm text-gray-600">
-                      창곡동 정류장 하차 후 도보 3분
-                    </div>
-                  </div>
-                </div>
+                <div class="flex items-start gap-3"></div>
                 <div class="flex items-start gap-3">
                   <i class="fas fa-car text-gray-600 mt-1"></i>
                   <div>
