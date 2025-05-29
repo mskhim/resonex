@@ -18,7 +18,14 @@
         <div
           class="absolute inset-0 flex items-center justify-center z-10 mt-30"
         >
-          <div class="text-center">
+          <div
+            class="text-center transition-all duration-1000"
+            :class="[
+              heroVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
+          >
             <h1
               class="text-3xl md:text-5xl font-bold mb-4 text-white logo-korean"
             >
@@ -31,12 +38,21 @@
         </div>
       </div>
     </section>
+
     <!-- 대표 소개 영역 -->
     <section class="py-20 bg-white">
       <div class="max-w-6xl mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-16 items-center">
           <!-- 사진 영역 -->
-          <div class="relative">
+          <div
+            ref="ceoImage"
+            class="relative transition-all duration-1000"
+            :class="[
+              isVisible.ceoImage
+                ? 'opacity-100 translate-x-0'
+                : 'opacity-0 -translate-x-8',
+            ]"
+          >
             <div class="relative overflow-hidden rounded-2xl shadow-2xl">
               <img
                 src="/about/ceo-profile.png"
@@ -58,7 +74,15 @@
           </div>
 
           <!-- 텍스트 영역 -->
-          <div class="space-y-6">
+          <div
+            ref="ceoContent"
+            class="space-y-6 transition-all duration-1000 delay-300"
+            :class="[
+              isVisible.ceoContent
+                ? 'opacity-100 translate-x-0'
+                : 'opacity-0 translate-x-8',
+            ]"
+          >
             <div>
               <div
                 class="inline-block px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-medium text-sm mb-4"
@@ -74,16 +98,15 @@
 
             <div class="space-y-4">
               <p class="text-gray-600 text-lg leading-relaxed">
-                <!-- 여기에 대표 인사말 내용이 들어갑니다 -->
-                공명짐을 찾아주신 모든 분들께 진심으로 감사드립니다.
+                공명짐을 찾아주신 모든 분들께
+                <br class="block md:hidden" />진심으로 감사드립니다.
               </p>
               <p class="text-gray-600 leading-relaxed">
-                <!-- 추가 내용 -->
-                저희는 단순한 운동 공간이 아닌, 여러분의 건강한 변화를<br />
+                저희는 단순한 운동 공간이 아닌,<br class="block md:hidden" />
+                여러분의 건강한 변화를<br />
                 함께 만들어가는 파트너가 되고자 합니다.
               </p>
               <p class="text-gray-600 leading-relaxed">
-                <!-- 추가 내용 -->
                 한 분 한 분의 소중한 건강 여정에 최선을 다하겠습니다.
               </p>
             </div>
@@ -114,17 +137,17 @@
             <!-- 전문 분야 태그 -->
             <div class="flex flex-wrap gap-2 pt-4">
               <span
-                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
               >
                 #퍼스널트레이닝
               </span>
               <span
-                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
               >
                 #체형교정
               </span>
               <span
-                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
               >
                 #건강관리
               </span>
@@ -133,12 +156,21 @@
         </div>
       </div>
     </section>
+
     <!-- 메인 소개 섹션 -->
     <section class="py-20 bg-white">
       <div class="max-w-6xl mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-16 items-center">
           <!-- 텍스트 영역 -->
-          <div>
+          <div
+            ref="aboutContent"
+            class="transition-all duration-1000"
+            :class="[
+              isVisible.aboutContent
+                ? 'opacity-100 translate-x-0'
+                : 'opacity-0 -translate-x-8',
+            ]"
+          >
             <div
               class="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium text-sm mb-6"
             >
@@ -155,16 +187,22 @@
               회원 한 분 한 분의 건강한 삶을 위한 맞춤형 솔루션과<br />
               전문 트레이닝, 최신식 장비로 건강한 일상을 함께 만듭니다.
             </p>
-            <div class="flex-col flex-wrap gap-4">
-              <div class="flex items-center gap-2 text-gray-700">
+            <div class="flex-col flex-wrap gap-4 space-y-3">
+              <div
+                class="flex items-center gap-2 text-gray-700 hover:text-slate-800 transition-colors"
+              >
                 <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
                 <span class="font-medium">맞춤형 트레이닝 솔루션</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-700">
+              <div
+                class="flex items-center gap-2 text-gray-700 hover:text-slate-800 transition-colors"
+              >
                 <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
                 <span class="font-medium">프리미엄 헬스케어 기기 체험</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-700">
+              <div
+                class="flex items-center gap-2 text-gray-700 hover:text-slate-800 transition-colors"
+              >
                 <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
                 <span class="font-medium">전문가 건강 상담</span>
               </div>
@@ -172,11 +210,19 @@
           </div>
 
           <!-- 이미지 영역 -->
-          <div class="relative">
+          <div
+            ref="aboutImage"
+            class="relative transition-all duration-1000 delay-300"
+            :class="[
+              isVisible.aboutImage
+                ? 'opacity-100 translate-x-0'
+                : 'opacity-0 translate-x-8',
+            ]"
+          >
             <img
               src="/about/profile2.png"
               alt="공명짐 운동 공간"
-              class="rounded-2xl shadow-2xl w-full h-96 object-cover"
+              class="rounded-2xl shadow-2xl w-full h-96 object-cover hover:shadow-3xl transition-shadow duration-300"
             />
           </div>
         </div>
@@ -186,7 +232,15 @@
     <!-- 서비스 영역 -->
     <section class="py-20 bg-gray-50">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16">
+        <div
+          ref="serviceTitle"
+          class="text-center mb-16 transition-all duration-1000"
+          :class="[
+            isVisible.serviceTitle
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-8',
+          ]"
+        >
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             공명짐의 <span class="text-slate-700">핵심 서비스</span>
           </h2>
@@ -199,10 +253,16 @@
         <div class="grid md:grid-cols-2 gap-8">
           <!-- 헬스장 서비스 -->
           <div
-            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+            ref="serviceCard1"
+            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            :class="[
+              isVisible.serviceCard1
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
           >
             <div
-              class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-6"
+              class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-slate-100 transition-colors"
             >
               <i class="fas fa-dumbbell text-2xl text-slate-700"></i>
             </div>
@@ -232,7 +292,13 @@
 
           <!-- 헬스케어 기기 서비스 -->
           <div
-            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+            ref="serviceCard2"
+            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            :class="[
+              isVisible.serviceCard2
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
           >
             <div
               class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-6"
@@ -268,7 +334,15 @@
 
     <!-- CTA 섹션 -->
     <section class="py-16 bg-white">
-      <div class="max-w-4xl mx-auto px-4 text-center">
+      <div
+        ref="ctaSection"
+        class="max-w-4xl mx-auto px-4 text-center transition-all duration-1000"
+        :class="[
+          isVisible.ctaSection
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-8',
+        ]"
+      >
         <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
           공명짐과 함께 건강한 변화를 시작해보세요
         </h2>
@@ -278,12 +352,14 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-8 rounded-xl transition-colors duration-200"
+            class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-105"
+            @click="openKakaoChat"
           >
             트레이닝 문의하기
           </button>
           <button
-            class="border-2 border-slate-800 text-slate-800 hover:bg-slate-800 hover:text-white font-semibold py-3 px-8 rounded-xl transition-colors duration-200"
+            class="border-2 border-slate-800 text-slate-800 hover:bg-slate-800 hover:text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-105"
+            @click="openKakaoChat"
           >
             기기 체험 상담받기
           </button>
@@ -296,13 +372,145 @@
 <script>
 export default {
   name: 'About',
+  data() {
+    return {
+      heroVisible: false,
+      isVisible: {
+        ceoImage: false,
+        ceoContent: false,
+        aboutContent: false,
+        aboutImage: false,
+        serviceTitle: false,
+        serviceCard1: false,
+        serviceCard2: false,
+        ctaSection: false,
+      },
+    };
+  },
   mounted() {
     // 페이지 상단으로 스크롤
     window.scrollTo(0, 0);
+
+    // 히어로 섹션 애니메이션
+    setTimeout(() => {
+      this.heroVisible = true;
+    }, 300);
+
+    // 스크롤 애니메이션 설정
+    this.setupScrollAnimation();
+  },
+  methods: {
+    // 카카오톡 링크 열기
+    openKakaoChat() {
+      if (typeof window !== 'undefined') {
+        try {
+          window.open('http://pf.kakao.com/_RJVsn', '_blank');
+        } catch (error) {
+          console.error('카카오톡 링크 열기 실패:', error);
+        }
+      }
+    },
+
+    // 상담 문의
+    openConsultation() {
+      if (typeof window !== 'undefined') {
+        try {
+          // 전화 연결 또는 다른 상담 방법
+          window.open('tel:010-1234-5678', '_self');
+        } catch (error) {
+          console.error('상담 연결 실패:', error);
+        }
+      }
+    },
+
+    // 스크롤 애니메이션 설정
+    setupScrollAnimation() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const target = entry.target;
+
+              // 각 섹션별 애니메이션 트리거
+              if (target === this.$refs.ceoImage) {
+                this.isVisible.ceoImage = true;
+              } else if (target === this.$refs.ceoContent) {
+                this.isVisible.ceoContent = true;
+              } else if (target === this.$refs.aboutContent) {
+                this.isVisible.aboutContent = true;
+              } else if (target === this.$refs.aboutImage) {
+                this.isVisible.aboutImage = true;
+              } else if (target === this.$refs.serviceTitle) {
+                this.isVisible.serviceTitle = true;
+              } else if (target === this.$refs.serviceCard1) {
+                this.isVisible.serviceCard1 = true;
+              } else if (target === this.$refs.serviceCard2) {
+                this.isVisible.serviceCard2 = true;
+              } else if (target === this.$refs.ctaSection) {
+                this.isVisible.ctaSection = true;
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        }
+      );
+
+      this.$nextTick(() => {
+        // 모든 요소들을 관찰
+        const elementsToObserve = [
+          this.$refs.ceoImage,
+          this.$refs.ceoContent,
+          this.$refs.aboutContent,
+          this.$refs.aboutImage,
+          this.$refs.serviceTitle,
+          this.$refs.serviceCard1,
+          this.$refs.serviceCard2,
+          this.$refs.ctaSection,
+        ];
+
+        elementsToObserve.forEach((element) => {
+          if (element) observer.observe(element);
+        });
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
-/* 추가 애니메이션이나 커스텀 스타일이 필요하면 여기에 */
+/* 로고 한글 폰트 */
+.logo-korean {
+  word-break: keep-all;
+  line-height: 1.2;
+}
+
+/* 커스텀 그림자 */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* 부드러운 애니메이션 */
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+/* 호버 효과 강화 */
+.transform:hover {
+  transform: translateY(-2px);
+}
+
+/* 버튼 호버 애니메이션 개선 */
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 태그 호버 효과 */
+.hover\:bg-slate-200:hover {
+  background-color: rgb(226 232 240);
+  transform: scale(1.05);
+}
 </style>

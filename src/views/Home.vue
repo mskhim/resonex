@@ -109,63 +109,47 @@
     <!-- 서비스 하이라이트 섹션 (간격 추가용) -->
     <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16">
-          <div
-            ref="highlightTitle"
-            :class="[
-              'transition-all duration-1000',
-              isVisible.highlightTitle
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-          >
-            <h2
-              class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 program-title"
-            >
-              공명짐만의 <span class="text-slate-700">특별함</span>
-            </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              파워플레이트 & 복합 트레이닝으로 짧은 시간 안에 최대의 효과를
-              경험하세요
-            </p>
-          </div>
-        </div>
+        <div class="text-center mb-16"></div>
 
-        <div class="grid md:grid-cols-4 gap-6">
+        <!-- 모바일: 2x2, 태블릿: 2x2, 데스크톱: 1x4 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           <div
             v-for="(feature, index) in specialFeatures"
             :key="index"
             ref="featureCards"
             :class="[
-              'text-center group transition-all duration-700 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl',
+              'text-center group transition-all duration-700 bg-gray-100 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl',
               isVisible.featureCards
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8',
             ]"
             :style="{ animationDelay: `${index * 150}ms` }"
           >
-            <div class="mb-4 relative">
+            <div class="mb-3 md:mb-4 relative">
               <div
-                class="w-16 h-16 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
               >
-                <i :class="feature.icon + ' text-2xl text-blue-600'"></i>
+                <i
+                  :class="feature.icon + ' text-xl md:text-2xl text-blue-600'"
+                ></i>
               </div>
             </div>
 
             <!-- 카운팅 숫자 -->
-            <div class="mb-3">
-              <span class="text-4xl font-bold text-gray-900">
+            <div class="mb-2 md:mb-3">
+              <h3
+                class="text-base md:text-lg font-bold text-gray-900 mb-1 md:mb-2"
+              >
+                {{ feature.title }}
+              </h3>
+              <span class="text-3xl md:text-4xl font-bold text-gray-900">
                 {{ Math.floor(animatedNumbers[index]) }}
               </span>
-              <span class="text-lg text-gray-600 ml-1">{{ feature.unit }}</span>
+              <br />
+              <span class="text-sm md:text-lg text-gray-900 ml-1">{{
+                feature.unit
+              }}</span>
             </div>
-
-            <h3 class="text-lg font-bold text-gray-900 mb-2">
-              {{ feature.title }}
-            </h3>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              {{ feature.description }}
-            </p>
           </div>
         </div>
       </div>
@@ -214,15 +198,18 @@
               class="space-y-6 text-lg md:text-xl lg:text-2xl leading-relaxed"
             >
               <p class="text-white/90">
-                진동 운동으로 몸과 마음을 함께 깨우는 공간,
+                진동 운동으로 몸과 마음을 함께 깨우는 공간,<br
+                  class="block md:hidden"
+                />
                 <span class="font-bold text-white">공명짐</span>입니다.
               </p>
               <p class="text-white/80 text-base md:text-lg">
-                조용하고 프라이빗한 공간에서, 온전히 나 자신에게 집중하며<br
+                조용하고 프라이빗한 공간에서, 온전히 나 자신에게
+                <br class="block md:hidden" />집중하며<br
                   class="hidden md:block"
                 />
-                운동하고 싶으신가요? 공명짐은 그런 분들을 위한 맞춤형
-                스튜디오입니다.
+                운동하고 싶으신가요?<br class="block md:hidden" />
+                공명짐은 그런 분들을 위한 맞춤형 스튜디오입니다.
               </p>
             </div>
 
@@ -231,7 +218,6 @@
         </div>
       </div>
     </section>
-
     <!-- 위탁판매 섹션 -->
     <section class="py-16 sm:py-24 bg-white">
       <div class="max-w-6xl mx-auto px-4">
@@ -257,16 +243,40 @@
               위탁판매 서비스
             </h2>
             <p class="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              전문가가 직접 선별한 프리미엄 건강기기를 합리적인 가격으로
-              만나보세요
+              전문가가 직접 선별한 프리미엄 건강기기를
+              <br class="block md:hidden" />합리적인 가격으로 만나보세요
             </p>
           </div>
         </div>
 
-        <!-- 파워플레이트 (좌: 텍스트, 우: 이미지) -->
+        <!-- 파워플레이트 -->
         <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+          <!-- 모바일: 이미지가 먼저, 데스크톱: 텍스트가 먼저 -->
+          <div
+            ref="productImage1"
+            class="lg:order-2"
+            :class="[
+              'relative transition-all duration-1000 delay-300',
+              isVisible.productImage1
+                ? 'opacity-100 translate-x-0'
+                : 'opacity-0 translate-x-8',
+            ]"
+          >
+            <div class="relative rounded-xl overflow-hidden shadow-xl">
+              <img
+                src="/main/card/powerPlate.jpg"
+                alt="파워플레이트"
+                class="w-full h-64 md:h-80 object-cover"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+              ></div>
+            </div>
+          </div>
+
           <div
             ref="productContent1"
+            class="lg:order-1"
             :class="[
               'space-y-6 transition-all duration-1000',
               isVisible.productContent1
@@ -282,8 +292,9 @@
             </div>
 
             <p class="text-gray-600 text-lg leading-relaxed">
-              3차원 진동 기술을 활용한 혁신적인 운동법으로 근력강화, 체중감량,
-              순환개선에 탁월한 효과를 제공합니다.
+              3차원 진동 기술을 활용한 혁신적인 운동법으로
+              <br class="block md:hidden" />근력강화, 체중감량, 순환개선에
+              탁월한 효과를 <br class="block md:hidden" />제공합니다.
             </p>
 
             <div class="space-y-3">
@@ -310,35 +321,16 @@
               </button>
             </div>
           </div>
-
-          <div
-            ref="productImage1"
-            :class="[
-              'relative transition-all duration-1000 delay-300',
-              isVisible.productImage1
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-8',
-            ]"
-          >
-            <div class="relative rounded-xl overflow-hidden shadow-xl">
-              <img
-                src="/main/card/powerPlate.jpg"
-                alt="파워플레이트"
-                class="w-full h-64 md:h-80 object-cover"
-              />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
-              ></div>
-            </div>
-          </div>
         </div>
 
-        <!-- 고압산소 치료기기 (좌: 이미지, 우: 텍스트) -->
+        <!-- 고압산소 치료기기 -->
         <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- 모바일: 이미지가 먼저, 데스크톱: 이미지가 먼저 (원래 의도대로) -->
           <div
             ref="productImage2"
+            class="order-1"
             :class="[
-              'relative lg:order-1 transition-all duration-1000',
+              'relative transition-all duration-1000',
               isVisible.productImage2
                 ? 'opacity-100 translate-x-0'
                 : 'opacity-0 -translate-x-8',
@@ -358,8 +350,9 @@
 
           <div
             ref="productContent2"
+            class="order-2"
             :class="[
-              'space-y-6 lg:order-2 transition-all duration-1000 delay-300',
+              'space-y-6 transition-all duration-1000 delay-300',
               isVisible.productContent2
                 ? 'opacity-100 translate-x-0'
                 : 'opacity-0 translate-x-8',
@@ -373,8 +366,9 @@
             </div>
 
             <p class="text-gray-600 text-lg leading-relaxed">
-              높은 농도의 산소를 공급하여 피로회복과 면역력 강화에 도움을 주며,
-              운동 후 빠른 회복을 지원합니다.
+              높은 농도의 산소를 공급하여 피로회복과
+              <br class="block md:hidden" />면역력 강화에 도움을 주며, 운동 후
+              빠른 회복을 <br class="block md:hidden" />지원합니다.
             </p>
 
             <div class="space-y-3">
@@ -620,8 +614,8 @@ export default {
         },
         {
           icon: 'fas fa-medal',
-          title: '자격증, 수상경력',
-          number: 10,
+          title: '자격증 및 수상경력',
+          number: 12,
           unit: '개 +',
           description: '검증된 전문성',
         },
@@ -636,11 +630,12 @@ export default {
           icon: 'fas fa-star',
           title: '프리미엄 장비',
           number: 15,
-          unit: '대 +',
+          unit: '대+',
           description: '최신 운동 장비',
         },
       ],
       animatedNumbers: [0, 0, 0, 0], // 카운팅용 숫자 배열
+      hasCountingStarted: false, // 카운팅 시작 여부 체크
       currentSlide: 0,
       isVisible: {
         impactContent: false,
@@ -660,9 +655,13 @@ export default {
   mounted() {
     this.setupScrollAnimation();
 
-    // DOM 로드 후 텍스트 표시
+    // DOM 로드 후 텍스트 표시 및 카운팅 시작
     setTimeout(() => {
       this.contentVisible = true;
+      // 페이지 로드 후 2초 뒤에 카운팅 시작
+      setTimeout(() => {
+        this.startCountingAnimation();
+      }, 2000);
     }, 500);
 
     // 캐러셀 자동 재생 (선택사항)
@@ -757,8 +756,7 @@ export default {
                 this.$refs.featureCards.includes(target)
               ) {
                 this.isVisible.featureCards = true;
-                // 숫자 카운팅 애니메이션 시작
-                this.startCountingAnimation();
+                // 스크롤 애니메이션만 트리거 (카운팅은 페이지 로드시에만)
               } else if (target === this.$refs.salesTitle) {
                 this.isVisible.salesTitle = true;
               } else if (target === this.$refs.productContent1) {
@@ -827,8 +825,13 @@ export default {
       this.currentSlide = index;
     },
 
-    // 숫자 카운팅 애니메이션
+    // 숫자 카운팅 애니메이션 (페이지 로드시 한 번만)
     startCountingAnimation() {
+      // 이미 카운팅이 시작되었다면 실행하지 않음
+      if (this.hasCountingStarted) return;
+
+      this.hasCountingStarted = true;
+
       this.specialFeatures.forEach((feature, index) => {
         this.animateNumber(index, feature.number);
       });
