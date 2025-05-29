@@ -205,14 +205,7 @@
         <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
           방문 전 알아두세요
         </h2>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-xl shadow-sm">
-            <i class="fas fa-id-card text-3xl text-slate-700 mb-4"></i>
-            <h3 class="font-bold text-gray-900 mb-2">신분증 지참</h3>
-            <p class="text-sm text-gray-600">
-              초회 방문시 신분증을 지참해주세요
-            </p>
-          </div>
+        <div class="grid md:grid-cols-2 gap-6">
           <div class="bg-white p-6 rounded-xl shadow-sm">
             <i class="fas fa-tshirt text-3xl text-slate-700 mb-4"></i>
             <h3 class="font-bold text-gray-900 mb-2">운동복 준비</h3>

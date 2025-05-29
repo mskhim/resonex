@@ -137,15 +137,6 @@
           <p class="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
             &copy; {{ currentYear }} 공명짐. All rights reserved.
           </p>
-          <div class="flex space-x-4 text-xs text-gray-500">
-            <a href="/privacy" class="hover:text-gray-300 transition-colors"
-              >개인정보처리방침</a
-            >
-            <span>|</span>
-            <a href="/terms" class="hover:text-gray-300 transition-colors"
-              >이용약관</a
-            >
-          </div>
         </div>
       </div>
     </div>
