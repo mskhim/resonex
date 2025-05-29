@@ -81,8 +81,7 @@
                   <span class="text-slate-700">위치정보</span>
                 </h2>
                 <p class="text-lg text-gray-600 leading-relaxed">
-                  8호선 남위례역과 가까운 위치에 있어 대중교통 이용이
-                  편리합니다.
+                  8호선 남위례역과 가까운 위치에 있습니다.<br />
                 </p>
               </div>
 

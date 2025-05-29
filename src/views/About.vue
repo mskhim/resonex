@@ -43,10 +43,10 @@
     <section class="py-20 bg-white">
       <div class="max-w-6xl mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-16 items-center">
-          <!-- 사진 영역 -->
+          <!-- 사진 영역 - 모바일: 첫번째, 데스크톱: 첫번째 -->
           <div
             ref="ceoImage"
-            class="relative transition-all duration-1000"
+            class="relative transition-all duration-1000 order-1"
             :class="[
               isVisible.ceoImage
                 ? 'opacity-100 translate-x-0'
@@ -57,7 +57,7 @@
               <img
                 src="/about/ceo-profile.png"
                 alt="공명짐 대표"
-                class="w-full h-96 md:h-[500px] object-cover object-top"
+                class="w-full h-96 md:h-[650px] object-cover object-top"
               />
               <!-- 그라데이션 오버레이 -->
               <div
@@ -73,10 +73,10 @@
             ></div>
           </div>
 
-          <!-- 텍스트 영역 -->
+          <!-- 텍스트 영역 - 모바일: 두번째, 데스크톱: 두번째 -->
           <div
             ref="ceoContent"
-            class="space-y-6 transition-all duration-1000 delay-300"
+            class="space-y-6 transition-all duration-1000 delay-300 order-2"
             :class="[
               isVisible.ceoContent
                 ? 'opacity-100 translate-x-0'
@@ -113,44 +113,88 @@
 
             <!-- 대표 정보 -->
             <div class="pt-6 border-t border-gray-200">
-              <div class="flex items-center gap-4">
+              <div class="flex items-center justify-between mb-6">
                 <div>
                   <h4 class="text-xl font-bold text-gray-900">고종관</h4>
-                  <p class="text-slate-600 font-medium">공명짐 대표</p>
+                  <p class="text-indigo-600 font-medium">대표</p>
                 </div>
-                <div class="flex gap-3 ml-auto">
-                  <!-- 소셜 링크 또는 자격증 뱃지 -->
-                  <div
-                    class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors cursor-pointer"
-                  >
-                    <i class="fas fa-certificate text-slate-600 text-sm"></i>
+              </div>
+
+              <!-- 전문 분야 태그 -->
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span
+                  class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium"
+                >
+                  #퍼스널트레이닝
+                </span>
+                <span
+                  class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium"
+                >
+                  #체형교정
+                </span>
+                <span
+                  class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium"
+                >
+                  #건강관리
+                </span>
+              </div>
+
+              <!-- 카드형 버튼들 -->
+              <div class="grid gap-3">
+                <!-- 자격증 카드 버튼 -->
+                <div
+                  class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-xl p-4 cursor-pointer hover:from-indigo-100 hover:to-purple-100 hover:border-indigo-300 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg group"
+                  @click="showCertifications = true"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 transition-colors flex-shrink-0"
+                    >
+                      <i class="fas fa-certificate text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                      <div class="font-semibold text-gray-900 mb-1">
+                        전문 자격증
+                      </div>
+                      <div class="text-sm text-gray-600">
+                        NASM 국제자격증 포함 다양한 전문 자격증 보유
+                      </div>
+                    </div>
+                    <div
+                      class="text-indigo-400 group-hover:text-indigo-600 transition-colors"
+                    >
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
                   </div>
-                  <div
-                    class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors cursor-pointer"
-                  >
-                    <i class="fas fa-award text-slate-600 text-sm"></i>
+                </div>
+
+                <!-- 경력 카드 버튼 -->
+                <div
+                  class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-4 cursor-pointer hover:from-emerald-100 hover:to-teal-100 hover:border-emerald-300 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg group"
+                  @click="showExperience = true"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center group-hover:bg-emerald-600 transition-colors flex-shrink-0"
+                    >
+                      <i class="fas fa-briefcase text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                      <div class="font-semibold text-gray-900 mb-1">
+                        경력 사항
+                      </div>
+                      <div class="text-sm text-gray-600">
+                        국가대표팀 트레이너 등 풍부한 현장 경험
+                      </div>
+                    </div>
+                    <div
+                      class="text-emerald-400 group-hover:text-emerald-600 transition-colors"
+                    >
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <!-- 전문 분야 태그 -->
-            <div class="flex flex-wrap gap-2 pt-4">
-              <span
-                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
-              >
-                #퍼스널트레이닝
-              </span>
-              <span
-                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
-              >
-                #체형교정
-              </span>
-              <span
-                class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium hover:bg-slate-200 transition-colors"
-              >
-                #건강관리
-              </span>
             </div>
           </div>
         </div>
@@ -161,10 +205,27 @@
     <section class="py-20 bg-white">
       <div class="max-w-6xl mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-16 items-center">
-          <!-- 텍스트 영역 -->
+          <!-- 이미지 영역 - 모바일: 첫번째, 데스크톱: 두번째 -->
+          <div
+            ref="aboutImage"
+            class="relative transition-all duration-1000 delay-300 order-1 md:order-2"
+            :class="[
+              isVisible.aboutImage
+                ? 'opacity-100 translate-x-0'
+                : 'opacity-0 translate-x-8',
+            ]"
+          >
+            <img
+              src="/about/profile2.png"
+              alt="공명짐 운동 공간"
+              class="rounded-2xl shadow-2xl w-full h-96 object-cover hover:shadow-3xl transition-shadow duration-300"
+            />
+          </div>
+
+          <!-- 텍스트 영역 - 모바일: 두번째, 데스크톱: 첫번째 -->
           <div
             ref="aboutContent"
-            class="transition-all duration-1000"
+            class="transition-all duration-1000 order-2 md:order-1"
             :class="[
               isVisible.aboutContent
                 ? 'opacity-100 translate-x-0'
@@ -207,23 +268,6 @@
                 <span class="font-medium">전문가 건강 상담</span>
               </div>
             </div>
-          </div>
-
-          <!-- 이미지 영역 -->
-          <div
-            ref="aboutImage"
-            class="relative transition-all duration-1000 delay-300"
-            :class="[
-              isVisible.aboutImage
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-8',
-            ]"
-          >
-            <img
-              src="/about/profile2.png"
-              alt="공명짐 운동 공간"
-              class="rounded-2xl shadow-2xl w-full h-96 object-cover hover:shadow-3xl transition-shadow duration-300"
-            />
           </div>
         </div>
       </div>
@@ -366,6 +410,355 @@
         </div>
       </div>
     </section>
+
+    <!-- 자격증 팝업 모달 -->
+    <div
+      v-if="showCertifications"
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      @click="showCertifications = false"
+    >
+      <div
+        class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl transform transition-all duration-300"
+        @click.stop
+      >
+        <!-- 헤더 -->
+        <div
+          class="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center"
+              >
+                <i class="fas fa-certificate text-slate-600 text-xl"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">자격증 현황</h3>
+                <p class="text-gray-600 text-sm">전문 자격증</p>
+              </div>
+            </div>
+            <button
+              @click="showCertifications = false"
+              class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+            >
+              <i class="fas fa-times text-gray-400"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 내용 -->
+        <div class="p-6 space-y-4">
+          <!-- 기본 자격증 -->
+          <div class="space-y-3">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-star text-yellow-500"></i>
+              기본 자격증
+            </h4>
+            <div class="bg-slate-50 p-4 rounded-xl">
+              <p class="text-gray-700 font-medium">
+                생활 체육 지도자 자격 2급 보디빌딩
+              </p>
+            </div>
+          </div>
+
+          <!-- 국제 자격증 -->
+          <div class="space-y-3">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-globe text-blue-500"></i>
+              국제 자격증 (NASM)
+            </h4>
+            <div class="space-y-2">
+              <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                <p class="text-blue-800 font-medium">
+                  CPT 미국 스포츠 의학회 트레이너 자격
+                </p>
+              </div>
+              <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                <p class="text-blue-800 font-medium">
+                  CES 미국 스포츠 의학회 재활 운동 전문가 자격
+                </p>
+              </div>
+              <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                <p class="text-blue-800 font-medium">
+                  PES 미국 스포츠 의학회 선수 운동 전문가 자격
+                </p>
+              </div>
+              <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                <p class="text-blue-800 font-medium">
+                  GFS 미국 스포츠 의학회 골프 피트니스 전문가
+                </p>
+              </div>
+              <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                <p class="text-blue-800 font-medium">
+                  WFS 미국 스포츠 의학회 여성 운동 전문가 수료
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 전문 트레이너 자격증 -->
+          <div class="space-y-3">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-dumbbell text-green-500"></i>
+              전문 트레이너 자격증
+            </h4>
+            <div class="grid gap-2">
+              <div
+                class="bg-green-50 p-3 rounded-lg border-l-4 border-green-400"
+              >
+                <p class="text-green-800">
+                  NSCA - Bosu Master Trainer 보수 마스터 트레이너
+                </p>
+              </div>
+              <div
+                class="bg-green-50 p-3 rounded-lg border-l-4 border-green-400"
+              >
+                <p class="text-green-800">
+                  Trigger Point Master Trainer 트리거 포인트 마스터 트레이너
+                </p>
+              </div>
+              <div
+                class="bg-green-50 p-3 rounded-lg border-l-4 border-green-400"
+              >
+                <p class="text-green-800">
+                  POWER PLATE Master Trainer 파워 플레이트 마스터 트레이너
+                </p>
+              </div>
+              <div
+                class="bg-green-50 p-3 rounded-lg border-l-4 border-green-400"
+              >
+                <p class="text-green-800">
+                  POWER PLATE ON Pilates 파워 플레이트 필라테스 강사
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 기타 전문 자격증 -->
+          <div class="space-y-3">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-heart text-red-500"></i>
+              기타 전문 자격증
+            </h4>
+            <div class="grid gap-2">
+              <div class="bg-red-50 p-3 rounded-lg">
+                <p class="text-red-800">
+                  M's Body Pilates Instructor 필라테스 강사
+                </p>
+              </div>
+              <div class="bg-red-50 p-3 rounded-lg">
+                <p class="text-red-800">
+                  IASTM & CRT & SASO 근막이완 테크닉 트레이너
+                </p>
+              </div>
+              <div class="bg-red-50 p-3 rounded-lg">
+                <p class="text-red-800">
+                  TRX - STC, SMSTC, YOGA 소도구 서스펜션 트레이너
+                </p>
+              </div>
+              <div class="bg-red-50 p-3 rounded-lg">
+                <p class="text-red-800">
+                  SuplexKorea Bulgarian Bag Level 1 불가리안백 자격
+                </p>
+              </div>
+              <div class="bg-red-50 p-3 rounded-lg">
+                <p class="text-red-800">
+                  Club Bell, Kettle Bell, VIPER Trainer 소도구 트레이너
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 세미나 참석 -->
+          <div class="space-y-3">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-graduation-cap text-purple-500"></i>
+              세미나 참석
+            </h4>
+            <div class="bg-purple-50 p-3 rounded-lg">
+              <p class="text-purple-800">
+                각종 세미나 참석 (부정형 증후군, 움직임 평가, CES 상급)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 경력사항 팝업 모달 -->
+    <div
+      v-if="showExperience"
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      @click="showExperience = false"
+    >
+      <div
+        class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl transform transition-all duration-300"
+        @click.stop
+      >
+        <!-- 헤더 -->
+        <div
+          class="sticky top-0 bg-slate-100 border-b border-gray-200 p-6 rounded-t-2xl z-10"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center"
+              >
+                <i class="fas fa-briefcase text-slate-600 text-xl"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">경력사항</h3>
+                <p class="text-gray-600 text-sm">전문 경력</p>
+              </div>
+            </div>
+            <button
+              @click="showExperience = false"
+              class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+            >
+              <i class="fas fa-times text-gray-400"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 내용 -->
+        <div class="p-6 space-y-6">
+          <!-- 인디어썸 스포츠 -->
+          <div class="relative">
+            <div
+              class="absolute left-0 top-0 w-1 h-full bg-blue-400 rounded-full"
+            ></div>
+            <div class="pl-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                  >2018-2019</span
+                >
+              </div>
+              <h4 class="font-bold text-gray-900 mb-1">인디어썸 스포츠</h4>
+              <p class="text-gray-600">브랜드 트레이닝 팀 트레이너</p>
+            </div>
+          </div>
+
+          <!-- 코엑스 컨벤션 -->
+          <div class="relative">
+            <div
+              class="absolute left-0 top-0 w-1 h-full bg-green-400 rounded-full"
+            ></div>
+            <div class="pl-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium"
+                  >2020-2023</span
+                >
+              </div>
+              <h4 class="font-bold text-gray-900 mb-1">코엑스 컨벤션</h4>
+              <p class="text-gray-600">컨벤스 어시스트 강사</p>
+            </div>
+          </div>
+
+          <!-- 무쇄복&ATZ Sup -->
+          <div class="relative">
+            <div
+              class="absolute left-0 top-0 w-1 h-full bg-purple-400 rounded-full"
+            ></div>
+            <div class="pl-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium"
+                  >2022-2023</span
+                >
+              </div>
+              <h4 class="font-bold text-gray-900 mb-1">무쇄복&ATZ Sup</h4>
+              <p class="text-gray-600">프로 대회 선수 케어 트레이너</p>
+            </div>
+          </div>
+
+          <!-- 대한민국 국가대표 -->
+          <div class="relative">
+            <div
+              class="absolute left-0 top-0 w-1 h-full bg-red-400 rounded-full"
+            ></div>
+            <div class="pl-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
+                  >2024</span
+                >
+                <span
+                  class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs"
+                  >최신</span
+                >
+              </div>
+              <h4 class="font-bold text-gray-900 mb-1">대한민국 국가대표</h4>
+              <p class="text-gray-600">댄스 스포츠팀 트레이너</p>
+            </div>
+          </div>
+
+          <!-- 주요 활동 섹션 -->
+          <div class="bg-slate-50 p-4 rounded-xl">
+            <h4
+              class="font-semibold text-gray-900 mb-3 flex items-center gap-2"
+            >
+              <i class="fas fa-star text-yellow-500"></i>
+              주요 활동 및 전문 분야
+            </h4>
+            <div class="grid gap-3">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">웨이트 필라테스 강사</p>
+                  <p class="text-sm text-gray-600">
+                    네이버, 네이트, 다음 '고종관 트레이너' 검색 1위
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">다양한 전문 강의</p>
+                  <p class="text-sm text-gray-600">
+                    압구정 필라테스 강사 / 판교 트레이너 / 각종 프리랜서
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">커뮤니티 센터 운영</p>
+                  <p class="text-sm text-gray-600">
+                    정형 관리 - 탈장, 신디저, 부정형 관리
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">
+                    Powerplate Master 파워 플레이트 교육 강사
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">
+                    에이스 바디 - 타워 플라 건설팀 이사
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">
+                    Muscle Tree PT Studio 위례 대표 원장
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -375,6 +768,8 @@ export default {
   data() {
     return {
       heroVisible: false,
+      showCertifications: false,
+      showExperience: false,
       isVisible: {
         ceoImage: false,
         ceoContent: false,

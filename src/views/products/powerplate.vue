@@ -121,8 +121,7 @@ export default {
             '컴팩트 디자인',
           ],
           price: '₩2,900,000',
-          image:
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/powerplate/move.jpg', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 2,
@@ -152,8 +151,7 @@ export default {
           price: '₩9,680,000',
           discount: '20% 할인',
           note: '신제품 할인중',
-          image:
-            'https://images.unsplash.com/photo-1593079831268-3381b0db4a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/powerplate/my8.png', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 4,
@@ -167,8 +165,7 @@ export default {
             '고성능 모터',
           ],
           price: '₩10,340,000',
-          image:
-            'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/powerplate/pro5.jpg', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 5,
@@ -197,8 +194,7 @@ export default {
             '장기 내구성',
           ],
           price: '₩17,500,000',
-          image:
-            'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          image: '/products/powerplate/pro7.jpg', // 실제 이미지 URL로 변경 필요
         },
         {
           id: 7,
@@ -217,21 +213,6 @@ export default {
           note: '신제품 할인중',
           image:
             'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 8,
-          name: 'PowerPlate REV',
-          description:
-            '혁신적인 진동 싸이클로 새로운 차원의 운동 경험을 제공합니다.',
-          features: [
-            '진동 싸이클',
-            '혁신적 디자인',
-            '독특한 운동 경험',
-            '전신 운동',
-          ],
-          price: '₩4,950,000',
-          image:
-            'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         },
       ],
       accessories: [
