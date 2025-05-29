@@ -117,7 +117,7 @@
               <video
                 controls
                 playsinline
-                class="w-full h-96 md:h-[500px] object-cover"
+                class="w-full h-96 md:h-[700px] object-cover"
               >
                 <source src="/video/vertical-video.mp4" type="video/mp4" />
                 <div
@@ -177,7 +177,7 @@
           </p>
         </div>
 
-        <div class="grid md:grid-cols-4 gap-8 fade-in">
+        <div class="grid md:grid-cols-4 grid-cols-2 gap-8 fade-in">
           <div class="text-center">
             <div
               class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"

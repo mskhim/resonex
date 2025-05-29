@@ -312,7 +312,7 @@
               :class="['w-px h-6', isScrolled ? 'bg-gray-300' : 'bg-white/30']"
             ></div>
             <RouterLink
-              to="/products/trigger-point"
+              to="/products/zeroi"
               :class="[
                 'px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap',
                 isScrolled
@@ -320,7 +320,7 @@
                   : 'text-gray-200 hover:bg-white/10 hover:text-blue-200',
               ]"
             >
-              트리거포인트
+              제로아이
             </RouterLink>
           </div>
 
@@ -559,10 +559,10 @@
               </RouterLink>
               <RouterLink
                 @click="closeMenu"
-                to="/products/trigger-point"
+                to="/products/zeroi"
                 class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
               >
-                트리거포인트
+                제로아이
               </RouterLink>
             </div>
           </div>

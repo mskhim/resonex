@@ -242,30 +242,37 @@
               <span class="text-slate-700">공명</span>
             </h2>
             <p
-              class="text-gray-600 text-sm md:text-base lg:text-lg leading-relaxed mb-8"
+              class="text-gray-600 text-sm md:text-base lg:text-lg leading-relaxed mb-4"
             >
-              공명짐은 운동 공간을 넘어선 특별한 헬스케어 공간입니다.<br />
-              회원 한 분 한 분의 건강한 삶을 위한 맞춤형 솔루션과<br />
-              전문 트레이닝, 최신식 장비로 건강한 일상을 함께 만듭니다.
+              공명짐의 중심에는 ‘파워플레이트’가 있습니다. <br />
+              파워플레이트의 고유 고주파 진동이 근육에 미세한 <br />
+              자극을 주어, 짧은 시간 안에 깊은 효과를 만들어내는<br />
+              최신 트레이닝 방식입니다.
             </p>
             <div class="flex-col flex-wrap gap-4 space-y-3">
               <div
                 class="flex items-center gap-2 text-gray-700 hover:text-slate-800 transition-colors"
               >
                 <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
-                <span class="font-medium">맞춤형 트레이닝 솔루션</span>
+                <span class="font-medium">근육 활성화</span>
               </div>
               <div
                 class="flex items-center gap-2 text-gray-700 hover:text-slate-800 transition-colors"
               >
                 <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
-                <span class="font-medium">프리미엄 헬스케어 기기 체험</span>
+                <span class="font-medium">체형 교정</span>
               </div>
               <div
                 class="flex items-center gap-2 text-gray-700 hover:text-slate-800 transition-colors"
               >
                 <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
-                <span class="font-medium">전문가 건강 상담</span>
+                <span class="font-medium">체지방 감량</span>
+              </div>
+              <div
+                class="flex items-center gap-2 text-gray-700 hover:text-slate-800 transition-colors"
+              >
+                <div class="w-2 h-2 bg-slate-600 rounded-full"></div>
+                <span class="font-medium">혈류 & 림프 순환 개선</span>
               </div>
             </div>
           </div>
@@ -294,7 +301,7 @@
           </p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid md:grid-cols-3 gap-8">
           <!-- 헬스장 서비스 -->
           <div
             ref="serviceCard1"
@@ -308,30 +315,15 @@
             <div
               class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-slate-100 transition-colors"
             >
-              <i class="fas fa-dumbbell text-2xl text-slate-700"></i>
+              <i class="fas fa-pray text-2xl text-slate-700"></i>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">
-              맞춤형 트레이닝 솔루션
+              정교한 코어 운동 – 필라테스
             </h3>
-            <p class="text-gray-600 mb-6">
-              최신식 장비와 쾌적한 환경에서 전문 트레이너의 1:1 맞춤 지도를
-              받으실 수 있습니다. 회원 한 분 한 분의 건강 목표에 맞는 개인별
-              운동 프로그램을 제공합니다.
+            <p class="text-gray-600">
+              작은 움직임 하나에도 집중하며, 몸의 정렬과 중심을 바로잡는 정밀한
+              운동. 파워플레이트의 진동과 결합해 깊은 코어 자극까지 더합니다.
             </p>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li class="flex items-center gap-2">
-                <i class="fas fa-check text-emerald-500 text-xs"></i>
-                <span>최신식 운동기구 완비</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i class="fas fa-check text-emerald-500 text-xs"></i>
-                <span>개인별 맞춤 트레이닝</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i class="fas fa-check text-emerald-500 text-xs"></i>
-                <span>체계적인 건강 관리 프로그램</span>
-              </li>
-            </ul>
           </div>
 
           <!-- 헬스케어 기기 서비스 -->
@@ -347,30 +339,38 @@
             <div
               class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-6"
             >
-              <i class="fas fa-heart-pulse text-2xl text-slate-700"></i>
+              <i class="fas fa-dumbbell text-2xl text-slate-700"></i>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">
-              프리미엄 헬스케어 기기 체험
+              기능 중심 웨이트 트레이닝
             </h3>
             <p class="text-gray-600 mb-6">
-              전문가가 직접 고른 프리미엄 건강기기를 직접 체험해보실 수
-              있습니다. 검증된 제품을 체험해보시고 건강 여정을 함께 상담해
-              드립니다.
+              기계적인 루틴이 아닌, ‘내 삶을 더 편안하게 만들어주는 움직임’을
+              위한 웨이트 트레이닝을 지향합니다 .
             </p>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li class="flex items-center gap-2">
-                <i class="fas fa-check text-emerald-500 text-xs"></i>
-                <span>전문가 선별 프리미엄 기기</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i class="fas fa-check text-emerald-500 text-xs"></i>
-                <span>직접 체험 후 상담 서비스</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i class="fas fa-check text-emerald-500 text-xs"></i>
-                <span>개인별 건강 솔루션 안내</span>
-              </li>
-            </ul>
+          </div>
+          <div
+            ref="serviceCard2"
+            class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            :class="[
+              isVisible.serviceCard2
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
+          >
+            <div
+              class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-spa text-2xl text-slate-700"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">
+              공명짐 리커버리 루틴
+            </h3>
+            <p class="text-gray-600 mb-6">
+              마지막은 고요한 진동 속에서 호흡을 정리하고 몸의 긴장을 풀어내는
+              회복 루틴으로 마무리합니다. 신경을 안정시키고 스트레스를 덜어주는
+              이 시간은, 단순한 운동 이상의 내면적인 리셋을 선사합니다.
+            </p>
           </div>
         </div>
       </div>
@@ -470,27 +470,27 @@
             <div class="space-y-2">
               <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
                 <p class="text-blue-800 font-medium">
-                  CPT 미국 스포츠 의학회 트레이너 자격
+                  NASM - CPT 미국 스포츠 의학회 트레이너 자격
                 </p>
               </div>
               <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
                 <p class="text-blue-800 font-medium">
-                  CES 미국 스포츠 의학회 재활 운동 전문가 자격
+                  NASM - CES 미국 스포츠 의학회 재활 운동 전문가 자격
                 </p>
               </div>
               <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
                 <p class="text-blue-800 font-medium">
-                  PES 미국 스포츠 의학회 선수 운동 전문가 자격
+                  NASM - PES 미국 스포츠 의학회 선수 운동 전문가 자격
                 </p>
               </div>
               <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
                 <p class="text-blue-800 font-medium">
-                  GFS 미국 스포츠 의학회 골프 피트니스 전문가
+                  NASM - GFS 미국 스포츠 의학회 골프 피트니스 전문가 자격
                 </p>
               </div>
               <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
                 <p class="text-blue-800 font-medium">
-                  WFS 미국 스포츠 의학회 여성 운동 전문가 수료
+                  NASM - WFS 미국 스포츠 의학회 여성 운동 전문가 수료
                 </p>
               </div>
             </div>
@@ -534,18 +534,45 @@
             </div>
           </div>
 
+          <!-- 필라테스 & 요가 자격증 -->
+          <div class="space-y-3">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-om text-purple-500"></i>
+              필라테스 & 요가 자격증
+            </h4>
+            <div class="grid gap-2">
+              <div
+                class="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-400"
+              >
+                <p class="text-purple-800">
+                  M's Body Pilates Instructor 문지숙 필라테스 강사
+                </p>
+              </div>
+              <div
+                class="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-400"
+              >
+                <p class="text-purple-800">
+                  M's Body Pilates Educator 문지숙 필라테스 강사 경력
+                </p>
+              </div>
+              <div
+                class="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-400"
+              >
+                <p class="text-purple-800">
+                  요가 그릿 - 요가 TTC 강사 자격 (아쉬탕가, 빈야사, 현대 요가
+                  고전 요가 등)
+                </p>
+              </div>
+            </div>
+          </div>
+
           <!-- 기타 전문 자격증 -->
           <div class="space-y-3">
             <h4 class="font-semibold text-gray-900 flex items-center gap-2">
-              <i class="fas fa-heart text-red-500"></i>
+              <i class="fas fa-tools text-red-500"></i>
               기타 전문 자격증
             </h4>
             <div class="grid gap-2">
-              <div class="bg-red-50 p-3 rounded-lg">
-                <p class="text-red-800">
-                  M's Body Pilates Instructor 필라테스 강사
-                </p>
-              </div>
               <div class="bg-red-50 p-3 rounded-lg">
                 <p class="text-red-800">
                   IASTM & CRT & SASO 근막이완 테크닉 트레이너
@@ -566,18 +593,23 @@
                   Club Bell, Kettle Bell, VIPER Trainer 소도구 트레이너
                 </p>
               </div>
+              <div class="bg-red-50 p-3 rounded-lg">
+                <p class="text-red-800">
+                  에이스 바디 타워풀리 - 상체/하체 TTC 코스 자격
+                </p>
+              </div>
             </div>
           </div>
 
           <!-- 세미나 참석 -->
           <div class="space-y-3">
             <h4 class="font-semibold text-gray-900 flex items-center gap-2">
-              <i class="fas fa-graduation-cap text-purple-500"></i>
+              <i class="fas fa-graduation-cap text-indigo-500"></i>
               세미나 참석
             </h4>
-            <div class="bg-purple-50 p-3 rounded-lg">
-              <p class="text-purple-800">
-                각종 세미나 참석 (부정형 증후군, 움직임 평가, CES 상급)
+            <div class="bg-indigo-50 p-3 rounded-lg">
+              <p class="text-indigo-800">
+                각종 세미나 참석 (부정렬 증후군, 요가, FMS 움직임 평가, CES 등)
               </p>
             </div>
           </div>
@@ -622,135 +654,188 @@
 
         <!-- 내용 -->
         <div class="p-6 space-y-6">
-          <!-- 인디어썸 스포츠 -->
-          <div class="relative">
-            <div
-              class="absolute left-0 top-0 w-1 h-full bg-blue-400 rounded-full"
-            ></div>
-            <div class="pl-6">
-              <div class="flex items-center gap-2 mb-2">
-                <span
-                  class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
-                  >2018-2019</span
-                >
-              </div>
-              <h4 class="font-bold text-gray-900 mb-1">인디어썸 스포츠</h4>
-              <p class="text-gray-600">브랜드 트레이닝 팀 트레이너</p>
-            </div>
-          </div>
-
-          <!-- 코엑스 컨벤션 -->
-          <div class="relative">
-            <div
-              class="absolute left-0 top-0 w-1 h-full bg-green-400 rounded-full"
-            ></div>
-            <div class="pl-6">
-              <div class="flex items-center gap-2 mb-2">
-                <span
-                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium"
-                  >2020-2023</span
-                >
-              </div>
-              <h4 class="font-bold text-gray-900 mb-1">코엑스 컨벤션</h4>
-              <p class="text-gray-600">컨벤스 어시스트 강사</p>
-            </div>
-          </div>
-
-          <!-- 무쇄복&ATZ Sup -->
-          <div class="relative">
-            <div
-              class="absolute left-0 top-0 w-1 h-full bg-purple-400 rounded-full"
-            ></div>
-            <div class="pl-6">
-              <div class="flex items-center gap-2 mb-2">
-                <span
-                  class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium"
-                  >2022-2023</span
-                >
-              </div>
-              <h4 class="font-bold text-gray-900 mb-1">무쇄복&ATZ Sup</h4>
-              <p class="text-gray-600">프로 대회 선수 케어 트레이너</p>
-            </div>
-          </div>
-
-          <!-- 대한민국 국가대표 -->
-          <div class="relative">
-            <div
-              class="absolute left-0 top-0 w-1 h-full bg-red-400 rounded-full"
-            ></div>
-            <div class="pl-6">
-              <div class="flex items-center gap-2 mb-2">
-                <span
-                  class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
-                  >2024</span
-                >
-                <span
-                  class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs"
-                  >최신</span
-                >
-              </div>
-              <h4 class="font-bold text-gray-900 mb-1">대한민국 국가대표</h4>
-              <p class="text-gray-600">댄스 스포츠팀 트레이너</p>
-            </div>
-          </div>
-
-          <!-- 주요 활동 섹션 -->
-          <div class="bg-slate-50 p-4 rounded-xl">
-            <h4
-              class="font-semibold text-gray-900 mb-3 flex items-center gap-2"
-            >
-              <i class="fas fa-star text-yellow-500"></i>
-              주요 활동 및 전문 분야
+          <!-- 전직 경력 -->
+          <div class="space-y-4">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-history text-blue-500"></i>
+              전직 경력
             </h4>
+
+            <!-- 언더아머 스포츠 -->
+            <div class="relative">
+              <div
+                class="absolute left-0 top-0 w-1 h-full bg-blue-400 rounded-full"
+              ></div>
+              <div class="pl-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span
+                    class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                    >2018-2019</span
+                  >
+                </div>
+                <h5 class="font-bold text-gray-900 mb-1">언더아머 스포츠</h5>
+                <p class="text-gray-600">브랜드 트레이닝 런 트레이너</p>
+              </div>
+            </div>
+
+            <!-- 코엑스, 킨텍스 -->
+            <div class="relative">
+              <div
+                class="absolute left-0 top-0 w-1 h-full bg-green-400 rounded-full"
+              ></div>
+              <div class="pl-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span
+                    class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium"
+                    >2020-2023</span
+                  >
+                </div>
+                <h5 class="font-bold text-gray-900 mb-1">코엑스, 킨텍스</h5>
+                <p class="text-gray-600">컨벤션 어시스트 강사</p>
+              </div>
+            </div>
+
+            <!-- 문체부&ATZ Sup -->
+            <div class="relative">
+              <div
+                class="absolute left-0 top-0 w-1 h-full bg-purple-400 rounded-full"
+              ></div>
+              <div class="pl-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span
+                    class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium"
+                    >2022-2023</span
+                  >
+                </div>
+                <h5 class="font-bold text-gray-900 mb-1">문체부&ATZ Sup</h5>
+                <p class="text-gray-600">프로 대회 선수 케어 트레이너</p>
+              </div>
+            </div>
+
+            <!-- 대한민국 국가대표 -->
+            <div class="relative">
+              <div
+                class="absolute left-0 top-0 w-1 h-full bg-red-400 rounded-full"
+              ></div>
+              <div class="pl-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span
+                    class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
+                    >2024</span
+                  >
+                  <span
+                    class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs"
+                    >최신</span
+                  >
+                </div>
+                <h5 class="font-bold text-gray-900 mb-1">대한민국 국가대표</h5>
+                <p class="text-gray-600">스탠다드 댄스 스포츠팀 트레이너</p>
+              </div>
+            </div>
+
+            <!-- 스타볼 워커힐 -->
+            <div class="relative">
+              <div
+                class="absolute left-0 top-0 w-1 h-full bg-indigo-400 rounded-full"
+              ></div>
+              <div class="pl-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span
+                    class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium"
+                    >2024</span
+                  >
+                </div>
+                <h5 class="font-bold text-gray-900 mb-1">스타볼 워커힐</h5>
+                <p class="text-gray-600">
+                  댄스 스포츠 대회 - 라틴, 스탠다드 선수 케어 부스 운영
+                </p>
+              </div>
+            </div>
+
+            <!-- 필라테스 강사 활동 -->
+            <div class="bg-gray-50 p-4 rounded-xl">
+              <h5 class="font-semibold text-gray-900 mb-2">
+                필라테스 & 트레이너 강사 활동
+              </h5>
+              <p class="text-gray-600 text-sm">
+                압구정, 판교, 역삼, 천호, 군자, 서울숲, 서초 등 다수 지역에서
+                필라테스 및 트레이너 강사 활동
+              </p>
+            </div>
+
+            <!-- 커뮤니티 센터 경영 -->
+            <div class="bg-gray-50 p-4 rounded-xl">
+              <h5 class="font-semibold text-gray-900 mb-2">
+                커뮤니티 센터 경영 관리
+              </h5>
+              <p class="text-gray-600 text-sm">
+                前) 서초, 판교, 위례 센터 경영 및 운영 관리<br />
+                現) 고덕 센터 경영 및 운영 관리
+              </p>
+            </div>
+          </div>
+
+          <!-- 현재 활동 -->
+          <div class="space-y-4">
+            <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-star text-yellow-500"></i>
+              현재 활동
+            </h4>
+
             <div class="grid gap-3">
               <div class="flex items-start gap-3">
                 <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
                 <div>
-                  <p class="font-medium text-gray-900">웨이트 필라테스 강사</p>
-                  <p class="text-sm text-gray-600">
-                    네이버, 네이트, 다음 '고종관 트레이너' 검색 1위
-                  </p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3">
-                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
-                <div>
-                  <p class="font-medium text-gray-900">다양한 전문 강의</p>
-                  <p class="text-sm text-gray-600">
-                    압구정 필라테스 강사 / 판교 트레이너 / 각종 프리랜서
-                  </p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3">
-                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
-                <div>
-                  <p class="font-medium text-gray-900">커뮤니티 센터 운영</p>
-                  <p class="text-sm text-gray-600">
-                    정형 관리 - 탈장, 신디저, 부정형 관리
-                  </p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3">
-                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
-                <div>
                   <p class="font-medium text-gray-900">
-                    Powerplate Master 파워 플레이트 교육 강사
+                    웨이트 필라테스 전문가
+                  </p>
+                  <p class="text-sm text-gray-600">
+                    네이버, 네이트, 다음 '고종관 트레이너' - 웨이트 필라테스
+                    기사
                   </p>
                 </div>
               </div>
+
               <div class="flex items-start gap-3">
                 <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
                 <div>
-                  <p class="font-medium text-gray-900">
-                    에이스 바디 - 타워 플라 건설팀 이사
+                  <p class="font-medium text-gray-900">미디어 활동</p>
+                  <p class="text-sm text-gray-600">
+                    더모스트타임즈 - 머슬트리피티스튜디오 - 고종관 대표 "함께
+                    건강한 미래를 설계하는 동반자"
                   </p>
                 </div>
               </div>
+
               <div class="flex items-start gap-3">
                 <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
                 <div>
-                  <p class="font-medium text-gray-900">
-                    Muscle Tree PT Studio 위례 대표 원장
+                  <p class="font-medium text-gray-900">교육 강사</p>
+                  <p class="text-sm text-gray-600">
+                    Powerplate Master (파워 플레이트) / Trigger Point (트리거
+                    포인트) 교육 강사
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">컨설팅 이사</p>
+                  <p class="text-sm text-gray-600">
+                    에이스 바디 - 타워 풀리 컨설팅 이사<br />
+                    메디코넷 - 고압 산소 챔버 컨설팅 이사<br />
+                    영일엠 - Saso 컨설팅 이사
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                <div>
+                  <p class="font-medium text-gray-900">센터 운영</p>
+                  <p class="text-sm text-gray-600">
+                    공명짐 & 파워플레이트 & 필라테스 위례점 대표 원장
                   </p>
                 </div>
               </div>

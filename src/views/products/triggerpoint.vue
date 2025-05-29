@@ -3,21 +3,18 @@
     <!-- 히어로 섹션 -->
     <section class="relative bg-slate-900 text-white">
       <div class="relative max-w-7xl mx-auto">
-        <!-- 대형 이미지 with 오버레이 -->
         <div class="mb-6 relative">
           <img
-            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80"
+            src="/products/zeroi/hero.jpg"
             alt="공명짐 제품"
             class="w-full h-64 md:h-80 object-cover shadow-2xl"
           />
-          <!-- 어두운 오버레이 -->
           <div class="absolute inset-0 bg-black/60"></div>
-
-          <!-- 텍스트 내용 -->
           <div class="absolute inset-0 flex items-center justify-center z-10">
             <div class="text-center max-w-4xl mx-auto px-4 mt-12 md:mt-30">
-              <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
-                제품 소개
+              <span class="text-xl md:text-2xl text-white">Zero-I</span>
+              <h1 class="text-4xl md:text-5xl font-bold mt-5 mb-6 text-white">
+                제로아이
               </h1>
             </div>
           </div>
@@ -25,17 +22,15 @@
       </div>
     </section>
 
-    <!-- 파워플레이트 섹션 -->
-    <section class="py-20 bg-white">
+    <!-- 제로아이 섹션 -->
+    <section class="py-16 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            PowerPlate <span class="text-blue-600">진동 플랫폼</span>
-          </h2>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            전 세계적으로 인정받은 파워플레이트의 진동 기술로 효과적인 운동과
-            재활을 경험하세요.
-          </p>
+          <img
+            src="/products/zeroi/zeroiLogo.png"
+            alt="Power Plate Logo"
+            class="w-50 mx-auto mb-4"
+          />
           <div class="mt-6 p-4 bg-blue-50 rounded-lg">
             <p class="text-sm text-blue-800">
               ※ 품절유무, 할인유무, 상세페이지 내용은 링크접속하여 확인
@@ -44,9 +39,10 @@
           </div>
         </div>
 
-        <div class="space-y-16">
+        <!-- 제로아이 제품 카드 (파워플레이트 스타일) -->
+        <div class="space-y-16 mb-20">
           <div
-            v-for="(product, index) in powerPlateProducts"
+            v-for="(product, index) in zeroiProducts"
             :key="product.id"
             :class="[
               'flex flex-col lg:flex-row items-center gap-8',
@@ -58,7 +54,7 @@
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="w-full h-80 object-cover rounded-2xl shadow-lg"
+                class="w-full h-80 object-contain rounded-2xl shadow-lg"
               />
             </div>
 
@@ -76,27 +72,60 @@
               <!-- 특징 -->
               <div class="space-y-2">
                 <div
-                  v-for="(feature, featureIndex) in product.features"
+                  v-for="(muscle, featureIndex) in product.targetMuscles"
                   :key="featureIndex"
                   class="flex items-center"
                 >
-                  <div class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                  <span class="text-gray-700">{{ feature }}</span>
+                  <div class="w-2 h-2 bg-emerald-600 rounded-full mr-3"></div>
+                  <span class="text-gray-700">{{ muscle }}</span>
+                </div>
+              </div>
+
+              <!-- 사이즈 정보 -->
+              <div class="bg-gray-50 p-4 rounded-xl">
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span class="text-gray-600">사이즈:</span>
+                    <p class="font-medium">{{ product.size }}</p>
+                  </div>
+                  <div>
+                    <span class="text-gray-600">중량:</span>
+                    <p class="font-medium">{{ product.weight }}</p>
+                  </div>
                 </div>
               </div>
 
               <!-- 문의 버튼 -->
               <button
-                @click="handleInquiry(product.name)"
-                class="w-full lg:w-auto bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-700 transition-colors duration-200"
+                @click="handleZeroiInquiry(product.name)"
+                class="w-full lg:w-auto bg-emerald-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-emerald-700 transition-colors duration-200"
               >
-                스마트 스토어 방문
+                제품 문의하기
               </button>
             </div>
           </div>
         </div>
+
+        <!-- 추가 상세 이미지 (타워풀리 스타일) -->
+        <div class="text-center mb-12 grid md:grid-cols-2 gap-4">
+          <div
+            v-for="(image, index) in zeroiDetailImages"
+            :key="index"
+            class="w-full"
+          >
+            <img
+              :src="image.url"
+              :alt="image.alt"
+              class="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- 제로아이 상세정보 모달 -->
+    <!-- 모달 제거됨 -->
   </div>
 </template>
 
@@ -105,209 +134,132 @@ export default {
   name: 'Products',
   data() {
     return {
-      powerPlateProducts: [
+      showZeroiModal: false,
+      selectedZeroiProduct: null,
+
+      tabs: [
+        { id: 'powerplate', name: 'PowerPlate' },
+        { id: 'zeroi', name: 'Zero-i' },
+        { id: 'towerpully', name: 'Tower Pully' },
+      ],
+
+      zeroiDetailImages: [
+        { url: '/products/zeroi/zeroi1.png', alt: '제로아이 상세 이미지 1' },
+        { url: '/products/zeroi/zeroi2.png', alt: '제로아이 상세 이미지 2' },
+        { url: '/products/zeroi/zeroi3.png', alt: '제로아이 상세 이미지 3' },
+        { url: '/products/zeroi/zeroi4.png', alt: '제로아이 상세 이미지 4' },
+        { url: '/products/zeroi/zeroi5.png', alt: '제로아이 상세 이미지 5' },
+        { url: '/products/zeroi/zeroi6.png', alt: '제로아이 상세 이미지 6' },
+      ],
+
+      zeroiProducts: [
         {
           id: 1,
-          name: 'PowerPlate MOVE',
+          name: 'Chest Extension',
           description:
-            '개인용 진동 플랫폼으로 가정에서 간편하게 사용할 수 있는 컴팩트한 모델입니다.',
-          features: [
-            '가정용 최적화',
-            '간편한 조작',
-            '효과적인 전신 운동',
-            '컴팩트 디자인',
-          ],
-          price: '₩2,900,000',
-          image:
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            '가슴과 어깨 스트레칭으로 견갑골 가동성을 개선하고 심폐기능을 강화합니다.',
+          targetMuscles: ['대흉근', '삼각근', '복직근', '상완삼두근'],
+          size: 'W 950 × D 1,350 × H 1,650 mm',
+          weight: '71kg',
+          color: '화이트 / 블랙',
+          system: '스프링식 (스프링 5개)',
+          purpose:
+            '가슴과 어깨 스트레칭 머신입니다. 견갑골을 뒤로 가동시켜 흉곽이 열립니다. 호흡근 활동을 개선시켜 심폐기능을 강화시킵니다.',
+          specifications: '스프링식 / 스프링 개수 5개 / 이동용 바퀴',
+          image: '/products/zeroi/chest-extention.png',
         },
         {
           id: 2,
-          name: 'PowerPlate MY7',
+          name: 'Shoulder Elevation',
           description:
-            '중급 사용자를 위한 다기능 진동 플랫폼으로 다양한 운동 프로그램을 제공합니다.',
-          features: [
-            '다양한 운동 프로그램',
-            '터치스크린 인터페이스',
-            '프리미엄 디자인',
-            '개인 맞춤 설정',
-          ],
-          price: '₩7,700,000',
-          image:
-            'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            '등 상부와 어깨 주위 스트레칭으로 견갑골 움직임을 개선합니다.',
+          targetMuscles: ['광배근', '능형근', '견갑거근', '삼각근'],
+          size: 'W 920 × D 1,300 × H 1,300 mm',
+          weight: '62kg',
+          color: '화이트 / 블랙',
+          system: '스프링식 (스프링 5개)',
+          purpose:
+            '등 상부·어깨 주위를 스트레칭하는 머신입니다. 팔의 움직임과 동시에 견갑골을 움직이면 상체가 편안합니다.',
+          specifications:
+            '스프링식 / 스프링 개수 5개 / 이동용 바퀴, 착석 높이 조정 / 손잡이(반월 모양) 가동영역 조정',
+          image: '/products/zeroi/shoulder-elevation.png',
         },
         {
           id: 3,
-          name: 'PowerPlate MY8',
-          description: '최신 기술이 적용된 신제품으로 현재 특가 할인 중입니다.',
-          features: [
-            '최신 기술 적용',
-            '고급 마감',
-            '전문가용 기능',
-            '신제품 출시',
-          ],
-          originalPrice: '₩12,100,000',
-          price: '₩9,680,000',
-          discount: '20% 할인',
-          note: '신제품 할인중',
-          image:
-            'https://images.unsplash.com/photo-1593079831268-3381b0db4a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          name: 'Adductor Extension',
+          description:
+            '고관절 주위 근육을 부드럽게 스트레칭하는 대형 머신입니다.',
+          targetMuscles: ['고관절 주변근육', '내전근군'],
+          size: 'W 1,450 × D 1,430 × H 1,150 mm',
+          weight: '93kg',
+          color: '화이트 / 블랙',
+          system: '스프링식 (스프링 5개)',
+          purpose:
+            '고관절 주위를 스트레칭하는 머신입니다. 고관절 주변의 근육을 부드럽게 합니다.',
+          specifications:
+            '스프링식 / 스프링 개수 5개 / 이동용 바퀴 / 엉덩관절 가동영역 조정',
+          image: '/products/zeroi/adductor-extention.png',
         },
         {
           id: 4,
-          name: 'PowerPlate Pro5',
+          name: 'Hip Flex',
           description:
-            '전문 트레이너와 피트니스 센터를 위한 프로페셔널 모델입니다.',
-          features: [
-            '전문가용 설계',
-            '내구성 강화',
-            '상업용 등급',
-            '고성능 모터',
-          ],
-          price: '₩10,340,000',
-          image:
-            'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            '엉덩이 전체 스트레칭으로 스포츠에 중요한 트위스트 동작을 촉진합니다.',
+          targetMuscles: ['고관절', '엉덩이 주변근육', '내전근군', '외전근'],
+          size: 'W 600 × D 950 × H 1,100 mm',
+          weight: '60kg',
+          color: '화이트 / 블랙',
+          system: '스프링식 (스프링 5개)',
+          purpose:
+            '엉덩이 전체를 스트레칭하는 머신입니다. 야구 타격 골프스윙으로 대표되는 모든 스포츠에 중요한 트위스트 동작을 촉진합니다.',
+          specifications: '스프링식 / 스프링 개수 5개 / 이동용 캐스터',
+          image: '/products/zeroi/hip-flex.png',
         },
         {
           id: 5,
-          name: 'PowerPlate Pro5HP',
+          name: 'Crus Extension',
           description:
-            'Pro5의 고성능 버전으로 더욱 강력한 진동과 다양한 기능을 제공합니다.',
-          features: [
-            '고성능 모터',
-            '강화된 진동',
-            '프리미엄 기능',
-            '상업용 최적화',
-          ],
-          price: '₩15,340,000',
-          image:
-            'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            '하체 중심 스트레칭으로 운동 시 하지 부상 예방에 효과적입니다.',
+          targetMuscles: ['햄스트링', '하퇴 삼두근', '대둔근', '대퇴사두근'],
+          size: 'W 600 × D 1,930 × H 1,500 mm',
+          weight: '135kg',
+          color: '화이트 / 블랙',
+          system: '스프링식 (스프링 5개)',
+          purpose:
+            '하체를 중심으로 스트레칭을 하는 머신입니다. 운동시 하지 부상 예방을 기대할 수 있습니다.',
+          specifications:
+            '스프링식 / 스프링 개수 5개 / 착석 높이 조절 / 이동용 캐스터',
+          image: '/products/zeroi/crus-extention.png',
         },
         {
           id: 6,
-          name: 'PowerPlate Pro7',
+          name: 'Spiral',
           description:
-            '상업용 고급 진동 플랫폼으로 최고의 성능과 내구성을 제공합니다.',
-          features: [
-            '상업용 최적화',
-            '최고 성능',
-            '프리미엄 기능',
-            '장기 내구성',
-          ],
-          price: '₩17,500,000',
-          image:
-            'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            '견갑골 상하 슬라이드와 비틀림 동작으로 상체 전체를 스트레칭합니다.',
+          targetMuscles: ['척추부', '승모근', '상완삼두근'],
+          size: 'W 1,100 × D 1,450 × H 2,280 mm',
+          weight: '93kg',
+          color: '화이트 / 블랙',
+          system: '스프링식 (스프링 5개)',
+          purpose:
+            '견갑골을 상하로 슬라이드 시키는 머신입니다. 좌우 견갑골을 분리하여 동작하기 때문에 상체 전체를 스트레칭하는 것이 가능합니다. 또한, 비틀림 동작을 할 수 있기 때문에 척추에 대한 접근법과 어깨의 피로, 자세의 개선을 기대할 수 있습니다.',
+          specifications: '스프링식 / 스프링 개수 5개 / 이동용 캐스터',
+          image: '/products/zeroi/spiral.jpg',
         },
         {
           id: 7,
-          name: 'PowerPlate Pro8',
+          name: 'Rotation',
           description:
-            '최상급 프로페셔널 모델로 신제품 출시 기념 특가 할인 중입니다.',
-          features: [
-            '최상급 성능',
-            '최신 기술',
-            '전문가 추천',
-            '프리미엄 설계',
-          ],
-          originalPrice: '₩23,100,000',
-          price: '₩18,480,000',
-          discount: '20% 할인',
-          note: '신제품 할인중',
-          image:
-            'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 8,
-          name: 'PowerPlate REV',
-          description:
-            '혁신적인 진동 싸이클로 새로운 차원의 운동 경험을 제공합니다.',
-          features: [
-            '진동 싸이클',
-            '혁신적 디자인',
-            '독특한 운동 경험',
-            '전신 운동',
-          ],
-          price: '₩4,950,000',
-          image:
-            'https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-      ],
-      accessories: [
-        {
-          id: 1,
-          name: 'Pro5 방진판',
-          price: '₩600,000',
-        },
-        {
-          id: 2,
-          name: 'MY7 방진판',
-          price: '₩550,000',
-        },
-        {
-          id: 3,
-          name: 'Pro7 방진판',
-          price: '₩600,000',
-        },
-        {
-          id: 4,
-          name: 'MOVE 방진판',
-          price: '₩440,000',
-        },
-      ],
-      oxygenProducts: [
-        {
-          id: 1,
-          name: 'O2ONE Q31',
-          description: '1인용 앉은 자세 고압산소치료기 - 병원 및 클리닉용',
-          features: ['1인용 설계', 'BIBS 마스크', '자동/수동 모드'],
-          specs: '1.1~3.0ATA / 1824×1024×2219mm',
-          image:
-            'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 2,
-          name: 'O2ONE Q32',
-          description: '2인용 앉은 자세 고압산소치료기 - 효율적인 동시 치료',
-          features: ['2인 동시 치료', '공간 효율성', '슬라이딩 도어'],
-          specs: '1.1~3.0ATA / 2340×1850×2210mm',
-          image:
-            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 3,
-          name: 'O2ONE H3000',
-          description: '하드타입 고압산소치료기 - 베드슬라이드 방식',
-          features: ['베드슬라이드', '화상환자 적합', 'PED 규격 준수'],
-          specs: '3.0ATA / 2250×1400×1346mm',
-          image:
-            'https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 4,
-          name: 'O2ONE H3100',
-          description: '고급형 하드타입 - 컬러 터치 디스플레이',
-          features: ['내/외부 터치스크린', 'Lock 기능', '쿨링시스템'],
-          specs: '3.0ATA / 225cm×ø81cm',
-          image:
-            'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 5,
-          name: 'O2ONE H2000',
-          description: '중압형 하드타입 - 경제적 솔루션',
-          features: ['1.1-2.0ATA', '경제적 가격', '안전성 확보'],
-          specs: '1.1-2.0ATA / 225cm×ø81cm',
-          image:
-            'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 6,
-          name: 'OXYSYS 4000/4500',
-          description: '소프트타입 고압산소치료기 - 휴대성과 편의성',
-          features: ['소프트 챔버', '휴대 가능', '간편 설치'],
-          specs: '1.1-1.3ATA / 200cm×ø70-90cm',
-          image:
-            'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            '척추부 스트레칭과 골반 움직임으로 상하반신 연동을 개선합니다.',
+          targetMuscles: ['척추부', '골반'],
+          size: 'W 600 × D 1,100 × H 950 mm',
+          weight: '30kg',
+          color: '화이트 / 블랙',
+          system: '스프링식',
+          purpose:
+            '척추부(주변)를 스트레치하는 머신입니다. 비틀림 동작이나 골반 주위를 전후 좌우로 움직이는 것으로 상반신과 하반신의 연동을 기대할 수 있습니다.',
+          specifications: 'W 600 × D 1,100 × H 950 mm',
+          image: '/products/zeroi/rotation.png',
         },
       ],
     };
@@ -316,8 +268,12 @@ export default {
     window.scrollTo(0, 0);
   },
   methods: {
+    showZeroiDetail(product) {
+      this.selectedZeroiProduct = product;
+      this.showZeroiModal = true;
+    },
+
     handleInquiry(productName) {
-      // 제품 문의 처리 로직
       const message = `안녕하세요! ${productName} 제품에 대해 문의드리고 싶습니다.`;
       const phone = '02-715-0607';
 
@@ -326,15 +282,30 @@ export default {
       }
     },
 
-    goToLocation() {
-      // 위치 페이지로 이동하는 로직 (Vue Router 사용시)
-      // this.$router.push('/location');
-      alert('위치 페이지로 이동합니다.');
+    handleZeroiInquiry(productName) {
+      if (
+        confirm(
+          `${productName} 제품 문의를 위해 카카오톡으로 연결하시겠습니까?`
+        )
+      ) {
+        window.open('http://pf.kakao.com/_RJVsn', '_blank');
+      }
+    },
+
+    handleTowerPullyInquiry() {
+      if (confirm('타워풀리 제품 문의를 위해 카카오톡으로 연결하시겠습니까?')) {
+        window.open('http://pf.kakao.com/_RJVsn', '_blank');
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-/* 추가적인 스타일이 필요한 경우 여기에 작성 */
+.program-title {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 </style>

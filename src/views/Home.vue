@@ -198,17 +198,14 @@
               class="space-y-6 text-lg md:text-xl lg:text-2xl leading-relaxed"
             >
               <p class="text-white/90">
-                진동 운동으로 몸과 마음을 함께 깨우는 공간,<br
-                  class="block md:hidden"
-                />
+                진동 운동으로 몸과 마음을 함께 깨우는 공간,
+                <br class="block md:hidden" />
                 <span class="font-bold text-white">공명짐</span>입니다.
               </p>
               <p class="text-white/80 text-base md:text-lg">
-                조용하고 프라이빗한 공간에서, 온전히 나 자신에게
-                <br class="block md:hidden" />집중하며<br
-                  class="hidden md:block"
-                />
-                운동하고 싶으신가요?<br class="block md:hidden" />
+                내 주변에서 나에게 꼭 맞는 운동을 찾고 계신가요?<br />
+                조용하고 프라이빗한 공간에서, <br />온전히 나 자신에게 집중하며
+                운동하고 싶으신가요?<br />
                 공명짐은 그런 분들을 위한 맞춤형 스튜디오입니다.
               </p>
             </div>
@@ -608,14 +605,14 @@ export default {
         {
           icon: 'fas fa-calendar-alt',
           title: '운영 연수',
-          number: 5,
+          number: 2,
           unit: '년 +',
           description: '축적된 전문 노하우',
         },
         {
           icon: 'fas fa-medal',
           title: '자격증 및 수상경력',
-          number: 12,
+          number: 20,
           unit: '개 +',
           description: '검증된 전문성',
         },

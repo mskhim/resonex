@@ -33,7 +33,7 @@ const routes = [
   { path: '/products/powerplate', name: 'PowerPlate', component: powerplate },
   { path: '/products/sasom7', name: 'SASOM7', component: sasom7 },
   {
-    path: '/products/trigger-point',
+    path: '/products/zeroi',
     name: 'TriggerPoint',
     component: triggerpoint,
   },
