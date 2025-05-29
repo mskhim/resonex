@@ -630,7 +630,7 @@ export default {
           icon: 'fas fa-star',
           title: '프리미엄 장비',
           number: 15,
-          unit: '대+',
+          unit: '대 +',
           description: '최신 운동 장비',
         },
       ],
