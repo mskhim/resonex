@@ -60,7 +60,7 @@
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="w-full h-80 object-contain rounded-2xl shadow-lg"
+                class="w-full h-80 object- rounded-2xl shadow-lg"
               />
             </div>
 

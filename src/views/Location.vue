@@ -30,7 +30,15 @@
       <div class="max-w-7xl mx-auto px-4">
         <div class="grid lg:grid-cols-2 gap-12 items-start">
           <!-- 지도 영역 -->
-          <div class="order-2 lg:order-1">
+          <div
+            ref="mapSection"
+            :class="[
+              'order-2 lg:order-1 transition-all duration-1000 ease-out',
+              isVisible.mapSection
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
+          >
             <div class="bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
               <div
                 id="map"
@@ -66,7 +74,15 @@
           </div>
 
           <!-- 정보 영역 -->
-          <div class="order-1 lg:order-2">
+          <div
+            ref="infoSection"
+            :class="[
+              'order-1 lg:order-2 transition-all duration-1000 ease-out delay-300',
+              isVisible.infoSection
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
+          >
             <div class="sticky top-8">
               <div class="mb-8">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -81,7 +97,13 @@
               <div class="space-y-6">
                 <!-- 주소 -->
                 <div
-                  class="bg-white p-6 rounded-xl shadow-lg border border-gray-200"
+                  ref="addressCard"
+                  :class="[
+                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-500',
+                    isVisible.addressCard
+                      ? 'opacity-100 translate-x-0'
+                      : 'opacity-0 translate-x-4',
+                  ]"
                 >
                   <div class="flex items-start gap-4">
                     <div
@@ -109,7 +131,13 @@
 
                 <!-- 전화번호 -->
                 <div
-                  class="bg-white p-6 rounded-xl shadow-lg border border-gray-200"
+                  ref="phoneCard"
+                  :class="[
+                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-700',
+                    isVisible.phoneCard
+                      ? 'opacity-100 translate-x-0'
+                      : 'opacity-0 translate-x-4',
+                  ]"
                 >
                   <div class="flex items-start gap-4">
                     <div
@@ -133,7 +161,13 @@
 
                 <!-- 운영시간 -->
                 <div
-                  class="bg-white p-6 rounded-xl shadow-lg border border-gray-200"
+                  ref="hoursCard"
+                  :class="[
+                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-900',
+                    isVisible.hoursCard
+                      ? 'opacity-100 translate-x-0'
+                      : 'opacity-0 translate-x-4',
+                  ]"
                 >
                   <div class="flex items-start gap-4">
                     <div
@@ -171,7 +205,13 @@
 
                 <!-- 이메일 -->
                 <div
-                  class="bg-white p-6 rounded-xl shadow-lg border border-gray-200"
+                  ref="emailCard"
+                  :class="[
+                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-1000',
+                    isVisible.emailCard
+                      ? 'opacity-100 translate-x-0'
+                      : 'opacity-0 translate-x-4',
+                  ]"
                 >
                   <div class="flex items-start gap-4">
                     <div
@@ -202,18 +242,42 @@
     <!-- 추가 정보 섹션 -->
     <section class="py-16 bg-gray-50">
       <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+        <h2
+          ref="tipsTitle"
+          :class="[
+            'text-2xl md:text-3xl font-bold text-gray-900 mb-6 transition-all duration-1000 ease-out',
+            isVisible.tipsTitle
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-8',
+          ]"
+        >
           방문 전 알아두세요
         </h2>
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div
+            ref="tip1"
+            :class="[
+              'bg-white p-6 rounded-xl shadow-sm transition-all duration-700 ease-out delay-300',
+              isVisible.tip1
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
+          >
             <i class="fas fa-tshirt text-3xl text-slate-700 mb-4"></i>
             <h3 class="font-bold text-gray-900 mb-2">운동복 준비</h3>
             <p class="text-sm text-gray-600">
               편안한 운동복과 운동화를 준비해주세요
             </p>
           </div>
-          <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div
+            ref="tip2"
+            :class="[
+              'bg-white p-6 rounded-xl shadow-sm transition-all duration-700 ease-out delay-500',
+              isVisible.tip2
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8',
+            ]"
+          >
             <i class="fas fa-bottle-water text-3xl text-slate-700 mb-4"></i>
             <h3 class="font-bold text-gray-900 mb-2">수건/물병</h3>
             <p class="text-sm text-gray-600">
@@ -242,13 +306,92 @@ export default {
       // 네이버 지도 URL
       naverMapUrl:
         'https://map.naver.com/p/entry/place/1058817891?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.1390431&lat=37.4669221',
+
+      // 애니메이션 상태 관리
+      isVisible: {
+        mapSection: false,
+        infoSection: false,
+        addressCard: false,
+        phoneCard: false,
+        hoursCard: false,
+        emailCard: false,
+        tipsTitle: false,
+        tip1: false,
+        tip2: false,
+      },
+      observer: null,
     };
   },
   mounted() {
     window.scrollTo(0, 0);
     this.setupMap();
+    this.setupScrollAnimation();
+  },
+  beforeUnmount() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   },
   methods: {
+    setupScrollAnimation() {
+      // Intersection Observer 설정
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const target = entry.target;
+
+              // ref 이름에 따라 isVisible 상태 업데이트
+              if (target === this.$refs.mapSection) {
+                this.isVisible.mapSection = true;
+              } else if (target === this.$refs.infoSection) {
+                this.isVisible.infoSection = true;
+              } else if (target === this.$refs.addressCard) {
+                this.isVisible.addressCard = true;
+              } else if (target === this.$refs.phoneCard) {
+                this.isVisible.phoneCard = true;
+              } else if (target === this.$refs.hoursCard) {
+                this.isVisible.hoursCard = true;
+              } else if (target === this.$refs.emailCard) {
+                this.isVisible.emailCard = true;
+              } else if (target === this.$refs.tipsTitle) {
+                this.isVisible.tipsTitle = true;
+              } else if (target === this.$refs.tip1) {
+                this.isVisible.tip1 = true;
+              } else if (target === this.$refs.tip2) {
+                this.isVisible.tip2 = true;
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.1, // 10%가 보이면 트리거
+          rootMargin: '0px 0px -50px 0px', // 하단 50px 전에 트리거
+        }
+      );
+
+      // 다음 틱에서 observer 등록
+      this.$nextTick(() => {
+        const elementsToObserve = [
+          this.$refs.mapSection,
+          this.$refs.infoSection,
+          this.$refs.addressCard,
+          this.$refs.phoneCard,
+          this.$refs.hoursCard,
+          this.$refs.emailCard,
+          this.$refs.tipsTitle,
+          this.$refs.tip1,
+          this.$refs.tip2,
+        ];
+
+        elementsToObserve.forEach((element) => {
+          if (element) {
+            this.observer.observe(element);
+          }
+        });
+      });
+    },
+
     setupMap() {
       // 기존 스크립트 제거
       const existingScripts = document.querySelectorAll(
@@ -442,10 +585,31 @@ export default {
   z-index: 10 !important;
 }
 
+/* 애니메이션 최적화 - GPU 가속 활용 */
+.transition-all {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* 모바일 최적화 */
 @media (max-width: 768px) {
   .sticky {
     position: relative !important;
     top: auto !important;
+  }
+
+  /* 모바일에서 애니메이션 부드럽게 */
+  .transition-all {
+    transition-duration: 0.8s !important;
+  }
+}
+
+/* 저성능 디바이스 대응 */
+@media (prefers-reduced-motion: reduce) {
+  .transition-all {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 </style>

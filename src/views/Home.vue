@@ -518,6 +518,7 @@
     </section>
   </div>
 </template>
+
 <script>
 export default {
   name: 'Home',
@@ -601,6 +602,8 @@ export default {
         `/main/mainImg5.jpg`,
         `/main/mainImg6.jpg`,
       ],
+      hasCountingStarted: false,
+      observer: null,
       specialFeatures: [
         {
           icon: 'fas fa-calendar-alt',
@@ -632,7 +635,6 @@ export default {
         },
       ],
       animatedNumbers: [0, 0, 0, 0], // 카운팅용 숫자 배열
-      hasCountingStarted: false, // 카운팅 시작 여부 체크
       currentSlide: 0,
       isVisible: {
         impactContent: false,
@@ -652,21 +654,17 @@ export default {
   mounted() {
     this.setupScrollAnimation();
 
-    // DOM 로드 후 텍스트 표시 및 카운팅 시작
+    // DOM 로드 후 텍스트 표시만 (카운팅 코드 제거)
     setTimeout(() => {
       this.contentVisible = true;
-      // 페이지 로드 후 2초 뒤에 카운팅 시작
-      setTimeout(() => {
-        this.startCountingAnimation();
-      }, 2000);
     }, 500);
 
-    // 캐러셀 자동 재생 (선택사항)
+    // 캐러셀 자동 재생
     setInterval(() => {
       this.nextSlide();
     }, 5000);
 
-    // 전역 이벤트 리스너 추가 (더 확실한 감지)
+    // 전역 이벤트 리스너 추가
     window.addEventListener('scroll', this.enableAutoplay, { once: true });
     window.addEventListener('click', this.enableAutoplay, { once: true });
     window.addEventListener('touchstart', this.enableAutoplay, { once: true });
@@ -677,7 +675,11 @@ export default {
     window.removeEventListener('scroll', this.enableAutoplay);
     window.removeEventListener('click', this.enableAutoplay);
     window.removeEventListener('touchstart', this.enableAutoplay);
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   },
+
   methods: {
     handleVideoLoaded() {
       console.log('Video loaded');
@@ -687,8 +689,6 @@ export default {
     handleVideoCanPlay() {
       console.log('Video can play');
       this.videoCanPlay = true;
-
-      // 자동재생 시도
       this.attemptAutoplay();
     },
 
@@ -736,6 +736,11 @@ export default {
       }
     },
 
+    enableAutoplay() {
+      // 사용자 인터랙션 후 자동재생 시도
+      this.attemptAutoplay();
+    },
+
     setupScrollAnimation() {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -753,7 +758,10 @@ export default {
                 this.$refs.featureCards.includes(target)
               ) {
                 this.isVisible.featureCards = true;
-                // 스크롤 애니메이션만 트리거 (카운팅은 페이지 로드시에만)
+                // 🎯 카운팅 애니메이션 시작 - 여기가 핵심!
+                if (!this.hasCountingStarted) {
+                  this.startCountingAnimation();
+                }
               } else if (target === this.$refs.salesTitle) {
                 this.isVisible.salesTitle = true;
               } else if (target === this.$refs.productContent1) {
@@ -799,7 +807,7 @@ export default {
           if (element) observer.observe(element);
         });
 
-        // 특징 카드들 관찰
+        // 특징 카드들 관찰 - 이것이 카운팅을 트리거함
         if (this.$refs.featureCards) {
           this.$refs.featureCards.forEach((card) => observer.observe(card));
         }
@@ -822,7 +830,7 @@ export default {
       this.currentSlide = index;
     },
 
-    // 숫자 카운팅 애니메이션 (페이지 로드시 한 번만)
+    // 숫자 카운팅 애니메이션 (스크롤시 한 번만)
     startCountingAnimation() {
       // 이미 카운팅이 시작되었다면 실행하지 않음
       if (this.hasCountingStarted) return;
@@ -849,7 +857,7 @@ export default {
           clearInterval(timer);
         }
 
-        // Vue 3 방식으로 반응형 데이터 업데이트
+        // Vue 반응형 데이터 업데이트
         this.animatedNumbers[index] = currentNumber;
         this.$forceUpdate();
       }, stepTime);

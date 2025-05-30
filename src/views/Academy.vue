@@ -358,6 +358,26 @@ export default {
           url: '/academy/academy21.jpg',
           alt: '교육 현장 추가 12',
         },
+        {
+          url: '/academy/academy22.jpg',
+          alt: '교육 현장 추가 13',
+        },
+        {
+          url: '/academy/academy23.jpg',
+          alt: '교육 현장 추가 14',
+        },
+        {
+          url: '/academy/academy24.jpg',
+          alt: '교육 현장 추가 15',
+        },
+        {
+          url: '/academy/academy25.jpg',
+          alt: '교육 현장 추가 16',
+        },
+        {
+          url: '/academy/academy26.jpg',
+          alt: '교육 현장 추가 17',
+        },
       ],
     };
   },
