@@ -18,7 +18,9 @@
             <div class="text-center max-w-4xl mx-auto px-4 mt-12 md:mt-30">
               <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
                 함께 성장하는<br />
-                <span class="text-blue-400">파트너</span>를 찾습니다
+                <div class="mt-3">
+                  <span class="text-blue-400">파트너</span>를 찾습니다
+                </div>
               </h1>
             </div>
           </div>
@@ -29,17 +31,6 @@
     <!-- 솔직한 소개 섹션 -->
     <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4">
-        <!-- 섹션 헤더 -->
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            솔직하게 말씀드릴게요
-          </h2>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            저희는 큰 걸 약속드릴 수는 없지만, <br />
-            진심으로 건강한 문화를 함께 만들어갈 파트너를 찾고 있습니다.
-          </p>
-        </div>
-
         <!-- 현실적인 정보 -->
         <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
           <div
@@ -223,9 +214,6 @@
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             왜 헬스장 프랜차이즈를 시작하나요?
           </h2>
-          <p class="text-lg text-gray-600">
-            진솔한 마음으로 말씀드리는 저희의 이유
-          </p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
@@ -264,9 +252,6 @@
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             이런 분과 함께하고 싶어요
           </h2>
-          <p class="text-lg text-gray-600">
-            헬스장 경험이나 자본보다는 마음가짐이 중요해요
-          </p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -303,9 +288,6 @@
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             저희가 배운 <span class="text-blue-600">헬스장 운영의 핵심</span>
           </h2>
-          <p class="text-lg text-gray-600">
-            2년간 운영하며 깨달은 소중한 경험들을 나누고 싶어요
-          </p>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-12 items-center">
