@@ -42,14 +42,6 @@
         <!-- 메인 제품 이미지 -->
         <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
           <div ref="mainImage" class="opacity-100 translate-x-0">
-            <!-- 애니메이션 비활성화 
-            :class="[
-              'transition-all duration-1000',
-              isVisible.mainImage
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 -translate-x-8',
-            ]"
-            -->
             <img
               :src="productData.images.main"
               alt="SASOM7 메인 이미지"
@@ -58,15 +50,6 @@
           </div>
 
           <div ref="mainContent" class="space-y-6 opacity-100 translate-x-0">
-            <!-- 애니메이션 비활성화
-            :class="[
-              'space-y-6 transition-all duration-1000 delay-300',
-              isVisible.mainContent
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-8',
-            ]"
-            -->
-            >
             <div>
               <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
                 {{ productData.name }}
@@ -123,50 +106,67 @@
       </div>
     </div>
 
-    <!-- 제품 상세 정보 섹션 -->
-    <div class="text-center mb-20"></div>
     <!-- 비디오 섹션 -->
     <section class="pb-20 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4">
-        <!-- 비디오 그리드 -->
-        <div class="grid lg:grid-cols-2 gap-8">
-          <!-- 첫 번째 비디오 -->
-          <div ref="video1" class="opacity-100 translate-y-0">
-            <!-- 애니메이션 비활성화
-            :class="[
-              'transition-all duration-1000',
-              isVisible.video1
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-            -->
-            <div class="relative rounded-2xl overflow-hidden shadow-lg">
-              <video
-                ref="videoPlayer1"
-                :src="productData.videos.demo"
-                class="w-full h-64 object-cover"
-                controls
-                preload="metadata"
-              ></video>
-            </div>
-          </div>
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            제품 시연 영상
+          </h2>
+          <p class="text-lg text-gray-600">
+            SASOM7의 실제 동작과 사용법을 영상으로 확인해보세요
+          </p>
+        </div>
 
-          <!-- 두 번째 GIF -->
-          <div ref="video2" class="opacity-100 translate-y-0">
-            <!-- 애니메이션 비활성화
-            :class="[
-              'transition-all duration-1000 delay-300',
-              isVisible.video2
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-            -->
-            <div class="relative rounded-2xl overflow-hidden shadow-lg">
+        <!-- 단일 비디오 -->
+        <div class="relative rounded-2xl overflow-hidden shadow-lg">
+          <video
+            ref="videoPlayer"
+            :src="productData.videos.demo"
+            class="w-full h-96 object-cover"
+            controls
+            preload="metadata"
+          ></video>
+          <div
+            class="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-1 rounded-lg text-sm"
+          >
+            SASOM7 제품 시연 영상
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 상세 정보 이미지 섹션 -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            제품 상세 정보
+          </h2>
+          <p class="text-lg text-gray-600">
+            SASOM7의 자세한 정보와 특징을 확인해보세요
+          </p>
+        </div>
+
+        <!-- 상세 이미지 그리드 (v-for 사용) -->
+        <div class="space-y-12 grid grid-cols-2 gap-8">
+          <div
+            v-for="(detail, index) in productData.detailImages"
+            :key="index"
+            class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full"
+          >
+            <!-- 이미지 -->
+            <div
+              class="order-2 lg:order-1"
+              :class="{ 'lg:order-2': index % 2 === 1 }"
+            >
               <img
-                :src="productData.videos.tutorial"
-                alt="SASOM7 사용법 가이드"
-                class="w-full h-64 object-cover"
+                :src="detail.src"
+                :alt="detail.alt"
+                class="w-full h-full object-contain p-6"
               />
+
+              <!-- 텍스트 내용 -->
             </div>
           </div>
         </div>
@@ -186,13 +186,60 @@ export default {
           'SASOM7은 최첨단 기술과 혁신적인 디자인이 결합된 차세대 프리미엄 제품입니다. 사용자의 편의성과 효율성을 극대화하여 새로운 차원의 경험을 제공합니다.',
         images: {
           main: '/products/saso/01M7.png',
-          detail:
-            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
         },
         videos: {
           demo: '/products/saso/01mVideo.mp4',
-          tutorial: '/products/saso/01mgif.gif',
         },
+        detailImages: [
+          {
+            src: '/products/saso/detail1.png',
+            alt: 'SASOM7 기능 상세',
+            title: '고급 소재와 정밀 가공',
+            description:
+              '최고급 소재를 사용하여 내구성과 안정성을 보장하며, 정밀한 가공 기술로 완성된 프리미엄 품질입니다. 모든 부품은 엄격한 품질 기준을 통과한 최상급 소재만을 사용합니다.',
+            points: [
+              '항공우주급 알루미늄 합금 사용',
+              '정밀도 ±0.01mm 가공 기술',
+              '내부식성 특수 코팅 처리',
+            ],
+          },
+          {
+            src: '/products/saso/detail2.png',
+            alt: 'SASOM7 인터페이스',
+            title: '직관적인 사용자 인터페이스',
+            description:
+              '사용자 편의성을 고려한 직관적인 인터페이스로 누구나 쉽게 사용할 수 있도록 설계되었습니다. 복잡한 설정 없이도 바로 사용 가능합니다.',
+            points: [
+              '터치스크린 기반 간편 조작',
+              '다국어 지원 (한국어, 영어)',
+              '사용자 맞춤 설정 저장 기능',
+            ],
+          },
+          {
+            src: '/products/saso/detail3.png',
+            alt: 'SASOM7 기술 사양',
+            title: '첨단 기술 적용',
+            description:
+              '최신 기술을 적용하여 뛰어난 성능과 효율성을 제공하며, 지속적인 업데이트를 통해 발전해 나갑니다. AI 기반 최적화 시스템이 탑재되어 있습니다.',
+            points: [
+              'AI 기반 자동 최적화',
+              '실시간 성능 모니터링',
+              '원격 업데이트 지원',
+            ],
+          },
+          {
+            src: '/products/saso/detail4.png',
+            alt: 'SASOM7 안전성',
+            title: '철저한 품질 관리',
+            description:
+              '엄격한 품질 관리 시스템을 통해 검증된 제품으로, 안전하고 신뢰할 수 있는 사용 경험을 보장합니다. 국제 안전 인증을 모두 획득했습니다.',
+            points: [
+              'CE, FCC, KC 인증 획득',
+              '24시간 연속 작동 테스트 통과',
+              '2년 품질보증 및 A/S 지원',
+            ],
+          },
+        ],
         features: [
           '혁신적인 기술 적용',
           '프리미엄 디자인',
@@ -222,82 +269,63 @@ export default {
           },
         ],
       },
-      isVisible: {
-        mainImage: false,
-        mainContent: false,
-        video1: false,
-        video2: false,
-      },
     };
   },
   mounted() {
     window.scrollTo(0, 0);
-    // 애니메이션 비활성화
-    // this.setupScrollAnimation();
-  },
-  beforeUnmount() {
-    // 애니메이션 비활성화
-    // if (this.observer) {
-    //   this.observer.disconnect();
-    // }
   },
   methods: {
-    // 애니메이션 관련 메서드 비활성화
-    /*
-    setupScrollAnimation() {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const target = entry.target;
-
-              if (target === this.$refs.mainImage) {
-                this.isVisible.mainImage = true;
-              } else if (target === this.$refs.mainContent) {
-                this.isVisible.mainContent = true;
-              } else if (target === this.$refs.video1) {
-                this.isVisible.video1 = true;
-              } else if (target === this.$refs.video2) {
-                this.isVisible.video2 = true;
-              }
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px',
-        }
-      );
-
-      this.$nextTick(() => {
-        const elementsToObserve = [
-          this.$refs.mainImage,
-          this.$refs.mainContent,
-          this.$refs.video1,
-          this.$refs.video2,
-        ];
-
-        elementsToObserve.forEach((element) => {
-          if (element) observer.observe(element);
-        });
-      });
-
-      this.observer = observer;
-    },
-    */
-
     handleInquiry() {
-      const message = '안녕하세요! SASOM7 제품에 대해 문의드리고 싶습니다.';
-      const phone = '02-715-0607';
-
+      const phone = '010-4429-2889';
       if (confirm('SASOM7 제품 문의를 위해 전화 연결하시겠습니까?')) {
         window.location.href = `tel:${phone}`;
       }
+    },
+
+    handleEmailInquiry() {
+      const email = 'cprh7677@naver.com';
+      const subject = 'SASOM7 제품 문의';
+      const body =
+        '안녕하세요! SASOM7 제품에 대해 자세한 정보를 문의드리고 싶습니다.';
+
+      const emailUrl = `mailto:${email}?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+      window.location.href = emailUrl;
     },
   },
 };
 </script>
 
 <style scoped>
-/* 추가적인 스타일이 필요한 경우 여기에 작성 */
+/* 비디오 호버 효과 */
+video:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* 상세 이미지 호버 효과 */
+.space-y-12 > div:hover img {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* 부드러운 트랜지션 */
+* {
+  transition: all 0.3s ease;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .grid.lg\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .order-1,
+  .order-2,
+  .lg\\:order-1,
+  .lg\\:order-2 {
+    order: initial !important;
+  }
+}
 </style>

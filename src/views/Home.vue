@@ -210,7 +210,19 @@
               </p>
             </div>
 
-            <div class="pt-8"></div>
+            <!-- 회사 소개 버튼 추가 -->
+            <div class="pt-8">
+              <button
+                @click="$router.push('/about')"
+                class="group relative inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold py-4 px-8 rounded-xl hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              >
+                <i class="fas fa-info-circle text-lg"></i>
+                <span class="text-lg">회사 소개</span>
+                <i
+                  class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform duration-300"
+                ></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -357,7 +369,7 @@
           >
             <div>
               <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                고압산소 치료기기
+                산소캡슐
               </h3>
               <div class="w-12 h-1 bg-green-600 mb-4"></div>
             </div>

@@ -16,7 +16,7 @@
           <!-- 텍스트 내용 -->
           <div class="absolute inset-0 flex items-center justify-center z-10">
             <div class="text-center max-w-4xl mx-auto px-4 mt-12 md:mt-30">
-              <span class="text-1xl md:text-2xl text-white"> Pilates </span>
+              <span class="text-xl md:text-2xl text-white"> Pilates </span>
               <h1
                 class="text-4xl md:text-5xl font-bold mt-5 mb-6 text-white program-title"
               >
@@ -45,7 +45,30 @@
             </p>
           </div>
         </div>
+        <!-- 제품 상세 정보 섹션 -->
+        <section class="py-20 bg-gray-50">
+          <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12"></div>
 
+            <!-- 상세 이미지 그리드 (수정된 부분) -->
+            <div class="grid gap-8">
+              <div
+                v-for="(detail, index) in detailImages"
+                :key="index"
+                class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full"
+              >
+                <!-- 이미지 -->
+                <div class="overflow-hidden">
+                  <img
+                    :src="detail.src"
+                    :alt="detail.alt"
+                    class="h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <div class="space-y-16">
           <div
             v-for="(product, index) in powerPlateProducts"
@@ -60,7 +83,7 @@
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="w-full h-90 object-contain rounded-2xl shadow-lg"
+                class="w-full h-96 object-contain rounded-2xl shadow-lg"
               />
             </div>
 
@@ -163,82 +186,30 @@ export default {
           image: '/products/align/barrel.jpg', // 실제 이미지 URL로 변경 필요
         },
       ],
-      accessories: [
+      detailImages: [
         {
-          id: 1,
-          name: 'Pro5 방진판',
-          price: '₩600,000',
+          src: '/products/align/detail1.png',
+          alt: '필라테스 기능 상세',
+          title: '고급 소재와 정밀 가공',
+          description:
+            '최고급 소재를 사용하여 내구성과 안정성을 보장하며, 정밀한 가공 기술로 완성된 프리미엄 품질입니다. 모든 부품은 엄격한 품질 기준을 통과한 최상급 소재만을 사용합니다.',
+          points: [
+            '항공우주급 알루미늄 합금 사용',
+            '정밀도 ±0.01mm 가공 기술',
+            '내부식성 특수 코팅 처리',
+          ],
         },
         {
-          id: 2,
-          name: 'MY7 방진판',
-          price: '₩550,000',
-        },
-        {
-          id: 3,
-          name: 'Pro7 방진판',
-          price: '₩600,000',
-        },
-        {
-          id: 4,
-          name: 'MOVE 방진판',
-          price: '₩440,000',
-        },
-      ],
-      oxygenProducts: [
-        {
-          id: 1,
-          name: 'O2ONE Q31',
-          description: '1인용 앉은 자세 고압산소치료기 - 병원 및 클리닉용',
-          features: ['1인용 설계', 'BIBS 마스크', '자동/수동 모드'],
-          specs: '1.1~3.0ATA / 1824×1024×2219mm',
-          image:
-            'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 2,
-          name: 'O2ONE Q32',
-          description: '2인용 앉은 자세 고압산소치료기 - 효율적인 동시 치료',
-          features: ['2인 동시 치료', '공간 효율성', '슬라이딩 도어'],
-          specs: '1.1~3.0ATA / 2340×1850×2210mm',
-          image:
-            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 3,
-          name: 'O2ONE H3000',
-          description: '하드타입 고압산소치료기 - 베드슬라이드 방식',
-          features: ['베드슬라이드', '화상환자 적합', 'PED 규격 준수'],
-          specs: '3.0ATA / 2250×1400×1346mm',
-          image:
-            'https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 4,
-          name: 'O2ONE H3100',
-          description: '고급형 하드타입 - 컬러 터치 디스플레이',
-          features: ['내/외부 터치스크린', 'Lock 기능', '쿨링시스템'],
-          specs: '3.0ATA / 225cm×ø81cm',
-          image:
-            'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 5,
-          name: 'O2ONE H2000',
-          description: '중압형 하드타입 - 경제적 솔루션',
-          features: ['1.1-2.0ATA', '경제적 가격', '안전성 확보'],
-          specs: '1.1-2.0ATA / 225cm×ø81cm',
-          image:
-            'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        },
-        {
-          id: 6,
-          name: 'OXYSYS 4000/4500',
-          description: '소프트타입 고압산소치료기 - 휴대성과 편의성',
-          features: ['소프트 챔버', '휴대 가능', '간편 설치'],
-          specs: '1.1-1.3ATA / 200cm×ø70-90cm',
-          image:
-            'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          src: '/products/align/detail2.png',
+          alt: '필라테스 인터페이스',
+          title: '직관적인 사용자 인터페이스',
+          description:
+            '사용자 편의성을 고려한 직관적인 인터페이스로 누구나 쉽게 사용할 수 있도록 설계되었습니다. 복잡한 설정 없이도 바로 사용 가능합니다.',
+          points: [
+            '터치스크린 기반 간편 조작',
+            '다국어 지원 (한국어, 영어)',
+            '사용자 맞춤 설정 저장 기능',
+          ],
         },
       ],
     };
@@ -265,7 +236,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* 추가적인 스타일이 필요한 경우 여기에 작성 */
-</style>
