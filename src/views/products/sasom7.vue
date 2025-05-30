@@ -32,12 +32,11 @@
     <section class="pt-20 pb-5 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            SASOM7 <span class="text-blue-600">제품 소개</span>
-          </h2>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            혁신적인 기술과 프리미엄 디자인이 만나 탄생한 차세대 솔루션입니다.
-          </p>
+          <img
+            src="/products/saso/01mlogo.png"
+            alt="Zero-I Logo"
+            class="w-50 mx-auto mb-4"
+          />
         </div>
 
         <!-- 메인 제품 이미지 -->
