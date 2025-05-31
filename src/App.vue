@@ -17,6 +17,11 @@ export default {
     Header,
     Footer,
   },
+  provide() {
+    return {
+      inquiryLink: 'http://pf.kakao.com/_RJVsn',
+    };
+  },
 };
 </script>
 

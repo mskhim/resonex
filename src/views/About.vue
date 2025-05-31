@@ -107,7 +107,8 @@
                 함께 만들어가는 파트너가 되고자 합니다.
               </p>
               <p class="text-gray-600 leading-relaxed">
-                한 분 한 분의 소중한 건강 여정에 최선을 다하겠습니다.
+                한 분 한 분의 소중한 건강 여정에
+                <br class="block md:hidden" />최선을 다하겠습니다.
               </p>
             </div>
 

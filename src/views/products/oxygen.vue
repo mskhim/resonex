@@ -228,6 +228,7 @@
 <script>
 export default {
   name: 'OxygenCapsule',
+  inject: ['inquiryLink'], // App.vue에서 provide한 값 주입
   data() {
     return {
       oxygenProducts: [
@@ -420,7 +421,7 @@ export default {
   methods: {
     handleGeneralInquiry() {
       if (confirm('산소캡슐 종합 상담을 위해 카카오톡으로 연결하시겠습니까?')) {
-        window.open('http://pf.kakao.com/_RJVsn', '_blank');
+        window.open(this.inquiryLink, '_blank');
       }
     },
   },

@@ -51,7 +51,7 @@
             <div class="text-center mb-12"></div>
 
             <!-- 상세 이미지 그리드 (수정된 부분) -->
-            <div class="grid gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
               <div
                 v-for="(detail, index) in detailImages"
                 :key="index"
@@ -80,11 +80,16 @@
           >
             <!-- 이미지 -->
             <div class="w-full lg:w-1/2">
-              <img
-                :src="product.image"
-                :alt="product.name"
-                class="w-full h-96 object-contain rounded-2xl shadow-lg"
-              />
+              <div
+                class="relative bg-gray-50 rounded-2xl shadow-lg overflow-hidden"
+                style="padding-bottom: 75%"
+              >
+                <img
+                  :src="product.image"
+                  :alt="product.name"
+                  class="absolute inset-0 w-full h-full object-contain p-4"
+                />
+              </div>
             </div>
 
             <!-- 제품 정보 -->
@@ -112,7 +117,7 @@
                 @click="handleInquiry(product.name)"
                 class="w-full lg:w-auto bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-700 transition-colors duration-200"
               >
-                스마트 스토어 방문
+                제품 문의하기
               </button>
             </div>
           </div>
@@ -125,6 +130,7 @@
 <script>
 export default {
   name: 'Products',
+  inject: ['inquiryLink'], // App.vue에서 provide한 값 주입
   data() {
     return {
       powerPlateProducts: [
@@ -219,18 +225,16 @@ export default {
   },
   methods: {
     handleInquiry(productName) {
-      // 제품 문의 처리 로직
-      const message = `안녕하세요! ${productName} 제품에 대해 문의드리고 싶습니다.`;
-      const phone = '02-715-0607';
-
-      if (confirm(`${productName} 제품 문의를 위해 전화 연결하시겠습니까?`)) {
-        window.location.href = `tel:${phone}`;
+      // 카카오톡 문의로 연결
+      if (
+        confirm(
+          `${productName} 제품 문의를 위해 카카오톡으로 연결하시겠습니까?`
+        )
+      ) {
+        window.open(this.inquiryLink, '_blank');
       }
     },
-
     goToLocation() {
-      // 위치 페이지로 이동하는 로직 (Vue Router 사용시)
-      // this.$router.push('/location');
       alert('위치 페이지로 이동합니다.');
     },
   },

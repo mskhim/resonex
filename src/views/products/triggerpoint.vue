@@ -97,7 +97,7 @@
 
               <!-- 문의 버튼 -->
               <button
-                @click="handleZeroiInquiry(product.name)"
+                @click="handleGeneralInquiry"
                 class="w-full lg:w-auto bg-emerald-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-emerald-700 transition-colors duration-200"
               >
                 제품 문의하기
@@ -147,7 +147,7 @@
         </div>
 
         <!-- 추가 상세 이미지 (타워풀리 스타일) -->
-        <div class="text-center mb-12 grid md:grid-cols-2 gap-4">
+        <div class="text-center mb-12 grid mx-20 md:mx-40 lg:mx-60 gap-4">
           <div
             v-for="(image, index) in zeroiDetailImages"
             :key="index"
@@ -258,13 +258,9 @@ export default {
     window.scrollTo(0, 0);
   },
   methods: {
-    handleZeroiInquiry(productName) {
-      if (
-        confirm(
-          `${productName} 제품 문의를 위해 카카오톡으로 연결하시겠습니까?`
-        )
-      ) {
-        window.open('http://pf.kakao.com/_RJVsn', '_blank');
+    handleGeneralInquiry() {
+      if (confirm('제품 상담을 위해 카카오톡으로 연결하시겠습니까?')) {
+        window.open(this.inquiryLink, '_blank');
       }
     },
   },

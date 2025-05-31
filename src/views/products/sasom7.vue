@@ -73,7 +73,7 @@
 
             <!-- 문의 버튼 -->
             <button
-              @click="handleInquiry"
+              @click="handleGeneralInquiry"
               class="w-full lg:w-auto bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-700 transition-colors duration-200"
             >
               제품 문의하기
@@ -275,23 +275,10 @@ export default {
     window.scrollTo(0, 0);
   },
   methods: {
-    handleInquiry() {
-      const phone = '010-4429-2889';
-      if (confirm('SASOM7 제품 문의를 위해 전화 연결하시겠습니까?')) {
-        window.location.href = `tel:${phone}`;
+    handleGeneralInquiry() {
+      if (confirm('제품 상담을 위해 카카오톡으로 연결하시겠습니까?')) {
+        window.open(this.inquiryLink, '_blank');
       }
-    },
-
-    handleEmailInquiry() {
-      const email = 'cprh7677@naver.com';
-      const subject = 'SASOM7 제품 문의';
-      const body =
-        '안녕하세요! SASOM7 제품에 대해 자세한 정보를 문의드리고 싶습니다.';
-
-      const emailUrl = `mailto:${email}?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(body)}`;
-      window.location.href = emailUrl;
     },
   },
 };

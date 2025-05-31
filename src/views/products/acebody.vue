@@ -73,6 +73,7 @@
 <script>
 export default {
   name: 'Products',
+  inject: ['inquiryLink'], // App.vue에서 provide한 값 주입
   data() {
     return {
       productImages: [
@@ -145,7 +146,7 @@ export default {
   methods: {
     handleInquiry() {
       if (confirm('제품 문의를 위해 카카오톡으로 연결하시겠습니까?')) {
-        window.open('http://pf.kakao.com/_RJVsn', '_blank');
+        window.open(this.inquiryLink, '_blank'); // 주입받은 링크 사용
       }
     },
   },

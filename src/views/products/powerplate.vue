@@ -89,10 +89,10 @@
 
               <!-- 문의 버튼 -->
               <button
-                @click="handleInquiry(product.name)"
+                @click="handleGeneralInquiry"
                 class="w-full lg:w-auto bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-700 transition-colors duration-200"
               >
-                스마트 스토어 방문
+                제품 문의하기
               </button>
             </div>
           </div>
@@ -105,6 +105,7 @@
 <script>
 export default {
   name: 'Products',
+  inject: ['inquiryLink'], // App.vue에서 provide한 값 주입
   data() {
     return {
       powerPlateProducts: [
@@ -218,20 +219,10 @@ export default {
     window.scrollTo(0, 0);
   },
   methods: {
-    handleInquiry(productName) {
-      // 제품 문의 처리 로직
-      const message = `안녕하세요! ${productName} 제품에 대해 문의드리고 싶습니다.`;
-      const phone = '02-715-0607';
-
-      if (confirm(`${productName} 제품 문의를 위해 전화 연결하시겠습니까?`)) {
-        window.location.href = `tel:${phone}`;
+    handleGeneralInquiry() {
+      if (confirm('제품 상담을 위해 카카오톡으로 연결하시겠습니까?')) {
+        window.open(this.inquiryLink, '_blank');
       }
-    },
-
-    goToLocation() {
-      // 위치 페이지로 이동하는 로직 (Vue Router 사용시)
-      // this.$router.push('/location');
-      alert('위치 페이지로 이동합니다.');
     },
   },
 };

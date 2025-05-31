@@ -30,7 +30,8 @@
             교육 아카데미
           </h2>
           <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            공명짐 아카데미에서는 파트너 센터 및 전문가 분들을 대상으로 한<br />
+            공명짐 아카데미에서는 파트너 센터 및
+            <br class="block md:hidden" />전문가 분들을 대상으로 한<br />
             전문 교육 출장 프로그램을 운영하고 있습니다.
           </p>
         </div>
@@ -56,19 +57,28 @@
                 <div
                   class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
                 ></div>
-                <p>파워플레이트의 과학적 원리와 핵심 적용 방식 이해</p>
+                <p>
+                  파워플레이트의 과학적 원리와 핵심
+                  <br class="block md:hidden" />적용 방식 이해
+                </p>
               </div>
               <div class="flex items-start">
                 <div
                   class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
                 ></div>
-                <p>소도구와 함께 구성하는 다이나믹한 기능성 트레이닝</p>
+                <p>
+                  소도구와 함께 구성하는 다이나믹한
+                  <br class="block md:hidden" />기능성 트레이닝
+                </p>
               </div>
               <div class="flex items-start">
                 <div
                   class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
                 ></div>
-                <p>센터 유형에 따라 맞춤 설계된 이론 + 실습 병행 수업</p>
+                <p>
+                  센터 유형에 따라 맞춤 설계된 이론과
+                  <br class="block md:hidden" />실습 병행 수업
+                </p>
               </div>
               <div class="flex items-start">
                 <div
@@ -132,7 +142,8 @@
             교육 현장
           </h3>
           <p class="text-lg text-gray-600">
-            전문적이고 체계적인 교육 프로그램의 현장을 확인하세요
+            전문적이고 체계적인 교육 프로그램의
+            <br class="block md:hidden" />현장을 확인하세요
           </p>
         </div>
 
@@ -223,8 +234,10 @@
             출장 교육 문의
           </h2>
           <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-            출장 교육은 센터 일정 및 공간 여건에 맞춰 유연하게 조율됩니다.<br />
-            전문적인 교육이 필요하시다면 언제든 연락주세요.
+            출장 교육은 센터 일정 및 공간 여건에
+            <br class="hidden md:block" />맞춰 유연하게 조율됩니다.<br />
+            전문적인 교육이 필요하시다면 <br class="block md:hidden" />언제든
+            연락주세요.
           </p>
 
           <div class="grid md:grid-cols-3 gap-6 mb-10">

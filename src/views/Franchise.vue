@@ -58,7 +58,8 @@
                 <div>
                   <span class="font-medium text-gray-900">현재 규모:</span>
                   <span class="text-gray-600 ml-2"
-                    >성남 본점 1개소 (소규모 퍼스널 중심)</span
+                    >성남 본점 1개소 <br class="block md:hidden" />(소규모
+                    퍼스널 중심)</span
                   >
                 </div>
               </div>
@@ -120,7 +121,8 @@
           ]"
         >
           <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">
-            헬스장 프랜차이즈 조건 (예상)
+            헬스장 프랜차이즈 조건<br class="block md:hidden" />
+            (예상)
           </h3>
 
           <div class="grid md:grid-cols-2 gap-8">
@@ -286,7 +288,10 @@
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            저희가 배운 <span class="text-blue-600">헬스장 운영의 핵심</span>
+            저희가 배운 <br class="block md:hidden" /><span
+              class="text-blue-600"
+              >헬스장 운영의 핵심</span
+            >
           </h2>
         </div>
 
@@ -352,7 +357,7 @@
               : 'opacity-0 translate-y-8',
           ]"
         >
-          헬스장 창업에 관심이 있으시다면
+          헬스장 창업에 <br class="block md:hidden" />관심이 있으시다면
         </h2>
         <p
           ref="ctaDescription"
@@ -363,7 +368,8 @@
               : 'opacity-0 translate-y-8',
           ]"
         >
-          부담 없이 편하게 대화해요. 헬스장 운영에 대한 궁금한 점들을 함께
+          부담 없이 편하게 대화해요.<br />
+          헬스장 운영에 대한 궁금한 점들을 <br class="block md:hidden" />함께
           나눠봐요.
         </p>
 

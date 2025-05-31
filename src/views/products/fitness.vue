@@ -201,13 +201,13 @@
               지금 바로 공명짐에게 문의하세요!
             </h3>
             <p class="text-gray-600 mb-6">
-              렉스코 대명사 컨설턴트인 공명짐이 최적의 솔루션을 제공해드립니다.
+              렉스코 대표 컨설턴트인 공명짐이 최적의 솔루션을 제공해드립니다.
             </p>
             <button
               @click="handleGeneralInquiry"
               class="bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-700 transition-colors duration-200"
             >
-              종합 상담 문의하기
+              제품 문의하기
             </button>
           </div>
         </div>
@@ -219,6 +219,7 @@
 <script>
 export default {
   name: 'LexcoFitness',
+  inject: ['inquiryLink'], // App.vue에서 provide한 값 주입
   data() {
     return {
       cardioProducts: [
@@ -360,7 +361,7 @@ export default {
   methods: {
     handleGeneralInquiry() {
       if (confirm('렉스코 종합 상담을 위해 카카오톡으로 연결하시겠습니까?')) {
-        window.open('http://pf.kakao.com/_RJVsn', '_blank');
+        window.open(this.inquiryLink, '_blank');
       }
     },
   },
