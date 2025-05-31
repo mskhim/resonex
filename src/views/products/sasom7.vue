@@ -149,7 +149,7 @@
         </div>
 
         <!-- 상세 이미지 그리드 (v-for 사용) -->
-        <div class="space-y-12 grid grid-cols-2 gap-8">
+        <div class="space-y-12 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div
             v-for="(detail, index) in productData.detailImages"
             :key="index"

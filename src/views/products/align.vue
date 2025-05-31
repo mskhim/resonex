@@ -62,7 +62,7 @@
                   <img
                     :src="detail.src"
                     :alt="detail.alt"
-                    class="h-full object-cover"
+                    class="h-full object-contain"
                   />
                 </div>
               </div>
