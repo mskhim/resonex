@@ -247,13 +247,13 @@
               PREMIUM PRODUCTS
             </div>
             <h2
-              class="text-3xl md:text-4xl font-bold text-gray-900 program-title mb-4"
+              class="text-2xl md:text-4xl font-bold text-gray-900 program-title mb-4"
             >
-              위탁판매 서비스
+              당신의 가치를, 공명짐에서 울리다
             </h2>
-            <p class="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              전문가가 직접 선별한 프리미엄 건강기기를
-              <br class="block md:hidden" />합리적인 가격으로 만나보세요
+            <p class="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              프리미엄 건강기기, 신뢰로 선별하고 합리로 제안합니다,
+              <br />전문가가 직접 선별한 프리미엄 건강 기기를 만나보세요
             </p>
           </div>
         </div>
@@ -300,10 +300,9 @@
               <div class="w-12 h-1 bg-blue-600 mb-4"></div>
             </div>
 
-            <p class="text-gray-600 text-lg leading-relaxed">
+            <p class="text-gray-600 text-sm leading-relaxed">
               3차원 진동 기술을 활용한 혁신적인 운동법으로
-              <br class="block md:hidden" />근력강화, 체중감량, 순환개선에
-              탁월한 효과를 <br class="block md:hidden" />제공합니다.
+              <br />근력강화, 체중감량, 순환개선에 탁월한 효과를 제공합니다.
             </p>
 
             <div class="space-y-3">
@@ -374,10 +373,9 @@
               <div class="w-12 h-1 bg-green-600 mb-4"></div>
             </div>
 
-            <p class="text-gray-600 text-lg leading-relaxed">
-              높은 농도의 산소를 공급하여 피로회복과
-              <br class="block md:hidden" />면역력 강화에 도움을 주며, 운동 후
-              빠른 회복을 <br class="block md:hidden" />지원합니다.
+            <p class="text-gray-600 text-sm leading-relaxed">
+              높은 농도의 산소를 공급하여 피로회복과 면역력
+              <br />강화에 도움을 주며, 운동 후 빠른 회복을 지원합니다.
             </p>
 
             <div class="space-y-3">
@@ -426,7 +424,7 @@
             >
               현장 갤러리
             </h2>
-            <p class="text-lg text-gray-600">
+            <p class="text-sm text-gray-600">
               실제 트레이닝 현장과 최신 시설을 확인해보세요
             </p>
           </div>

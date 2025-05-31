@@ -57,7 +57,7 @@
               <img
                 src="/about/ceo-profile.png"
                 alt="공명짐 대표"
-                class="w-full h-96 md:h-[650px] object-cover object-top"
+                class="w-full h-96 md:h-[650px] object-contain object-top"
               />
               <!-- 그라데이션 오버레이 -->
               <div
@@ -90,8 +90,9 @@
                 CEO MESSAGE
               </div>
               <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                건강한 삶을 향한<br />
-                <span class="text-slate-700">진정한 동반자</span>
+                몸을 넘어서 삶의 균형까지,
+                <br />
+                <span class="text-slate-700"> 공명짐입니다.</span>
               </h2>
               <div class="w-16 h-1 bg-slate-600 mb-6"></div>
             </div>
@@ -102,13 +103,14 @@
                 <br class="block md:hidden" />진심으로 감사드립니다.
               </p>
               <p class="text-gray-600 leading-relaxed">
-                저희는 단순한 운동 공간이 아닌,<br class="block md:hidden" />
-                여러분의 건강한 변화를<br />
-                함께 만들어가는 파트너가 되고자 합니다.
+                우리는 단순한 운동을 넘어, 삶의 질을 바꾸는<br
+                  class="block md:hidden"
+                />
+                건강한 변화를 함께 만들어가고자 합니다. <br />
               </p>
               <p class="text-gray-600 leading-relaxed">
-                한 분 한 분의 소중한 건강 여정에
-                <br class="block md:hidden" />최선을 다하겠습니다.
+                한 사람, 한 사람의 길에
+                <br class="block md:hidden" />진심으로 공명하며 동행하겠습니다.
               </p>
             </div>
 
@@ -219,7 +221,7 @@
             <img
               src="/about/profile2.png"
               alt="공명짐 운동 공간"
-              class="rounded-2xl shadow-2xl w-full h-96 object-cover hover:shadow-3xl transition-shadow duration-300"
+              class="rounded-2xl shadow-2xl w-full h-96 object-contain hover:shadow-3xl transition-shadow duration-300"
             />
           </div>
 

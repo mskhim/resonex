@@ -902,6 +902,15 @@ const handleResize = () => {
   }
 };
 
+// 메뉴 상태 변경 감지 스크롤 방지
+// watch(menuOpen, (newValue) => {
+//   if (newValue) {
+//     document.body.style.overflow = 'hidden'; // 스크롤 방지
+//   } else {
+//     document.body.style.overflow = ''; // 스크롤 복원
+//   }
+// });
+
 // 메가메뉴 상태 로깅 (개발용)
 watch(activeMegaMenu, (newValue, oldValue) => {
   if (process.env.NODE_ENV === 'development') {

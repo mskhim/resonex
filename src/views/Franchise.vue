@@ -7,7 +7,7 @@
         <div class="mb-6 relative">
           <img
             src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80"
-            alt="헬스장 프랜차이즈"
+            alt="공명짐 프랜차이즈"
             class="w-full h-64 md:h-80 object-cover shadow-2xl"
           />
           <!-- 어두운 오버레이 -->
@@ -45,26 +45,26 @@
             <h3 class="text-2xl font-bold text-gray-900 mb-6">
               공명짐의 현재 모습
             </h3>
-            <div class="space-y-4">
-              <div class="flex items-start gap-3">
-                <i class="fas fa-calendar-alt text-blue-600 mt-1"></i>
+            <div class="space-y-3">
+              <div class="grid grid-cols-[24px_1fr] gap-3 items-start">
+                <i class="fas fa-calendar-alt text-blue-600 mt-0.5"></i>
                 <div>
                   <span class="font-medium text-gray-900">운영 기간:</span>
                   <span class="text-gray-600 ml-2">2023년 창업</span>
                 </div>
               </div>
-              <div class="flex items-start gap-3">
-                <i class="fas fa-dumbbell text-blue-600 mt-1"></i>
+              <div class="grid grid-cols-[24px_1fr] gap-3 items-start">
+                <i class="fas fa-dumbbell text-blue-600 mt-0.5"></i>
                 <div>
                   <span class="font-medium text-gray-900">현재 규모:</span>
                   <span class="text-gray-600 ml-2"
-                    >성남 본점 1개소 <br class="block md:hidden" />(소규모
-                    퍼스널 중심)</span
+                    >성남 본점, 고덕점 <br class="block md:hidden" />(소규모
+                    통합 트레이닝 센터 운영)</span
                   >
                 </div>
               </div>
-              <div class="flex items-start gap-3">
-                <i class="fas fa-heart text-blue-600 mt-1"></i>
+              <div class="grid grid-cols-[24px_1fr] gap-3 items-start">
+                <i class="fas fa-heart text-blue-600 mt-0.5"></i>
                 <div>
                   <span class="font-medium text-gray-900">운영 철학:</span>
                   <span class="text-gray-600 ml-2"
@@ -72,8 +72,8 @@
                   >
                 </div>
               </div>
-              <div class="flex items-start gap-3">
-                <i class="fas fa-users text-blue-600 mt-1"></i>
+              <div class="grid grid-cols-[24px_1fr] gap-3 items-start">
+                <i class="fas fa-users text-blue-600 mt-0.5"></i>
                 <div>
                   <span class="font-medium text-gray-900">회원 특징:</span>
                   <span class="text-gray-600 ml-2"
@@ -81,8 +81,8 @@
                   >
                 </div>
               </div>
-              <div class="flex items-start gap-3">
-                <i class="fas fa-seedling text-blue-600 mt-1"></i>
+              <div class="grid grid-cols-[24px_1fr] gap-3 items-start">
+                <i class="fas fa-seedling text-blue-600 mt-0.5"></i>
                 <div>
                   <span class="font-medium text-gray-900">목표:</span>
                   <span class="text-gray-600 ml-2"
@@ -103,9 +103,9 @@
             ]"
           >
             <img
-              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="헬스장 내부 모습"
-              class="w-full h-80 object-cover rounded-2xl shadow-lg"
+              src="/franchise/img1.jpg"
+              alt="공명짐 내부 모습"
+              class="w-full h-80 object-contain rounded-2xl shadow-lg"
             />
           </div>
         </div>
@@ -121,7 +121,7 @@
           ]"
         >
           <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">
-            헬스장 프랜차이즈 조건<br class="block md:hidden" />
+            공명짐 프랜차이즈 조건<br class="block md:hidden" />
             (예상)
           </h3>
 
@@ -136,28 +136,44 @@
               </h4>
               <div class="space-y-3">
                 <div class="flex justify-between">
-                  <span class="text-gray-600">가맹금</span>
+                  <span class="text-gray-600">가맹금(교육비 포함)</span>
                   <span class="font-medium">300~500만원</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">인테리어 (30평 기준)</span>
-                  <span class="font-medium">3,000~5,000만원</span>
+                <div class="flex justify-between flex-col gap-2">
+                  <span class="text-gray-600">인테리어 (20평 기준)</span>
+                  <div class="space-y-1 text-right">
+                    <div class="flex justify-between">
+                      <span class="text-sm text-gray-500"
+                        >스탠다드형 (평단가 250)</span
+                      >
+                      <span class="font-medium">5,000만원</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-sm text-gray-500"
+                        >프리미엄형 (평단가 350)</span
+                      >
+                      <span class="font-medium">7,000만원</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-gray-600">운동기구 및 장비</span>
-                  <span class="font-medium">2,000~4,000만원</span>
+                  <span class="text-gray-600">운동 기구 및 장비</span>
+                  <span class="font-medium">2,500~10,000만원</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-gray-600">기타 (음향, 에어컨 등)</span>
-                  <span class="font-medium">500~1,000만원</span>
+                  <span class="text-gray-600"
+                    >기타 <br class="block md:hidden" />(간판, 사인물, 가구,
+                    냉난방공사)</span
+                  >
+                  <span class="font-medium">현장협의</span>
                 </div>
                 <div class="border-t pt-3 flex justify-between font-bold">
                   <span>총 예상 비용</span>
-                  <span class="text-blue-600">5,800~10,500만원</span>
+                  <span class="text-blue-600">7,800~17,500만원</span>
                 </div>
               </div>
               <p class="text-sm text-gray-500 mt-4">
-                * 지역, 평수, 장비 등급에 따라 차이가 클 수 있습니다
+                * 현장 환경에 따라 공사 금액이 상이할 수 있습니다
               </p>
             </div>
 
@@ -167,12 +183,12 @@
                 class="text-lg font-bold text-gray-900 mb-4 flex items-center"
               >
                 <i class="fas fa-hands-helping text-blue-600 mr-3"></i>
-                저희가 도와드릴 수 있는 것
+                공명짐이 도와드릴 수 있는 것
               </h4>
               <ul class="space-y-3">
                 <li class="flex items-start gap-3">
                   <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                  <span class="text-gray-600">헬스장 운영 노하우 공유</span>
+                  <span class="text-gray-600">운동 센터 운영 노하우 공유</span>
                 </li>
                 <li class="flex items-start gap-3">
                   <i class="fas fa-check-circle text-green-500 mt-1"></i>
@@ -191,15 +207,21 @@
                   <span class="text-gray-600">지속적인 소통과 상담</span>
                 </li>
                 <li class="flex items-start gap-3">
-                  <i class="fas fa-times-circle text-red-400 mt-1"></i>
-                  <span class="text-gray-500"
-                    >수익이나 회원 수 보장은 어려워요</span
+                  <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                  <span class="text-gray-600"
+                    >기타 부가 수익을 위한 공명짐 제안</span
                   >
                 </li>
                 <li class="flex items-start gap-3">
                   <i class="fas fa-times-circle text-red-400 mt-1"></i>
                   <span class="text-gray-500"
-                    >대규모 마케팅 지원은 한계가 있어요</span
+                    >수익이나 회원 수 보장은 어렵습니다</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-times-circle text-red-400 mt-1"></i>
+                  <span class="text-gray-500"
+                    >대규모 마케팅 지원은 한계가 있습니다</span
                   >
                 </li>
               </ul>
@@ -214,7 +236,7 @@
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            왜 헬스장 프랜차이즈를 시작하나요?
+            왜 체육 시설 프랜차이즈를 <br class="block md:hidden" />시작하나요?
           </h2>
         </div>
 
@@ -283,14 +305,14 @@
       </div>
     </section>
 
-    <!-- 성공적인 헬스장 운영 팁 섹션 -->
+    <!-- 성공적인 운동 센터 운영 팁 섹션 -->
     <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             저희가 배운 <br class="block md:hidden" /><span
               class="text-blue-600"
-              >헬스장 운영의 핵심</span
+              >운동 센터 운영의 핵심</span
             >
           </h2>
         </div>
@@ -336,9 +358,9 @@
             ]"
           >
             <img
-              src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="성공적인 헬스장 운영"
-              class="w-full h-96 object-cover rounded-2xl shadow-lg"
+              src="/franchise/img2.png"
+              alt="성공적인 운동 센터 운영"
+              class="w-full h-96 object-contain rounded-2xl shadow-lg"
             />
           </div>
         </div>
@@ -357,7 +379,7 @@
               : 'opacity-0 translate-y-8',
           ]"
         >
-          헬스장 창업에 <br class="block md:hidden" />관심이 있으시다면
+          공명짐 창업에 <br class="block md:hidden" />관심이 있으시다면
         </h2>
         <p
           ref="ctaDescription"
@@ -369,7 +391,7 @@
           ]"
         >
           부담 없이 편하게 대화해요.<br />
-          헬스장 운영에 대한 궁금한 점들을 <br class="block md:hidden" />함께
+          공명짐 운영에 대한 궁금한 점들을 <br class="block md:hidden" />함께
           나눠봐요.
         </p>
 
@@ -482,13 +504,13 @@
               v-model="inquiryForm.location"
               type="text"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="헬스장 창업을 생각하고 계신 지역"
+              placeholder="공명짐 창업을 생각하고 계신 지역"
             />
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2"
-              >헬스장 경험</label
+              >운동 센터 경험</label
             >
             <select
               v-model="inquiryForm.experience"
@@ -497,8 +519,8 @@
               <option value="">선택해주세요</option>
               <option value="none">없음</option>
               <option value="trainer">트레이너 경험</option>
-              <option value="manager">헬스장 관리 경험</option>
-              <option value="owner">헬스장 운영 경험</option>
+              <option value="manager">운동 센터 관리 경험</option>
+              <option value="owner">운동 센터 운영 경험</option>
             </select>
           </div>
 
@@ -510,7 +532,7 @@
               v-model="inquiryForm.message"
               rows="4"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="헬스장 창업에 대해 궁금한 것들을 편하게 말씀해주세요"
+              placeholder="공명짐 창업에 대해 궁금한 것들을 편하게 말씀해주세요"
             ></textarea>
           </div>
 
@@ -554,22 +576,17 @@ export default {
       // 프랜차이즈 시작 이유
       reasons: [
         {
-          icon: 'fas fa-handshake',
-          title: '건강한 문화 확산',
+          icon: 'fas fa-home',
+          title: '지역 밀착형 운영',
           description:
-            '혼자보다는 여러 지역에서 함께 건강한 운동 문화를 만들어가고 싶어요.',
+            '대형 체인점과는 다른, 동네 주민들과 가까워질 수 있는 친근한 운동 센터를 만들고 싶어요.',
         },
-        {
-          icon: 'fas fa-seedling',
-          title: '함께 배우며 성장',
-          description:
-            '각 지역의 특성과 회원들의 니즈를 파악하며 서로 배우고 발전하고 싶어요.',
-        },
+
         {
           icon: 'fas fa-heart',
-          title: '진정한 파트너십',
+          title: '건강한 지역 커뮤니티',
           description:
-            '단순한 수익보다는 지역 주민들의 건강에 도움이 되는 진정한 파트너십을 원해요.',
+            '운동을 통해 이웃과 만나고, 서로 격려하며 함께 건강해지는 지역 커뮤니티를 만들어가고 싶어요.',
         },
       ],
 
@@ -579,7 +596,7 @@ export default {
           icon: 'fas fa-dumbbell',
           title: '운동을 좋아하는 분',
           description:
-            '헬스장 운영 경험보다는 운동과 건강에 대한 진정한 관심과 열정을 가진 분',
+            '운동 센터 운영 경험보다는 운동과 건강에 대한 진정한 관심과 열정을 가진 분',
         },
         {
           icon: 'fas fa-users',
@@ -603,13 +620,13 @@ export default {
           icon: 'fas fa-lightbulb',
           title: '함께 발전하고 싶은 분',
           description:
-            '서로의 경험을 나누며 더 나은 헬스장을 만들어가고 싶은 분',
+            '서로의 경험을 나누며 더 나은 운동 센터를 만들어가고 싶은 분',
         },
         {
           icon: 'fas fa-compass',
           title: '지역 밀착형 운영을 원하는 분',
           description:
-            '대형 프랜차이즈보다는 동네 사람들과 가까운 헬스장을 만들고 싶은 분',
+            '대형 프랜차이즈보다는 동네 사람들과 가까운 운동 센터를 만들고 싶은 분',
         },
       ],
 
@@ -730,7 +747,7 @@ export default {
     },
 
     callDirect() {
-      if (confirm('헬스장 프랜차이즈 상담을 위해 전화 연결하시겠습니까?')) {
+      if (confirm('공명짐 프랜차이즈 상담을 위해 전화 연결하시겠습니까?')) {
         window.location.href = 'tel:010-4429-2889';
       }
     },
@@ -739,19 +756,19 @@ export default {
       const experienceText = {
         none: '없음',
         trainer: '트레이너 경험',
-        manager: '헬스장 관리 경험',
-        owner: '헬스장 운영 경험',
+        manager: '운동 센터 관리 경험',
+        owner: '운동 센터 운영 경험',
       };
 
-      const message = `헬스장 프랜차이즈 문의
+      const message = `공명짐 프랜차이즈 문의
       
 이름: ${this.inquiryForm.name}
 연락처: ${this.inquiryForm.phone}
 관심지역: ${this.inquiryForm.location || '미정'}
-헬스장 경험: ${experienceText[this.inquiryForm.experience] || '미선택'}
+운동 센터 경험: ${experienceText[this.inquiryForm.experience] || '미선택'}
 메시지: ${this.inquiryForm.message || '특별한 문의사항 없음'}`;
 
-      const emailUrl = `mailto:cprh7677@naver.com?subject=헬스장 프랜차이즈 문의 - ${
+      const emailUrl = `mailto:cprh7677@naver.com?subject=공명짐 프랜차이즈 문의 - ${
         this.inquiryForm.name
       }&body=${encodeURIComponent(message)}`;
 
@@ -767,7 +784,7 @@ export default {
       this.closeInquiryForm();
 
       alert(
-        '메시지를 보내주셔서 감사합니다.\n헬스장 운영에 대해 편한 시간에 대화해요!'
+        '메시지를 보내주셔서 감사합니다.\n공명짐 운영에 대해 편한 시간에 대화해요!'
       );
     },
   },
