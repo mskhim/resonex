@@ -332,7 +332,7 @@
           </div>
         </div>
 
-        <!-- 고압산소 치료기기 -->
+        <!-- 고압산소캡슐 -->
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <!-- 모바일: 이미지가 먼저, 데스크톱: 이미지가 먼저 (원래 의도대로) -->
           <div
@@ -347,8 +347,8 @@
           >
             <div class="relative rounded-xl overflow-hidden shadow-xl">
               <img
-                src="/main/card/oxygen.png"
-                alt="고압산소 치료기기"
+                src="/products/cap/cap2.jpg"
+                alt="고압산소 캡슐"
                 class="w-full h-64 md:h-80 object-cover"
               />
               <div
