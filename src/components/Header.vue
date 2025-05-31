@@ -446,21 +446,28 @@
       <!-- 모바일 드롭다운 메뉴 -->
       <div
         v-if="menuOpen"
-        class="absolute top-full right-0 left-0 bg-white/95 backdrop-blur-lg border-t border-gray-200/50 shadow-lg z-50 transform transition-all duration-300 ease-in-out max-h-96 overflow-y-auto"
+        class="absolute top-full right-0 left-0 bg-white/95 backdrop-blur-lg border-t border-gray-200/50 shadow-lg z-50 transform transition-all duration-300 ease-in-out overflow-hidden"
         :class="
           menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         "
+        :style="{
+          maxHeight: 'calc(100vh - 80px)',
+          height: 'auto',
+        }"
       >
-        <nav class="py-2">
+        <nav
+          class="py-2 overflow-y-auto"
+          style="max-height: calc(100vh - 120px)"
+        >
           <!-- About Section -->
           <div>
             <button
               @click="toggleMobileSection('about')"
-              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between transition-colors duration-200"
             >
               About
               <svg
-                class="w-4 h-4 transition-transform duration-200"
+                class="w-4 h-4 transition-transform duration-300 ease-out"
                 :class="{ 'rotate-180': expandedSections.about }"
                 fill="none"
                 stroke="currentColor"
@@ -474,21 +481,35 @@
                 />
               </svg>
             </button>
-            <div v-if="expandedSections.about" class="bg-gray-50">
-              <RouterLink
-                @click="closeMenu"
-                to="/about"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+            <div
+              class="overflow-hidden transition-all duration-300 ease-out bg-gray-50"
+              :class="
+                expandedSections.about
+                  ? 'max-h-40 opacity-100'
+                  : 'max-h-0 opacity-0'
+              "
+            >
+              <div
+                class="transform transition-transform duration-300 ease-out"
+                :class="
+                  expandedSections.about ? 'translate-y-0' : '-translate-y-2'
+                "
               >
-                회사 소개
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/location"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                위치 안내
-              </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/about"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  회사 소개
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/location"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  위치 안내
+                </RouterLink>
+              </div>
             </div>
           </div>
 
@@ -496,11 +517,11 @@
           <div>
             <button
               @click="toggleMobileSection('products')"
-              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between transition-colors duration-200"
             >
               Products
               <svg
-                class="w-4 h-4 transition-transform duration-200"
+                class="w-4 h-4 transition-transform duration-300 ease-out"
                 :class="{ 'rotate-180': expandedSections.products }"
                 fill="none"
                 stroke="currentColor"
@@ -514,56 +535,70 @@
                 />
               </svg>
             </button>
-            <div v-if="expandedSections.products" class="bg-gray-50">
-              <RouterLink
-                @click="closeMenu"
-                to="/products/powerplate"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+            <div
+              class="overflow-hidden transition-all duration-300 ease-out bg-gray-50"
+              :class="
+                expandedSections.products
+                  ? 'max-h-80 opacity-100'
+                  : 'max-h-0 opacity-0'
+              "
+            >
+              <div
+                class="transform transition-transform duration-300 ease-out"
+                :class="
+                  expandedSections.products ? 'translate-y-0' : '-translate-y-2'
+                "
               >
-                파워플레이트
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/products/oxygen"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                산소캡슐
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/products/sasom7"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                SasoM7
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/products/ace-body"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                에이스바디 타워풀리
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/products/align-pilates"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                얼라인필라테스
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/products/fitness"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                헬스 기구
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/products/zeroi"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                제로아이
-              </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/products/powerplate"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  파워플레이트
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/products/oxygen"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  산소캡슐
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/products/sasom7"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  SasoM7
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/products/ace-body"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  에이스바디 타워풀리
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/products/align-pilates"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  얼라인필라테스
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/products/fitness"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  헬스 기구
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/products/zeroi"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  제로아이
+                </RouterLink>
+              </div>
             </div>
           </div>
 
@@ -571,11 +606,11 @@
           <div>
             <button
               @click="toggleMobileSection('programs')"
-              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-100 hover:bg-gray-50 flex items-center justify-between transition-colors duration-200"
             >
               Programs
               <svg
-                class="w-4 h-4 transition-transform duration-200"
+                class="w-4 h-4 transition-transform duration-300 ease-out"
                 :class="{ 'rotate-180': expandedSections.programs }"
                 fill="none"
                 stroke="currentColor"
@@ -589,21 +624,35 @@
                 />
               </svg>
             </button>
-            <div v-if="expandedSections.programs" class="bg-gray-50">
-              <RouterLink
-                @click="closeMenu"
-                to="/academy"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+            <div
+              class="overflow-hidden transition-all duration-300 ease-out bg-gray-50"
+              :class="
+                expandedSections.programs
+                  ? 'max-h-40 opacity-100'
+                  : 'max-h-0 opacity-0'
+              "
+            >
+              <div
+                class="transform transition-transform duration-300 ease-out"
+                :class="
+                  expandedSections.programs ? 'translate-y-0' : '-translate-y-2'
+                "
               >
-                교육 아카데미
-              </RouterLink>
-              <RouterLink
-                @click="closeMenu"
-                to="/franchise"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                공명짐 체인점 문의
-              </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/academy"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  교육 아카데미
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/franchise"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  공명짐 체인점 문의
+                </RouterLink>
+              </div>
             </div>
           </div>
 
@@ -611,11 +660,11 @@
           <div>
             <button
               @click="toggleMobileSection('support')"
-              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider hover:bg-gray-50 flex items-center justify-between"
+              class="w-full px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider hover:bg-gray-50 flex items-center justify-between transition-colors duration-200"
             >
               Support
               <svg
-                class="w-4 h-4 transition-transform duration-200"
+                class="w-4 h-4 transition-transform duration-300 ease-out"
                 :class="{ 'rotate-180': expandedSections.support }"
                 fill="none"
                 stroke="currentColor"
@@ -629,22 +678,35 @@
                 />
               </svg>
             </button>
-            <div v-if="expandedSections.support" class="bg-gray-50">
-              <RouterLink
-                @click="closeMenu"
-                to="/video-inquiry"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
+            <div
+              class="overflow-hidden transition-all duration-300 ease-out bg-gray-50"
+              :class="
+                expandedSections.support
+                  ? 'max-h-40 opacity-100'
+                  : 'max-h-0 opacity-0'
+              "
+            >
+              <div
+                class="transform transition-transform duration-300 ease-out"
+                :class="
+                  expandedSections.support ? 'translate-y-0' : '-translate-y-2'
+                "
               >
-                영상 홍보 촬영 문의
-              </RouterLink>
-
-              <RouterLink
-                @click="closeMenu"
-                to="/faq"
-                class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-colors duration-200"
-              >
-                자주 묻는 질문
-              </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/video-inquiry"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  영상 홍보 촬영 문의
+                </RouterLink>
+                <RouterLink
+                  @click="closeMenu"
+                  to="/faq"
+                  class="block px-8 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 hover:translate-x-1"
+                >
+                  자주 묻는 질문
+                </RouterLink>
+              </div>
             </div>
           </div>
         </nav>
@@ -678,7 +740,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted, watch } from 'vue';
 
 const menuOpen = ref(false);
 const isScrolled = ref(false);
@@ -692,61 +754,105 @@ const expandedSections = reactive({
 });
 
 let megaMenuTimeout = null;
+let scrollTimeout = null;
 
-// 스크롤 이벤트 핸들러
+// 스크롤 이벤트 핸들러 (쓰로틀링 적용)
 const handleScroll = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  isScrolled.value = scrollTop > 50;
-  showBackToTop.value = scrollTop > 300;
+  if (scrollTimeout) return;
+
+  scrollTimeout = setTimeout(() => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    isScrolled.value = scrollTop > 50;
+    showBackToTop.value = scrollTop > 300;
+    scrollTimeout = null;
+  }, 16); // 60fps 제한
 };
 
 // 메뉴 토글
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
+
   if (!menuOpen.value) {
     // 메뉴 닫을 때 모든 섹션 닫기
-    Object.keys(expandedSections).forEach((key) => {
-      expandedSections[key] = false;
-    });
+    closeAllSections();
   }
 };
 
+// 메뉴 닫기
 const closeMenu = () => {
   menuOpen.value = false;
+  closeAllSections();
+};
+
+// 모든 섹션 닫기 (헬퍼 함수)
+const closeAllSections = () => {
   Object.keys(expandedSections).forEach((key) => {
     expandedSections[key] = false;
   });
 };
 
-// 모바일 섹션 토글
+// 모바일 섹션 토글 (개선된 버전 - 다른 섹션 자동 닫기)
 const toggleMobileSection = (section) => {
+  // 다른 섹션들을 모두 닫기
+  Object.keys(expandedSections).forEach((key) => {
+    if (key !== section) {
+      expandedSections[key] = false;
+    }
+  });
+
+  // 선택한 섹션 토글
   expandedSections[section] = !expandedSections[section];
+};
+
+// 특정 섹션만 열기
+const openMobileSection = (section) => {
+  closeAllSections();
+  expandedSections[section] = true;
 };
 
 // 메가메뉴 컨트롤
 const showMegaMenu = (menuType) => {
   if (megaMenuTimeout) {
     clearTimeout(megaMenuTimeout);
+    megaMenuTimeout = null;
   }
   activeMegaMenu.value = menuType;
 };
 
 const hideMegaMenu = () => {
+  if (megaMenuTimeout) {
+    clearTimeout(megaMenuTimeout);
+  }
+
   megaMenuTimeout = setTimeout(() => {
     activeMegaMenu.value = null;
-  }, 100);
+  }, 150); // 살짝 딜레이 증가
 };
 
 const keepMegaMenuOpen = () => {
   if (megaMenuTimeout) {
     clearTimeout(megaMenuTimeout);
+    megaMenuTimeout = null;
   }
 };
 
 const closeMegaMenu = () => {
+  if (megaMenuTimeout) {
+    clearTimeout(megaMenuTimeout);
+  }
+
   megaMenuTimeout = setTimeout(() => {
     activeMegaMenu.value = null;
   }, 100);
+};
+
+// 즉시 메가메뉴 닫기
+const closeMegaMenuImmediately = () => {
+  if (megaMenuTimeout) {
+    clearTimeout(megaMenuTimeout);
+    megaMenuTimeout = null;
+  }
+  activeMegaMenu.value = null;
 };
 
 // 맨 위로 스크롤
@@ -757,16 +863,105 @@ const scrollToTop = () => {
   });
 };
 
+// ESC 키로 메뉴 닫기
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') {
+    if (menuOpen.value) {
+      closeMenu();
+    }
+    if (activeMegaMenu.value) {
+      closeMegaMenuImmediately();
+    }
+  }
+};
+
+// 외부 클릭으로 메뉴 닫기
+const handleClickOutside = (event) => {
+  const menuElement = document.querySelector('.mobile-menu-container');
+  const megaMenuElement = document.querySelector('.mega-menu-container');
+
+  if (menuOpen.value && menuElement && !menuElement.contains(event.target)) {
+    closeMenu();
+  }
+
+  if (
+    activeMegaMenu.value &&
+    megaMenuElement &&
+    !megaMenuElement.contains(event.target)
+  ) {
+    closeMegaMenuImmediately();
+  }
+};
+
+// 화면 크기 변경 감지 (모바일 <-> 데스크톱)
+const handleResize = () => {
+  const isMobile = window.innerWidth < 1024; // lg 브레이크포인트
+
+  if (!isMobile && menuOpen.value) {
+    closeMenu();
+  }
+};
+
+// 메뉴 상태 변경 감지
+watch(menuOpen, (newValue) => {
+  if (newValue) {
+    document.body.style.overflow = 'hidden'; // 스크롤 방지
+  } else {
+    document.body.style.overflow = ''; // 스크롤 복원
+  }
+});
+
+// 메가메뉴 상태 로깅 (개발용)
+watch(activeMegaMenu, (newValue, oldValue) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`메가메뉴 변경: ${oldValue} → ${newValue}`);
+  }
+});
+
 // 라이프사이클
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('click', handleClickOutside);
+  window.addEventListener('resize', handleResize);
+
   handleScroll(); // 초기 상태 설정
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('click', handleClickOutside);
+  window.removeEventListener('resize', handleResize);
+
+  // 타임아웃 정리
   if (megaMenuTimeout) {
     clearTimeout(megaMenuTimeout);
   }
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+  }
+
+  // body 스타일 복원
+  document.body.style.overflow = '';
+});
+
+// 템플릿에서 사용할 함수들 노출
+defineExpose({
+  menuOpen,
+  isScrolled,
+  showBackToTop,
+  activeMegaMenu,
+  expandedSections,
+  toggleMenu,
+  closeMenu,
+  toggleMobileSection,
+  openMobileSection,
+  showMegaMenu,
+  hideMegaMenu,
+  keepMegaMenuOpen,
+  closeMegaMenu,
+  closeMegaMenuImmediately,
+  scrollToTop,
 });
 </script>
