@@ -57,7 +57,7 @@
               <img
                 src="/about/ceo-profile.png"
                 alt="공명짐 대표"
-                class="w-full h-96 md:h-[650px] object-contain object-top"
+                class="w-full h-auto object-contain"
               />
               <!-- 그라데이션 오버레이 -->
               <div
@@ -115,7 +115,9 @@
             </div>
 
             <!-- 대표 정보 -->
+
             <div class="pt-6 border-t border-gray-200">
+              <div class="flex items-start justify-between gap-6"></div>
               <div class="flex items-center justify-between mb-6">
                 <div>
                   <h4 class="text-xl font-bold text-gray-900">고종관</h4>
