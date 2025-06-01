@@ -136,7 +136,7 @@
         <div class="mb-20">
           <div class="text-center mb-12">
             <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              프로페셔널 모델
+              전문가 모델
             </h3>
             <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
           </div>
@@ -257,9 +257,9 @@ export default {
             '출력 전력': '180W',
             진동수: '레벨 6개 (30-40Hz)',
             진폭: '30Hz, 35Hz, 40Hz',
-            보증기간: '하드웨어3년/전자기기1년/A/S1년',
+            보증기간: '하드웨어 3년/전자기기 1년/AS 1년',
           },
-          image: '/products/powerplate/move.jpg',
+          image: '/products/powerplate/move.png',
           isDiscount: false,
         },
         {
@@ -282,33 +282,10 @@ export default {
             '출력 전력': '180W',
             진동수: '레벨 7개 (30~40Hz)',
             보증서: 'CE, EMC, RoHS/WEEE, FDA 1등급',
-            보증기간: '하드웨어3년/전자기기1년/A/S1년',
+            보증기간: '하드웨어 3년/전자기기 1년/AS 1년',
           },
-          image: '/products/powerplate/my7.jpg',
+          image: '/products/powerplate/my7.png',
           isDiscount: false,
-        },
-        {
-          id: 3,
-          name: 'PowerPlate MY8',
-          description:
-            '최신 기술이 적용된 신제품으로 현재 특가 할인 중입니다. 고급 마감과 전문가용 기능을 갖춘 최상급 모델입니다.',
-          features: [
-            '최신 기술 적용',
-            '고급 마감',
-            '전문가용 기능',
-            '신제품 출시 기념 특가',
-          ],
-          specs: {
-            상태: '신제품 출시',
-            특징: '최신 기술 적용',
-            등급: '전문가용',
-            마감: '프리미엄 고급 마감',
-            할인: '20% 특가 할인',
-            보증기간: '하드웨어3년/전자기기1년/A/S1년',
-          },
-          image: '/products/powerplate/my8.png',
-          isDiscount: true,
-          discount: '20% 할인',
         },
       ],
       proProducts: [
@@ -332,9 +309,9 @@ export default {
             '공진 전력': '160-265VA',
             진동수: '25-50Hz (5Hz씩 증가)',
             보증서: 'CE, PSE',
-            보증기간: '하드웨어3년/전자기기1년/A/S1년',
+            보증기간: '하드웨어 3년/전자기기 1년/AS 1년',
           },
-          image: '/products/powerplate/pro5.jpg',
+          image: '/products/powerplate/pro5.png',
           isDiscount: false,
         },
         {
@@ -357,7 +334,7 @@ export default {
             전압량: '160-265VA',
             진동수: '25-50Hz',
             보증서: 'CE, PSE',
-            보증기간: '하드웨어3년/전자기기1년/A/S1년',
+            보증기간: '하드웨어 3년/전자기기 1년/AS 1년',
           },
           image: '/products/powerplate/pro5hp.png',
           isDiscount: false,
@@ -382,9 +359,9 @@ export default {
             전압량: '160-265VA',
             진동수: '25-50Hz (1Hz씩 증가)',
             보증서: 'CE, PSE',
-            보증기간: '하드웨어3년/전자기기1년/A/S1년',
+            보증기간: '하드웨어 3년/전자기기 1년/AS 1년',
           },
-          image: '/products/powerplate/pro7.jpg',
+          image: '/products/powerplate/pro7.png',
           isDiscount: false,
         },
         {
@@ -404,7 +381,7 @@ export default {
             등급: '최상급 프로페셔널',
             설계: '프리미엄 설계',
             할인: '20% 특가 할인',
-            보증기간: '하드웨어3년/전자기기1년/A/S1년',
+            보증기간: '하드웨어 3년/전자기기 1년/AS 1년',
           },
           image: '/products/powerplate/pro8.png',
           isDiscount: true,
