@@ -911,13 +911,6 @@ const handleResize = () => {
 //   }
 // });
 
-// 메가메뉴 상태 로깅 (개발용)
-watch(activeMegaMenu, (newValue, oldValue) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`메가메뉴 변경: ${oldValue} → ${newValue}`);
-  }
-});
-
 // 라이프사이클
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, { passive: true });

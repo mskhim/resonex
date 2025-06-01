@@ -174,7 +174,7 @@
         <div class="mb-20">
           <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
             <!-- 설명 텍스트 (왼쪽) -->
-            <div class="space-y-6 order-1 md:order-2">
+            <div class="space-y-6 order-1 md:order-1">
               <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
                 바이럴 숏폼 콘텐츠
               </h3>
@@ -207,7 +207,7 @@
             </div>
 
             <!-- 가로 동영상 (오른쪽) -->
-            <div class="relative order-1 md:order-2">
+            <div class="relative order- 2 md:order-1">
               <div class="bg-black rounded-2xl overflow-hidden shadow-2xl">
                 <video
                   controls
