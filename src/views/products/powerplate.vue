@@ -92,6 +92,9 @@
                           'w-2 h-2 rounded-full mr-3 mt-2 flex-shrink-0',
                         ]"
                       ></div>
+                      <div
+                        class="w-2 h-2 bg-blue-600 rounded-full mr-3 mt-2 flex-shrink-0"
+                      ></div>
                       <span class="text-gray-700">{{ feature }}</span>
                     </div>
                   </div>
@@ -184,6 +187,9 @@
                         :class="[
                           'w-2 h-2 rounded-full mr-3 mt-2 flex-shrink-0',
                         ]"
+                      ></div>
+                      <div
+                        class="w-2 h-2 bg-blue-600 rounded-full mr-3 mt-2 flex-shrink-0"
                       ></div>
                       <span class="text-gray-700">{{ feature }}</span>
                     </div>
@@ -368,20 +374,26 @@ export default {
           id: 7,
           name: 'PowerPlate Pro8',
           description:
-            '운동 퍼포먼스를 위한 25년 궁극의 모델. 최상급 프로페셔널 모델로 신제품 출시 기념 특가 할인 중입니다.',
+            '다재다능하고 완전히 새로워진 Pro8로 진동 경험을 다시 한번 향상시킵니다. 기존 프로그램보다 절반의 시간 만에 효과를 볼 수 있다는 것이 과학적으로 입증되었으며, 단 한 번의 세션만으로도 그 차이를 느낄 수 있습니다.',
           features: [
-            '최상급 성능',
-            '최신 기술 적용',
-            '전문가 추천 모델',
-            '프리미엄 설계',
+            '통합 LCD 터치스크린 컨트롤',
+            '간편하고 편리한 퀵 스타트 옵션',
+            '정밀한 전자식 ProMotion 저항 케이블',
+            '최대 9분 러닝 타임',
+            'Power Plate 라인업 중 가장 큰 플랫폼',
+            '250개 이상의 맞춤형 프로그램',
+            '1,000개 이상의 운동 영상 제공',
           ],
           specs: {
-            상태: '신제품 출시',
-            특징: '25년 궁극의 모델',
-            등급: '최상급 프로페셔널',
-            설계: '프리미엄 설계',
-            할인: '20% 특가 할인',
-            보증기간: '하드웨어 3년/전자기기 1년/AS 1년',
+            색상: '매트 블랙, 화이트',
+            크기: '95cm×113cm×154cm',
+            '플랫폼 크기': '95cm×84cm×31cm',
+            무게: '169kg (패키지포함)',
+            전원: '100-240 VAC, 50/60Hz',
+            진동수: '25-50Hz (1Hz씩 증가)',
+            보증서: 'CE, NRTL, C-NRTL, FDA Class 1 Device',
+            보증기간: '하드웨어3년/전자기기1년/A/S1년',
+            특별사항: '2025년 신규 출시 모델',
           },
           image: '/products/powerplate/pro8.png',
           isDiscount: true,
