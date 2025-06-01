@@ -137,7 +137,7 @@
             </div>
 
             <!-- 설명 텍스트 -->
-            <div class="space-y-6 order-1 md:order-2">
+            <div class="space-y-6 order-2 md:order-1">
               <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
                 SNS 최적화 콘텐츠
               </h3>
@@ -174,7 +174,7 @@
         <div class="mb-20">
           <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
             <!-- 설명 텍스트 (왼쪽) -->
-            <div class="space-y-6 order-2 md:order-1">
+            <div class="space-y-6 order-1 md:order-2">
               <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
                 바이럴 숏폼 콘텐츠
               </h3>
