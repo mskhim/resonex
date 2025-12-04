@@ -4,16 +4,10 @@
     <!-- 확장된 폼 -->
     <div
       v-if="isExpanded"
-      class="bg-white rounded-2xl shadow-2xl p-4 md:p-6 w-72 md:w-80 mb-4 animate-slideIn"
+      class="absolute bottom-16 right-0 bg-white rounded-2xl shadow-2xl p-4 md:p-6 w-72 md:w-80 animate-slideIn"
     >
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-bold text-gray-900">문의</h3>
-        <button
-          @click="toggleForm"
-          class="text-gray-500 hover:text-gray-700 transition-colors"
-        >
-          <i class="fas fa-times"></i>
-        </button>
       </div>
 
       <form @submit.prevent="submitInquiry" class="space-y-3">
@@ -56,7 +50,7 @@
       </form>
     </div>
 
-    <!-- 토글 버튼 -->
+    <!-- 토글 버튼 (항상 고정) -->
     <button
       @click="toggleForm"
       class="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center"
