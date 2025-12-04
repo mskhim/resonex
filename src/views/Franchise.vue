@@ -733,6 +733,7 @@ export default {
           name: this.inquiryForm.name,
           number: this.inquiryForm.phone,
           message: this.inquiryForm.message || '특별한 문의사항 없음',
+          type: '프렌차이즈문의'
         };
 
         await emailjs.send(

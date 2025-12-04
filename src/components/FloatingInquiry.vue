@@ -7,7 +7,7 @@
       class="absolute bottom-16 right-0 bg-white rounded-2xl shadow-2xl p-4 md:p-6 w-72 md:w-80 animate-slideIn"
     >
       <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-bold text-gray-900">문의</h3>
+        <h3 class="text-lg font-bold text-gray-900">“프리미엄 PT & 제품” 상담 문의</h3>
       </div>
 
       <form @submit.prevent="submitInquiry" class="space-y-3">
@@ -90,6 +90,7 @@ export default {
           name: this.form.name,
           number: this.form.phone,
           message: this.form.message || '특별한 문의사항 없음',
+          type: 'PT & 제품 상담 문의'
         };
 
         await emailjs.send(
