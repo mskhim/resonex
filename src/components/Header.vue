@@ -713,30 +713,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Back to Top 버튼 -->
-  <Transition name="fade">
-    <button
-      v-if="showBackToTop"
-      @click="scrollToTop"
-      class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-      aria-label="맨 위로 이동"
-    >
-      <svg
-        class="w-6 h-6 mx-auto"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M5 10l7-7m0 0l7 7m-7-7v18"
-        ></path>
-      </svg>
-    </button>
-  </Transition>
 </template>
 
 <script setup>

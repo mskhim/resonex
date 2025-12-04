@@ -407,7 +407,7 @@
     </section>
 
     <!-- 갤러리 캐러셀 섹션 -->
-    <section class="py-16 sm:py-24 bg-gray-50 overflow-hidden">
+    <section class="py-16 sm:py-24 bg-gray-50">
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-12">
           <div
@@ -454,18 +454,9 @@
                 <img
                   :src="image"
                   :alt="`갤러리 ${index + 1}`"
-                  class="w-full h-64 md:h-100 object-cover"
+                  class="w-full h-auto object-contain max-h-[1200px]"
                 />
-                <div class="absolute inset-0 bg-black/10"></div>
-
-                <!-- 이미지 넘버 -->
-                <div
-                  class="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1"
-                >
-                  <span class="text-white text-sm font-medium"
-                    >{{ index + 1 }} / {{ galleryImages.length }}</span
-                  >
-                </div>
+                <div class="absolute inset-0pointer-events-none"></div>
               </div>
             </div>
           </div>

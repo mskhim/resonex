@@ -498,34 +498,6 @@
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2"
-              >관심 지역</label
-            >
-            <input
-              v-model="inquiryForm.location"
-              type="text"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="공명짐 창업을 생각하고 계신 지역"
-            />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >운동 센터 경험</label
-            >
-            <select
-              v-model="inquiryForm.experience"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">선택해주세요</option>
-              <option value="none">없음</option>
-              <option value="trainer">트레이너 경험</option>
-              <option value="manager">운동 센터 관리 경험</option>
-              <option value="owner">운동 센터 운영 경험</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
               >궁금한 점이나 하고 싶은 말씀</label
             >
             <textarea
@@ -549,6 +521,8 @@
 </template>
 
 <script>
+import emailjs from '@emailjs/browser';
+
 export default {
   name: 'Franchise',
   data() {
@@ -752,40 +726,41 @@ export default {
       }
     },
 
-    submitInquiry() {
-      const experienceText = {
-        none: '없음',
-        trainer: '트레이너 경험',
-        manager: '운동 센터 관리 경험',
-        owner: '운동 센터 운영 경험',
-      };
+    async submitInquiry() {
+      try {
+        // EmailJS를 통해 이메일 전송
+        const templateParams = {
+          name: this.inquiryForm.name,
+          number: this.inquiryForm.phone,
+          message: this.inquiryForm.message || '특별한 문의사항 없음',
+        };
 
-      const message = `공명짐 프랜차이즈 문의
-      
-이름: ${this.inquiryForm.name}
-연락처: ${this.inquiryForm.phone}
-관심지역: ${this.inquiryForm.location || '미정'}
-운동 센터 경험: ${experienceText[this.inquiryForm.experience] || '미선택'}
-메시지: ${this.inquiryForm.message || '특별한 문의사항 없음'}`;
+        await emailjs.send(
+          'resonex',      // EmailJS 서비스 ID
+          'template_bvfq6hg',     // EmailJS 템플릿 ID
+          templateParams,
+          'gAoL9uCniHayhdwIg'       // EmailJS Public Key
+        );
 
-      const emailUrl = `mailto:cprh7677@naver.com?subject=공명짐 프랜차이즈 문의 - ${
-        this.inquiryForm.name
-      }&body=${encodeURIComponent(message)}`;
+        // 폼 초기화
+        this.inquiryForm = {
+          name: '',
+          phone: '',
+          location: '',
+          experience: '',
+          message: '',
+        };
+        this.closeInquiryForm();
 
-      window.location.href = emailUrl;
-
-      this.inquiryForm = {
-        name: '',
-        phone: '',
-        location: '',
-        experience: '',
-        message: '',
-      };
-      this.closeInquiryForm();
-
-      alert(
-        '메시지를 보내주셔서 감사합니다.\n공명짐 운영에 대해 편한 시간에 대화해요!'
-      );
+        alert(
+          '메시지가 성공적으로 전송되었습니다!\n공명짐 운영에 대해 편한 시간에 대화해요!'
+        );
+      } catch (error) {
+        console.error('이메일 전송 실패:', error);
+        alert(
+          '메시지 전송에 실패했습니다.\n잠시 후 다시 시도해주세요.'
+        );
+      }
     },
   },
 };

@@ -5,17 +5,20 @@
       <router-view />
     </main>
     <Footer />
+    <FloatingInquiry />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import FloatingInquiry from './components/FloatingInquiry.vue';
 
 export default {
   components: {
     Header,
     Footer,
+    FloatingInquiry,
   },
   provide() {
     return {
