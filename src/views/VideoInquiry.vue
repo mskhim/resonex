@@ -1,413 +1,327 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- 히어로 섹션 (가로 동영상) -->
-    <section class="relative bg-slate-900 text-white overflow-hidden">
-      <div class="relative max-w-7xl mx-auto">
-        <div class="relative">
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            class="w-full h-64 md:h-80 lg:h-96 object-cover"
-          >
-            <source src="/video/hero-video.mp4" type="video/mp4" />
-            <!-- 동영상 로드 실패 시 대체 이미지 -->
-            <img
-              alt="영상 촬영 홍보"
-              class="w-full h-64 md:h-80 lg:h-96 object-cover"
-            />
-          </video>
-          <div class="absolute inset-0 bg-black/50"></div>
-          <div class="absolute inset-0 flex items-center justify-center z-10">
-            <div class="text-center max-w-4xl mx-auto px-4 mt-10 md:mt-30">
-              <h1
-                class="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6 text-white"
-              >
-                전문 영상 제작 서비스
-              </h1>
-              <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-                브랜드 가치를 높이는<br />
-                고품질 영상 콘텐츠 제작
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <div>
+    <!-- ═══════════ 히어로 (영상 배경) ═══════════ -->
+    <PageHero
+      eyebrow="Video Production"
+      subtitle="브랜드 가치를 높이는 고품질 영상 콘텐츠 제작"
+    >
+      <template #media>
+        <video
+          src="/video/hero-video.mp4"
+          poster="/video-poster.jpg"
+          autoplay
+          muted
+          loop
+          playsinline
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+      </template>
 
-    <!-- 서비스 소개 섹션 -->
-    <section class="py-16 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12 fade-in">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      <template #title>전문 영상 제작 서비스</template>
+
+      <template #actions>
+        <a
+          :href="contact.kakao"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn bg-white text-ink-900 hover:-translate-y-0.5"
+        >
+          제작 문의하기
+        </a>
+        <a href="#portfolio" class="btn btn-ghost-light">
+          제작 사례 보기
+          <i class="fas fa-arrow-down text-xs" />
+        </a>
+      </template>
+    </PageHero>
+
+    <!-- ═══════════ 서비스 ═══════════ -->
+    <section class="section-y bg-white">
+      <div class="container-page">
+        <header class="mx-auto mb-14 max-w-2xl text-center">
+          <p data-reveal="fade" class="eyebrow justify-center before:hidden">
+            Services
+          </p>
+          <h2
+            data-reveal="up"
+            data-reveal-delay="80"
+            class="program-title mt-4 text-h2 text-ink-900"
+          >
             프리미엄 영상 제작 서비스
           </h2>
-          <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          <p
+            data-reveal="up"
+            data-reveal-delay="140"
+            class="mt-4 text-lead text-ink-500"
+          >
             부산국제영화제 촬영팀과 인플루언서들이 함께하는<br />
             최고 품질의 바이럴 콘텐츠 제작
           </p>
-        </div>
+        </header>
 
-        <!-- 서비스 카드 -->
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
-          <div
-            class="bg-white rounded-3xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 fade-in"
+        <div class="grid gap-6 md:grid-cols-3">
+          <article
+            v-for="(service, i) in services"
+            :key="service.title"
+            data-reveal="up"
+            :data-reveal-delay="i * 110"
+            class="card card-hover group p-7 md:p-8"
           >
-            <div
-              class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6"
+            <span
+              class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl text-white transition-transform duration-300 group-hover:scale-105"
+              :class="service.color"
             >
-              <i class="fas fa-video text-white text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">홍보 영상</h3>
-            <p class="text-gray-600 leading-relaxed">
-              브랜드의 가치와 특징을 담은 전문적인 홍보 영상으로 인지도를
-              높여드립니다.
-            </p>
-          </div>
-
-          <div
-            class="bg-white rounded-3xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 fade-in"
-          >
-            <div
-              class="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center mb-6"
-            >
-              <i class="fas fa-star text-white text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">
-              인플루언서 콜라보
+              <i :class="service.icon" class="text-lg" />
+            </span>
+            <h3 class="program-title text-lg text-ink-900">
+              {{ service.title }}
             </h3>
-            <p class="text-gray-600 leading-relaxed">
-              틱톡 팔로워 10만+ 인플루언서들과의 협업으로 바이럴 효과를
-              극대화합니다.
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">
+              {{ service.description }}
             </p>
-          </div>
-
-          <div
-            class="bg-white rounded-3xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 fade-in"
-          >
-            <div
-              class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-6"
-            >
-              <i class="fas fa-trophy text-white text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">
-              영화제급 퀄리티
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              부산국제영화제 촬영팀이 참여하는 최고 수준의 전문 영상을
-              제작합니다.
-            </p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 제작 사례 섹션 -->
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16 fade-in">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+    <!-- ═══════════ 제작 사례 ═══════════ -->
+    <section id="portfolio" class="section-y bg-ink-50">
+      <div class="container-page">
+        <header class="mx-auto mb-14 max-w-2xl text-center">
+          <p data-reveal="fade" class="eyebrow justify-center before:hidden">
+            Portfolio
+          </p>
+          <h2
+            data-reveal="up"
+            data-reveal-delay="80"
+            class="program-title mt-4 text-h2 text-ink-900"
+          >
             제작 사례
           </h2>
-          <p class="text-lg text-gray-600">
-            실제 제작된 영상을 통해 결과물을 확인해보세요.
+          <p
+            data-reveal="up"
+            data-reveal-delay="140"
+            class="mt-3 text-[0.9375rem] text-ink-500"
+          >
+            실제 제작된 영상을 통해 결과물을 확인해보세요
           </p>
-        </div>
-        <div class="mb-20">
-          <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
-            <!-- 세로 동영상 -->
-            <div class="relative order-2 md:order-1">
+        </header>
+
+        <div class="space-y-16 md:space-y-24">
+          <!-- 세로형 SNS 콘텐츠 -->
+          <article class="grid items-center gap-8 md:grid-cols-2 md:gap-14">
+            <div data-reveal="right" class="md:order-2">
               <div
-                class="bg-black rounded-3xl overflow-hidden shadow-2xl max-w-sm mx-auto"
+                class="mx-auto max-w-[19rem] overflow-hidden rounded-3xl bg-ink-950 shadow-lift"
               >
                 <video
+                  src="/video/vertical-video.mp4"
                   controls
                   playsinline
-                  class="w-full h-96 md:h-[600px] object-cover"
-                >
-                  <source src="/video/vertical-video.mp4" type="video/mp4" />
-                  <div
-                    class="w-full h-96 md:h-[600px] bg-gray-300 flex items-center justify-center"
-                  >
-                    <i class="fas fa-play-circle text-gray-500 text-6xl"></i>
-                  </div>
-                </video>
+                  preload="metadata"
+                  class="aspect-[9/16] w-full object-cover"
+                />
               </div>
             </div>
 
-            <!-- 설명 텍스트 -->
-            <div class="space-y-6 order-2 md:order-1">
-              <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
+            <div data-reveal="left">
+              <span
+                class="inline-flex rounded-full bg-brand-50 px-3 py-1.5 text-xs font-semibold text-brand-700"
+              >
+                9:16 세로형
+              </span>
+              <h3 class="program-title mt-4 text-h3 text-ink-900">
                 SNS 최적화 콘텐츠
               </h3>
-              <div class="space-y-4 text-gray-600">
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>세로형 9:16 비율로 모바일에 최적화</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>팔로워 10만+ 인플루언서와의 협업</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>트렌디한 편집과 음악으로 바이럴 유도</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>인스타그램, 틱톡, 유튜브 쇼츠 동시 활용</p>
-                </div>
-              </div>
+              <ul class="mt-6 space-y-3">
+                <li
+                  v-for="point in verticalPoints"
+                  :key="point"
+                  class="flex gap-3 text-sm text-ink-600"
+                >
+                  <i class="fas fa-check mt-0.5 shrink-0 text-xs text-brand-600" />
+                  {{ point }}
+                </li>
+              </ul>
             </div>
-          </div>
-        </div>
-        <!-- 첫 번째 가로 영상 (20초) -->
-        <div class="mb-20">
-          <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
-            <!-- 설명 텍스트 (왼쪽) -->
-            <div class="space-y-6 order-1 md:order-1">
-              <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
-                바이럴 숏폼 콘텐츠
-              </h3>
-              <div class="space-y-4 text-gray-600">
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>20초 내외의 임팩트 있는 숏폼 영상</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>인플루언서와의 협업으로 바이럴 효과 극대화</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>트렌디한 콘텐츠로 젊은 층 어필</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>SNS 플랫폼 최적화 편집</p>
-                </div>
-              </div>
-            </div>
+          </article>
 
-            <!-- 가로 동영상 (오른쪽) -->
-            <div class="relative order- 2 md:order-1">
-              <div class="bg-black rounded-2xl overflow-hidden shadow-2xl">
+          <!-- 숏폼 -->
+          <article class="grid items-center gap-8 md:grid-cols-2 md:gap-14">
+            <div data-reveal="left">
+              <div class="overflow-hidden rounded-2xl bg-ink-950 shadow-lift">
                 <video
+                  src="/video/short-promo-video.mp4"
                   controls
                   playsinline
-                  class="w-full h-60 md:h-80 object-cover"
-                >
-                  <source src="/video/short-promo-video.mp4" type="video/mp4" />
-                  <div
-                    class="w-full h-60 md:h-80 bg-gray-300 flex items-center justify-center"
-                  >
-                    <i class="fas fa-play-circle text-gray-500 text-6xl"></i>
-                  </div>
-                </video>
+                  preload="metadata"
+                  class="aspect-video w-full object-cover"
+                />
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- 두 번째 가로 영상 (2분, 유튜브) -->
-        <div class="mb-20">
-          <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
-            <!-- 유튜브 영상 -->
-            <div class="relative">
-              <div class="bg-black rounded-2xl overflow-hidden shadow-2xl">
+            <div data-reveal="right">
+              <span
+                class="inline-flex rounded-full bg-accent-500/12 px-3 py-1.5 text-xs font-semibold text-accent-700"
+              >
+                20초 숏폼
+              </span>
+              <h3 class="program-title mt-4 text-h3 text-ink-900">
+                바이럴 숏폼 콘텐츠
+              </h3>
+              <ul class="mt-6 space-y-3">
+                <li
+                  v-for="point in shortPoints"
+                  :key="point"
+                  class="flex gap-3 text-sm text-ink-600"
+                >
+                  <i
+                    class="fas fa-check mt-0.5 shrink-0 text-xs text-accent-600"
+                  />
+                  {{ point }}
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 브랜드 스토리 (유튜브) -->
+          <article class="grid items-center gap-8 md:grid-cols-2 md:gap-14">
+            <div data-reveal="right" class="md:order-2">
+              <div class="overflow-hidden rounded-2xl bg-ink-950 shadow-lift">
                 <iframe
-                  class="w-full h-60 md:h-80"
+                  class="aspect-video w-full"
                   src="https://www.youtube.com/embed/rWMxEA6RjzU"
                   title="댄스스포츠 대회 하이라이트"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen
-                ></iframe>
+                />
               </div>
             </div>
 
-            <!-- 설명 텍스트 -->
-            <div class="space-y-6">
-              <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
+            <div data-reveal="left">
+              <span
+                class="inline-flex rounded-full bg-ink-900 px-3 py-1.5 text-xs font-semibold text-white"
+              >
+                브랜드 필름
+              </span>
+              <h3 class="program-title mt-4 text-h3 text-ink-900">
                 브랜드 스토리 영상
               </h3>
-              <div class="space-y-4 text-gray-600">
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>부산국제영화제 촬영팀의 전문 퀄리티</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>전문 카메라 10대로 다각도 촬영</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>브랜드 철학과 가치를 스토리텔링으로 표현</p>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"
-                  ></div>
-                  <p>감동적인 내러티브로 시청자 몰입도 향상</p>
-                </div>
-              </div>
+              <ul class="mt-6 space-y-3">
+                <li
+                  v-for="point in storyPoints"
+                  :key="point"
+                  class="flex gap-3 text-sm text-ink-600"
+                >
+                  <i class="fas fa-check mt-0.5 shrink-0 text-xs text-ink-900" />
+                  {{ point }}
+                </li>
+              </ul>
             </div>
-          </div>
+          </article>
         </div>
-
-        <!-- 세로 동영상 섹션 (맨 아래로 이동) -->
       </div>
     </section>
 
-    <!-- 제작 프로세스 섹션 -->
-    <section class="py-16 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12 fade-in">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+    <!-- ═══════════ 제작 프로세스 ═══════════ -->
+    <section class="section-y bg-white">
+      <div class="container-page">
+        <header class="mx-auto mb-14 max-w-2xl text-center">
+          <p data-reveal="fade" class="eyebrow justify-center before:hidden">
+            Process
+          </p>
+          <h2
+            data-reveal="up"
+            data-reveal-delay="80"
+            class="program-title mt-4 text-h2 text-ink-900"
+          >
             제작 프로세스
           </h2>
-          <p class="text-lg text-gray-600">
+          <p
+            data-reveal="up"
+            data-reveal-delay="140"
+            class="mt-3 text-[0.9375rem] text-ink-500"
+          >
             체계적인 프로세스로 고품질 영상을 제작합니다
           </p>
-        </div>
+        </header>
 
-        <div class="grid md:grid-cols-4 grid-cols-2 gap-8 fade-in">
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <span class="text-blue-600 font-bold text-xl">1</span>
-            </div>
-            <h3 class="font-semibold text-gray-900 mb-2">상담 및 기획</h3>
-            <p class="text-gray-600 text-sm">
-              센터 특성 파악 및<br />촬영 컨셉 기획
-            </p>
-          </div>
+        <ol class="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <!-- 연결선 (데스크톱) -->
+          <span
+            class="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-ink-200 lg:block"
+          />
 
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          <li
+            v-for="(step, i) in process"
+            :key="step.title"
+            data-reveal="up"
+            :data-reveal-delay="i * 110"
+            class="relative text-center"
+          >
+            <span
+              class="relative z-10 mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white bg-ink-900 text-sm font-bold text-white ring-1 ring-ink-200"
             >
-              <span class="text-emerald-600 font-bold text-xl">2</span>
-            </div>
-            <h3 class="font-semibold text-gray-900 mb-2">촬영 진행</h3>
-            <p class="text-gray-600 text-sm">
-              전문 장비와 기술로<br />현장 촬영 진행
-            </p>
-          </div>
-
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <span class="text-purple-600 font-bold text-xl">3</span>
-            </div>
-            <h3 class="font-semibold text-gray-900 mb-2">편집 및 후작업</h3>
-            <p class="text-gray-600 text-sm">
-              전문적인 편집과<br />사운드 후작업
-            </p>
-          </div>
-
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <span class="text-indigo-600 font-bold text-xl">4</span>
-            </div>
-            <h3 class="font-semibold text-gray-900 mb-2">최종 전달</h3>
-            <p class="text-gray-600 text-sm">
-              고품질 영상 파일<br />및 활용 가이드 제공
-            </p>
-          </div>
-        </div>
+              {{ i + 1 }}
+            </span>
+            <h3 class="font-bold text-ink-900">{{ step.title }}</h3>
+            <p
+              class="mt-2 text-sm leading-relaxed text-ink-500"
+              v-html="step.description"
+            />
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- 문의 섹션 -->
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <div class="bg-white rounded-3xl shadow-lg p-12 fade-in">
-          <div
-            class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-8"
+    <!-- ═══════════ 문의 ═══════════ -->
+    <section class="section-y bg-ink-50 pb-20 md:pb-28">
+      <div class="container-page">
+        <div
+          data-reveal="scale"
+          class="card mx-auto max-w-3xl px-6 py-14 text-center md:px-14 md:py-16"
+        >
+          <span
+            class="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-ink-900 text-white"
           >
-            <i class="fas fa-video text-white text-3xl"></i>
-          </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            영상 제작 문의
-          </h2>
-          <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+            <i class="fas fa-video text-2xl" />
+          </span>
+
+          <h2 class="program-title text-h2 text-ink-900">영상 제작 문의</h2>
+          <p class="mx-auto mt-5 max-w-lg text-lead text-ink-500">
             브랜드의 특별함을 담은 전문 영상으로<br />
             마케팅 효과를 극대화하세요
           </p>
 
-          <div class="grid md:grid-cols-3 gap-6 mb-10">
-            <div class="text-center">
-              <div
-                class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4"
+          <div class="mt-10 grid gap-6 sm:grid-cols-3">
+            <div v-for="strength in strengths" :key="strength.title">
+              <span
+                class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
               >
-                <i class="fas fa-film text-blue-600 text-2xl"></i>
-              </div>
-              <h3 class="font-semibold text-gray-900 mb-2">영화제급 퀄리티</h3>
-              <p class="text-gray-600 text-sm">부산국제영화제 촬영팀 참여</p>
-            </div>
-            <div class="text-center">
-              <div
-                class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4"
-              >
-                <i class="fas fa-video text-emerald-600 text-2xl"></i>
-              </div>
-              <h3 class="font-semibold text-gray-900 mb-2">전문 장비</h3>
-              <p class="text-gray-600 text-sm">전문 카메라 10대 +@ 보유</p>
-            </div>
-            <div class="text-center">
-              <div
-                class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4"
-              >
-                <i class="fas fa-star text-purple-600 text-2xl"></i>
-              </div>
-              <h3 class="font-semibold text-gray-900 mb-2">인플루언서 협업</h3>
-              <p class="text-gray-600 text-sm">
-                틱톡 팔로워 10만+ 크리에이터들과 협업
+                <i :class="strength.icon" class="text-lg" />
+              </span>
+              <h3 class="font-semibold text-ink-900">{{ strength.title }}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-ink-500">
+                {{ strength.description }}
               </p>
             </div>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              @click="openKakaoChat"
-              class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-4 px-8 rounded-2xl transition-colors duration-200 flex items-center justify-center gap-3"
+          <div class="mt-11 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              :href="contact.kakao"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn bg-[#FEE500] text-ink-900 hover:-translate-y-0.5 hover:brightness-105"
             >
+              <i class="fas fa-comment" />
               카카오톡 문의
-            </button>
-            <button
-              @click="openPhoneCall"
-              class="bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-2xl transition-colors duration-200 flex items-center justify-center gap-3"
-            >
+            </a>
+            <a :href="`tel:${contact.phone}`" class="btn btn-primary">
+              <i class="fas fa-phone" />
               전화 문의
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -415,68 +329,91 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'VideoInquiry',
-  mounted() {
-    window.scrollTo(0, 0);
-    this.initializeAnimations();
-  },
-  methods: {
-    initializeAnimations() {
-      // Intersection Observer for fade-in animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      };
+<script setup>
+import { inject } from 'vue';
+import PageHero from '../components/PageHero.vue';
+import { useReveal } from '../composables/useReveal';
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      }, observerOptions);
+useReveal();
 
-      // Observe all elements with fade-in class
-      document.querySelectorAll('.fade-in').forEach((el) => {
-        observer.observe(el);
-      });
-    },
-    openKakaoChat() {
-      window.open('http://pf.kakao.com/_RJVsn', '_blank');
-    },
-    openPhoneCall() {
-      window.location.href = 'tel:010-4429-2889';
-    },
+const contact = inject('contact');
+
+const services = [
+  {
+    icon: 'fas fa-video',
+    color: 'bg-brand-600',
+    title: '홍보 영상',
+    description:
+      '브랜드의 가치와 특징을 담은 전문적인 홍보 영상으로 인지도를 높여드립니다.',
   },
-};
+  {
+    icon: 'fas fa-star',
+    color: 'bg-accent-600',
+    title: '인플루언서 콜라보',
+    description:
+      '틱톡 팔로워 10만+ 인플루언서들과의 협업으로 바이럴 효과를 극대화합니다.',
+  },
+  {
+    icon: 'fas fa-trophy',
+    color: 'bg-ink-900',
+    title: '영화제급 퀄리티',
+    description:
+      '부산국제영화제 촬영팀이 참여하는 최고 수준의 전문 영상을 제작합니다.',
+  },
+];
+
+const verticalPoints = [
+  '세로형 9:16 비율로 모바일에 최적화',
+  '팔로워 10만+ 인플루언서와의 협업',
+  '트렌디한 편집과 음악으로 바이럴 유도',
+  '인스타그램, 틱톡, 유튜브 쇼츠 동시 활용',
+];
+
+const shortPoints = [
+  '20초 내외의 임팩트 있는 숏폼 영상',
+  '인플루언서와의 협업으로 바이럴 효과 극대화',
+  '트렌디한 콘텐츠로 젊은 층 어필',
+  'SNS 플랫폼 최적화 편집',
+];
+
+const storyPoints = [
+  '부산국제영화제 촬영팀의 전문 퀄리티',
+  '전문 카메라 10대로 다각도 촬영',
+  '브랜드 철학과 가치를 스토리텔링으로 표현',
+  '감동적인 내러티브로 시청자 몰입도 향상',
+];
+
+const process = [
+  {
+    title: '상담 및 기획',
+    description: '센터 특성 파악 및<br />촬영 컨셉 기획',
+  },
+  { title: '촬영 진행', description: '전문 장비와 기술로<br />현장 촬영 진행' },
+  {
+    title: '편집 및 후작업',
+    description: '전문적인 편집과<br />사운드 후작업',
+  },
+  {
+    title: '최종 전달',
+    description: '고품질 영상 파일<br />및 활용 가이드 제공',
+  },
+];
+
+const strengths = [
+  {
+    icon: 'fas fa-film',
+    title: '영화제급 퀄리티',
+    description: '부산국제영화제 촬영팀 참여',
+  },
+  {
+    icon: 'fas fa-camera',
+    title: '전문 장비',
+    description: '전문 카메라 10대 +@ 보유',
+  },
+  {
+    icon: 'fas fa-star',
+    title: '인플루언서 협업',
+    description: '틱톡 팔로워 10만+ 크리에이터',
+  },
+];
 </script>
-
-<style scoped>
-/* 페이드인 애니메이션 */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.animate-fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 스태거 애니메이션 */
-.fade-in:nth-child(1) {
-  transition-delay: 0.1s;
-}
-.fade-in:nth-child(2) {
-  transition-delay: 0.2s;
-}
-.fade-in:nth-child(3) {
-  transition-delay: 0.3s;
-}
-.fade-in:nth-child(4) {
-  transition-delay: 0.4s;
-}
-</style>

@@ -1,30 +1,18 @@
 <template>
-  <div
-    class="min-h-screen bg-white"
-    @click="enableAutoplay"
-    @scroll="enableAutoplay"
-    @touchstart="enableAutoplay"
-  >
-    <!-- 풀스크린 히어로 섹션 -->
-    <section
-      class="relative h-screen flex items-center justify-center overflow-hidden"
-    >
-      <!-- 배경 비디오 -->
-      <div class="absolute inset-0 z-0">
-        <!-- 로딩 중 배경 이미지 -->
+  <div>
+    <!-- ═══════════ 히어로 ═══════════ -->
+    <section class="relative isolate h-[100svh] min-h-[560px] overflow-hidden">
+      <div class="absolute inset-0">
         <img
           src="../img/video-poster.jpg"
-          alt="Video poster"
-          class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-          :class="{
-            'opacity-100': !videoPlaying,
-            'opacity-0': videoPlaying,
-          }"
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
+          :class="videoPlaying ? 'opacity-0' : 'opacity-100'"
         />
 
-        <!-- 비디오 (심플 버전) -->
         <video
-          ref="heroVideo"
+          ref="videoEl"
           src="../video/mainVideo.mp4"
           poster="../img/video-poster.jpg"
           autoplay
@@ -32,487 +20,450 @@
           loop
           playsinline
           webkit-playsinline
-          x5-playsinline
           preload="auto"
-          class="w-full h-full object-cover transition-opacity duration-500"
-          :class="{
-            'opacity-0': !videoCanPlay || !videoPlaying,
-            'opacity-100': videoCanPlay && videoPlaying,
-          }"
-          @loadeddata="handleVideoLoaded"
-          @canplay="handleVideoCanPlay"
-          @play="handleVideoPlay"
-          @pause="handleVideoPause"
-          @error="handleVideoError"
-        ></video>
+          class="h-full w-full object-cover transition-opacity duration-1000"
+          :class="videoPlaying ? 'opacity-100' : 'opacity-0'"
+          @playing="videoPlaying = true"
+          @pause="videoPlaying = false"
+        />
 
-        <!-- 재생 버튼 (자동재생 실패시) -->
+        <!-- 텍스트 대비 확보 -->
         <div
-          v-if="showPlayButton"
-          class="absolute inset-0 z-20 flex items-center justify-center"
-          @click="playVideo"
-        >
-          <div
-            class="bg-black/60 rounded-full p-8 cursor-pointer hover:bg-black/80 transition-colors backdrop-blur-sm"
-          >
-            <svg
-              class="w-16 h-16 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-        </div>
-
-        <!-- 어두운 오버레이 -->
-        <div class="absolute inset-0 bg-black/60 z-5"></div>
+          class="absolute inset-0 bg-gradient-to-b from-ink-950/70 via-ink-950/45 to-ink-950/85"
+        />
       </div>
 
-      <!-- 메인 콘텐츠 -->
+      <!-- 히어로 콘텐츠 -->
       <div
-        class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto transition-opacity duration-1000"
-        :class="{ 'opacity-0': !contentVisible, 'opacity-100': contentVisible }"
+        class="container-page relative flex h-full flex-col items-center justify-center text-center"
       >
-        <span
-          class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 text-white logo-korean leading-tight"
+        <div
+          class="transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          :class="heroIn ? 'opacity-100 blur-0' : 'translate-y-6 opacity-0 blur-sm'"
         >
-          [공명-共鳴] : 함께 공, 울 명
-        </span>
-        <h2
-          class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 text-white logo-korean leading-tight"
-        >
-          "함께 울리는, 더 큰 울림"
-        </h2>
+          <p
+            class="mb-6 text-[0.6875rem] font-semibold uppercase tracking-[0.35em] text-white/50 md:text-xs"
+          >
+            Resonance Gym
+          </p>
+
+          <h1 class="logo-korean text-display font-light text-white">
+            함께 울리는,<br class="sm:hidden" />
+            <span class="font-normal"> 더 큰 울림</span>
+          </h1>
+
+          <p
+            class="mx-auto mt-7 max-w-md text-sm leading-relaxed text-white/65 md:max-w-lg md:text-base"
+          >
+            공명(共鳴) — 함께 공, 울 명.<br />
+            진동 운동으로 몸과 마음을 함께 깨우는 공간입니다.
+          </p>
+
+          <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+            <RouterLink to="/about" class="btn btn-ghost-light">
+              공명짐 소개
+              <i class="fas fa-arrow-right text-xs" />
+            </RouterLink>
+            <a
+              :href="contact.kakao"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn bg-white text-ink-900 hover:-translate-y-0.5 hover:shadow-lift"
+            >
+              무료 상담 받기
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- 스크롤 인디케이터 -->
       <div
-        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10"
+        class="absolute inset-x-0 bottom-8 flex justify-center transition-opacity duration-500"
+        :class="scrolledPast ? 'opacity-0' : 'opacity-100'"
       >
-        <svg
-          class="w-6 h-6 text-white/60"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+        <div
+          class="flex h-10 w-6 justify-center rounded-full border border-white/25 pt-2"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          ></path>
-        </svg>
-      </div>
-    </section>
-
-    <!-- 서비스 하이라이트 섹션 (간격 추가용) -->
-    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16"></div>
-
-        <!-- 모바일: 2x2, 태블릿: 2x2, 데스크톱: 1x4 -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          <div
-            v-for="(feature, index) in specialFeatures"
-            :key="index"
-            ref="featureCards"
-            :class="[
-              'text-center group transition-all duration-700 bg-gray-100 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl',
-              isVisible.featureCards
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-            :style="{ animationDelay: `${index * 150}ms` }"
-          >
-            <div class="mb-3 md:mb-4 relative">
-              <div
-                class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-              >
-                <i
-                  :class="feature.icon + ' text-xl md:text-2xl text-blue-600'"
-                ></i>
-              </div>
-            </div>
-
-            <!-- 카운팅 숫자 -->
-            <div class="mb-2 md:mb-3">
-              <h3
-                class="text-base md:text-lg font-bold text-gray-900 mb-1 md:mb-2"
-              >
-                {{ feature.title }}
-              </h3>
-              <span class="text-3xl md:text-4xl font-bold text-gray-900">
-                {{ Math.floor(animatedNumbers[index]) }}
-              </span>
-              <br />
-              <span class="text-sm md:text-lg text-gray-900 ml-1">{{
-                feature.unit
-              }}</span>
-            </div>
-          </div>
+          <span class="animate-scroll-hint h-1.5 w-1.5 rounded-full bg-white/70" />
         </div>
       </div>
     </section>
 
-    <!-- 와이드 임팩트 섹션 -->
-    <section class="mt-15 relative h-screen bg-black overflow-hidden">
-      <!-- 배경 이미지 -->
+    <!-- ═══════════ 지표 ═══════════ -->
+    <section ref="statsEl" class="section-y-sm border-b border-ink-100 bg-white">
+      <div class="container-page">
+        <dl class="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4 md:gap-8">
+          <div
+            v-for="(stat, i) in stats"
+            :key="stat.label"
+            data-reveal="up"
+            :data-reveal-delay="i * 90"
+            class="group text-center md:text-left"
+          >
+            <div
+              class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-all duration-300 group-hover:scale-105 group-hover:bg-brand-600 group-hover:text-white max-md:mx-auto"
+            >
+              <i :class="stat.icon" class="text-base" />
+            </div>
+
+            <dd class="flex items-baseline justify-center gap-1 md:justify-start">
+              <span
+                class="program-title text-4xl tabular-nums text-ink-900 md:text-5xl"
+              >
+                {{ Math.round(counts[i]) }}
+              </span>
+              <span class="text-lg font-semibold text-brand-600">
+                {{ stat.suffix }}
+              </span>
+            </dd>
+
+            <dt class="mt-2 text-sm font-medium text-ink-500">
+              {{ stat.label }}
+            </dt>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ═══════════ 브랜드 스테이트먼트 ═══════════ -->
+    <section class="relative isolate overflow-hidden bg-ink-950">
       <div class="absolute inset-0">
         <img
           src="/main/powerplate-wide.jpg"
           alt="공명짐 파워플레이트 트레이닝"
-          class="w-full h-full object-cover"
+          class="h-full w-full object-cover"
+          loading="lazy"
         />
-        <div class="absolute inset-0 bg-black/50"></div>
-      </div>
-
-      <!-- 콘텐츠 -->
-      <div class="relative z-10 h-full flex items-center">
-        <div class="max-w-7xl mx-auto px-4 w-full">
-          <div
-            ref="impactContent"
-            :class="[
-              'text-white space-y-8 max-w-4xl transition-all duration-1000',
-              isVisible.impactContent
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-          >
-            <div class="space-y-4">
-              <h2
-                class="text-2xl md:text-3xl lg:text-4xl font-light logo-korean text-white/90"
-              >
-                [공명-共鳴] : 함께 공, 울 명
-              </h2>
-              <h3
-                class="text-3xl md:text-5xl lg:text-6xl font-bold program-title"
-              >
-                '함께 울리는, 더 큰 울림'
-              </h3>
-            </div>
-
-            <div class="w-20 h-1 bg-white/80"></div>
-
-            <div
-              class="space-y-6 text-lg md:text-xl lg:text-2xl leading-relaxed"
-            >
-              <p class="text-white/90">
-                진동 운동으로 몸과 마음을 함께 깨우는 공간,
-                <br class="block md:hidden" />
-                <span class="font-bold text-white">공명짐</span>입니다.
-              </p>
-              <p class="text-white/80 text-base md:text-lg">
-                내 주변에서 나에게 꼭 맞는 운동을 찾고 계신가요?<br />
-                조용하고 프라이빗한 공간에서, <br />온전히 나 자신에게 집중하며
-                운동하고 싶으신가요?<br />
-                공명짐은 그런 분들을 위한 맞춤형 스튜디오입니다.
-              </p>
-            </div>
-
-            <!-- 회사 소개 버튼 추가 -->
-            <div class="pt-8">
-              <button
-                @click="$router.push('/about')"
-                class="group relative inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold py-4 px-8 rounded-xl hover:bg-white/20 hover:border-white/50 transition-all duration-300"
-              >
-                <i class="fas fa-info-circle text-lg"></i>
-                <span class="text-lg">회사 소개</span>
-                <i
-                  class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform duration-300"
-                ></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- 위탁판매 섹션 -->
-    <section class="py-16 sm:py-24 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <!-- 제목 -->
-        <div class="text-center mb-16">
-          <div
-            ref="salesTitle"
-            :class="[
-              'transition-all duration-1000',
-              isVisible.salesTitle
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-          >
-            <div
-              class="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-full font-medium text-sm mb-4"
-            >
-              PREMIUM PRODUCTS
-            </div>
-            <h2
-              class="text-2xl md:text-4xl font-bold text-gray-900 program-title mb-4"
-            >
-              당신의 가치를, 공명짐에서 울리다
-            </h2>
-            <p class="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              프리미엄 건강기기, 신뢰로 선별하고 합리로 제안합니다,
-              <br />전문가가 직접 선별한 프리미엄 건강 기기를 만나보세요
-            </p>
-          </div>
-        </div>
-
-        <!-- 파워플레이트 -->
-        <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
-          <!-- 모바일: 이미지가 먼저, 데스크톱: 텍스트가 먼저 -->
-          <div
-            ref="productImage1"
-            class="lg:order-2"
-            :class="[
-              'relative transition-all duration-1000 delay-300',
-              isVisible.productImage1
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-8',
-            ]"
-          >
-            <div class="relative rounded-xl overflow-hidden shadow-xl">
-              <img
-                src="/main/card/powerPlate.jpg"
-                alt="파워플레이트"
-                class="w-full h-64 md:h-80 object-cover"
-              />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
-              ></div>
-            </div>
-          </div>
-
-          <div
-            ref="productContent1"
-            class="lg:order-1"
-            :class="[
-              'space-y-6 transition-all duration-1000',
-              isVisible.productContent1
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 -translate-x-8',
-            ]"
-          >
-            <div>
-              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                파워플레이트 프리미엄
-              </h3>
-              <div class="w-12 h-1 bg-blue-600 mb-4"></div>
-            </div>
-
-            <p class="text-gray-600 text-sm leading-relaxed">
-              3차원 진동 기술을 활용한 혁신적인 운동법으로
-              <br />근력강화, 체중감량, 순환개선에 탁월한 효과를 제공합니다.
-            </p>
-
-            <div class="space-y-3">
-              <div class="flex items-center text-gray-700">
-                <div class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                <span>근력 및 근지구력 향상</span>
-              </div>
-              <div class="flex items-center text-gray-700">
-                <div class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                <span>체지방 감소 및 순환 개선</span>
-              </div>
-              <div class="flex items-center text-gray-700">
-                <div class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                <span>시간 효율적인 운동</span>
-              </div>
-            </div>
-
-            <div class="pt-4">
-              <button
-                class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
-                @click="$router.push('/products/powerplate')"
-              >
-                제품 자세히 보기
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 고압산소캡슐 -->
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <!-- 모바일: 이미지가 먼저, 데스크톱: 이미지가 먼저 (원래 의도대로) -->
-          <div
-            ref="productImage2"
-            class="order-1"
-            :class="[
-              'relative transition-all duration-1000',
-              isVisible.productImage2
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 -translate-x-8',
-            ]"
-          >
-            <div class="relative rounded-xl overflow-hidden shadow-xl">
-              <img
-                src="/products/cap/cap2.jpg"
-                alt="고압산소 캡슐"
-                class="w-full h-64 md:h-80 object-cover"
-              />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
-              ></div>
-            </div>
-          </div>
-
-          <div
-            ref="productContent2"
-            class="order-2"
-            :class="[
-              'space-y-6 transition-all duration-1000 delay-300',
-              isVisible.productContent2
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-8',
-            ]"
-          >
-            <div>
-              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                산소캡슐
-              </h3>
-              <div class="w-12 h-1 bg-green-600 mb-4"></div>
-            </div>
-
-            <p class="text-gray-600 text-sm leading-relaxed">
-              높은 농도의 산소를 공급하여 피로회복과 면역력
-              <br />강화에 도움을 주며, 운동 후 빠른 회복을 지원합니다.
-            </p>
-
-            <div class="space-y-3">
-              <div class="flex items-center text-gray-700">
-                <div class="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                <span>피로회복 및 면역력 강화</span>
-              </div>
-              <div class="flex items-center text-gray-700">
-                <div class="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                <span>운동 후 빠른 회복</span>
-              </div>
-              <div class="flex items-center text-gray-700">
-                <div class="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                <span>혈액순환 개선</span>
-              </div>
-            </div>
-
-            <div class="pt-4">
-              <button
-                class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300 cursor-pointer"
-                @click="$router.push('/products/oxygen')"
-              >
-                제품 자세히 보기
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 갤러리 캐러셀 섹션 -->
-    <section class="py-16 sm:py-24 bg-gray-50">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12">
-          <div
-            ref="galleryTitle"
-            :class="[
-              'transition-all duration-1000',
-              isVisible.galleryTitle
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-          >
-            <h2
-              class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 program-title"
-            >
-              현장 갤러리
-            </h2>
-            <p class="text-sm text-gray-600">
-              실제 트레이닝 현장과 최신 시설을 확인해보세요
-            </p>
-          </div>
-        </div>
-
-        <!-- 캐러셀 컨테이너 -->
         <div
-          ref="galleryCarousel"
-          :class="[
-            'relative transition-all duration-1000',
-            isVisible.galleryCarousel
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-8',
-          ]"
-        >
-          <!-- 캐러셀 래퍼 -->
-          <div class="overflow-hidden rounded-xl">
-            <div
-              class="flex transition-transform duration-500 ease-in-out"
-              :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+          class="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/85 to-ink-950/35"
+        />
+      </div>
+
+      <div class="container-page relative py-24 md:py-36">
+        <div class="max-w-xl">
+          <p data-reveal="fade" class="eyebrow !text-brand-300">Philosophy</p>
+
+          <h2
+            data-reveal="up"
+            data-reveal-delay="80"
+            class="logo-korean mt-6 text-h1 font-light text-white"
+          >
+            내게 꼭 맞는 운동을<br />
+            찾고 계신가요?
+          </h2>
+
+          <div
+            data-reveal="up"
+            data-reveal-delay="160"
+            class="mt-7 space-y-4 text-lead text-white/60"
+          >
+            <p>
+              조용하고 프라이빗한 공간에서, 온전히 나 자신에게 집중하며 운동하고
+              싶으신가요?
+            </p>
+            <p>
+              공명짐은 그런 분들을 위한
+              <span class="font-semibold text-white">맞춤형 스튜디오</span>입니다.
+            </p>
+          </div>
+
+          <!-- 핵심 가치 -->
+          <ul
+            data-reveal="up"
+            data-reveal-delay="240"
+            class="mt-9 grid gap-x-6 gap-y-3 sm:grid-cols-2"
+          >
+            <li
+              v-for="value in values"
+              :key="value"
+              class="flex items-center gap-2.5 text-sm text-white/75"
             >
+              <span class="h-1 w-1 shrink-0 rounded-full bg-brand-400" />
+              {{ value }}
+            </li>
+          </ul>
+
+          <RouterLink
+            data-reveal="up"
+            data-reveal-delay="320"
+            to="/about"
+            class="btn btn-ghost-light mt-10"
+          >
+            회사 소개 보기
+            <i class="fas fa-arrow-right text-xs" />
+          </RouterLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 프리미엄 제품 ═══════════ -->
+    <section class="section-y bg-white">
+      <div class="container-page">
+        <!-- 섹션 헤더 -->
+        <header class="mb-16 max-w-2xl md:mb-20">
+          <p data-reveal="fade" class="eyebrow">Premium Products</p>
+          <h2
+            data-reveal="up"
+            data-reveal-delay="80"
+            class="program-title mt-5 text-h2 text-ink-900"
+          >
+            당신의 가치를,<br />공명짐에서 울리다
+          </h2>
+          <p
+            data-reveal="up"
+            data-reveal-delay="160"
+            class="mt-5 text-lead text-ink-500"
+          >
+            전문가가 직접 선별한 프리미엄 건강 기기를 신뢰로 선별하고 합리로
+            제안합니다.
+          </p>
+        </header>
+
+        <!-- 제품 목록 — 좌우 교차 배치 -->
+        <div class="space-y-20 md:space-y-28">
+          <article
+            v-for="(product, i) in products"
+            :key="product.to"
+            class="grid items-center gap-8 md:grid-cols-2 md:gap-14"
+          >
+            <!-- 이미지 -->
+            <div
+              :data-reveal="i % 2 === 0 ? 'right' : 'left'"
+              class="zoom-frame relative overflow-hidden rounded-2xl shadow-card"
+              :class="i % 2 === 0 ? 'md:order-2' : ''"
+            >
+              <img
+                :src="product.image"
+                :alt="product.title"
+                class="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
               <div
-                v-for="(image, index) in galleryImages"
-                :key="index"
-                class="w-full flex-shrink-0 relative"
+                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/25 to-transparent"
+              />
+              <span
+                class="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1.5 text-[0.6875rem] font-bold uppercase tracking-wider text-ink-800 backdrop-blur"
               >
-                <img
-                  :src="image"
-                  :alt="`갤러리 ${index + 1}`"
-                  class="w-full h-auto object-contain max-h-[1200px]"
-                />
-                <div class="absolute inset-0pointer-events-none"></div>
-              </div>
+                {{ product.tag }}
+              </span>
+            </div>
+
+            <!-- 설명 -->
+            <div :data-reveal="i % 2 === 0 ? 'left' : 'right'">
+              <h3 class="program-title text-h3 text-ink-900">
+                {{ product.title }}
+              </h3>
+              <div
+                class="mt-4 h-0.5 w-12 rounded-full"
+                :class="product.accent"
+              />
+
+              <p class="mt-5 text-[0.9375rem] leading-relaxed text-ink-500">
+                {{ product.description }}
+              </p>
+
+              <ul class="mt-6 space-y-2.5">
+                <li
+                  v-for="benefit in product.benefits"
+                  :key="benefit"
+                  class="flex items-center gap-3 text-sm text-ink-700"
+                >
+                  <i class="fas fa-check text-xs" :class="product.iconColor" />
+                  {{ benefit }}
+                </li>
+              </ul>
+
+              <RouterLink :to="product.to" class="btn btn-primary mt-8">
+                제품 자세히 보기
+                <i class="fas fa-arrow-right text-xs" />
+              </RouterLink>
+            </div>
+          </article>
+        </div>
+
+        <!-- 전체 제품 링크 -->
+        <div data-reveal="up" class="mt-16 flex flex-wrap justify-center gap-2.5">
+          <RouterLink
+            v-for="link in otherProducts"
+            :key="link.to"
+            :to="link.to"
+            class="rounded-full border border-ink-200 px-4 py-2 text-sm font-medium text-ink-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-ink-900 hover:bg-ink-900 hover:text-white"
+          >
+            {{ link.label }}
+          </RouterLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 갤러리 ═══════════ -->
+    <section class="section-y bg-ink-50">
+      <div class="container-page">
+        <header
+          class="mb-10 flex flex-wrap items-end justify-between gap-6 md:mb-12"
+        >
+          <div>
+            <p data-reveal="fade" class="eyebrow">Why Resonance</p>
+            <h2
+              data-reveal="up"
+              data-reveal-delay="80"
+              class="program-title mt-5 text-h2 text-ink-900"
+            >
+              공명짐을 선택하는 이유
+            </h2>
+            <p
+              data-reveal="up"
+              data-reveal-delay="140"
+              class="mt-3 text-[0.9375rem] text-ink-500"
+            >
+              위례에서 공명짐만이 갖춘 전문성을 확인해보세요
+            </p>
+          </div>
+
+          <!-- 네비게이션 (데스크톱) -->
+          <div data-reveal="fade" class="hidden gap-2 md:flex">
+            <button
+              type="button"
+              @click="go(-1)"
+              aria-label="이전 사진"
+              class="flex h-11 w-11 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-600 transition-all hover:border-ink-900 hover:bg-ink-900 hover:text-white"
+            >
+              <i class="fas fa-chevron-left text-sm" />
+            </button>
+            <button
+              type="button"
+              @click="go(1)"
+              aria-label="다음 사진"
+              class="flex h-11 w-11 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-600 transition-all hover:border-ink-900 hover:bg-ink-900 hover:text-white"
+            >
+              <i class="fas fa-chevron-right text-sm" />
+            </button>
+          </div>
+        </header>
+
+        <!-- 슬라이더 — 원본이 4:5 세로형이라 같은 비율로 맞춰 잘리지 않게 한다.
+             캡션이 이미지 안에 있으므로 글자가 깎이지 않는 게 중요하다. -->
+        <div
+          data-reveal="scale"
+          class="group relative mx-auto max-w-[min(100%,26rem)] overflow-hidden rounded-2xl bg-ink-900 shadow-card md:max-w-[30rem]"
+          @mouseenter="pauseAuto"
+          @mouseleave="resumeAuto"
+        >
+          <div
+            class="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            :style="{ transform: `translateX(-${slide * 100}%)` }"
+          >
+            <div
+              v-for="(item, i) in gallery"
+              :key="item.src"
+              class="w-full shrink-0"
+            >
+              <img
+                :src="item.src"
+                :alt="item.alt"
+                class="aspect-[4/5] w-full object-contain"
+                :loading="i === 0 ? 'eager' : 'lazy'"
+              />
             </div>
           </div>
 
-          <!-- 네비게이션 버튼 -->
+          <!-- 모바일 좌우 버튼 -->
           <button
-            @click="prevSlide"
-            class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-white transition-colors duration-300 z-10"
+            type="button"
+            @click="go(-1)"
+            aria-label="이전 사진"
+            class="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-ink-800 backdrop-blur transition-opacity md:opacity-0 md:group-hover:opacity-100"
           >
-            <svg
-              class="w-5 h-5 text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              ></path>
-            </svg>
+            <i class="fas fa-chevron-left text-sm" />
+          </button>
+          <button
+            type="button"
+            @click="go(1)"
+            aria-label="다음 사진"
+            class="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-ink-800 backdrop-blur transition-opacity md:opacity-0 md:group-hover:opacity-100"
+          >
+            <i class="fas fa-chevron-right text-sm" />
           </button>
 
-          <button
-            @click="nextSlide"
-            class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-white transition-colors duration-300 z-10"
+          <!-- 현재 위치 표시 -->
+          <div
+            class="absolute right-3 top-3 rounded-full bg-ink-950/55 px-2.5 py-1 text-xs font-medium tabular-nums text-white/85 backdrop-blur"
           >
-            <svg
-              class="w-5 h-5 text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              ></path>
-            </svg>
-          </button>
+            {{ slide + 1 }} / {{ gallery.length }}
+          </div>
 
-          <!-- 인디케이터 -->
-          <div class="flex justify-center mt-6 space-x-2">
+          <!-- 진행 인디케이터 -->
+          <div class="absolute inset-x-0 bottom-0 flex gap-0.5 p-3 md:gap-1 md:p-4">
             <button
-              v-for="(image, index) in galleryImages"
-              :key="index"
-              @click="goToSlide(index)"
-              :class="[
-                'w-2 h-2 rounded-full transition-all duration-300',
-                currentSlide === index
-                  ? 'bg-gray-800 scale-125'
-                  : 'bg-gray-400 hover:bg-gray-600',
-              ]"
-            ></button>
+              v-for="(item, i) in gallery"
+              :key="item.src"
+              type="button"
+              @click="goTo(i)"
+              :aria-label="item.alt"
+              :aria-current="i === slide"
+              class="group/dot h-4 flex-1 py-1.5"
+            >
+              <span
+                class="block h-1 overflow-hidden rounded-full bg-white/25 transition-colors group-hover/dot:bg-white/45"
+              >
+                <span
+                  class="block h-full rounded-full bg-white transition-transform duration-500 ease-out"
+                  :class="i === slide ? 'scale-x-100' : 'scale-x-0'"
+                  style="transform-origin: left"
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 마무리 CTA ═══════════ -->
+    <section class="section-y bg-white">
+      <div class="container-page">
+        <div
+          data-reveal="scale"
+          class="relative overflow-hidden rounded-3xl bg-ink-950 px-6 py-16 text-center md:px-16 md:py-24"
+        >
+          <!-- 은은한 배경 광원 -->
+          <div
+            class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand-600/18 blur-3xl"
+          />
+          <div
+            class="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-accent-500/12 blur-3xl"
+          />
+
+          <div class="relative mx-auto max-w-xl">
+            <h2 class="logo-korean text-h2 font-light text-white">
+              건강한 변화를<br class="sm:hidden" /> 시작해보세요
+            </h2>
+            <p class="mt-5 text-[0.9375rem] leading-relaxed text-white/60">
+              맞춤형 건강 솔루션과 프리미엄 기기 체험이 궁금하시다면
+              <br class="hidden sm:block" />
+              지금 바로 문의해주세요.
+            </p>
+
+            <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+              <a
+                :href="contact.kakao"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn bg-white text-ink-900 hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                <i class="fas fa-comment" />
+                카카오톡 상담
+              </a>
+              <a :href="`tel:${contact.phone}`" class="btn btn-ghost-light">
+                <i class="fas fa-phone" />
+                {{ contact.phone }}
+              </a>
+            </div>
+
+            <RouterLink
+              to="/location"
+              class="link-underline mt-8 inline-block text-sm text-white/45 transition-colors hover:text-white"
+            >
+              오시는 길 안내
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -520,438 +471,214 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Home',
-  data() {
-    return {
-      videoLoaded: false,
-      videoCanPlay: false,
-      videoPlaying: false,
-      showPlayButton: false,
-      contentVisible: false,
-      programs: [
-        {
-          image:
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          title: '퍼스널 트레이닝',
-          description:
-            '개인 맞춤형 운동 프로그램으로 체형 교정과 체력 향상을 도와드립니다',
-          benefits: [
-            '개인 맞춤형 운동 계획',
-            '체형 교정 및 체력 향상',
-            '전문 트레이너의 1:1 지도',
-            '목표 달성을 위한 지속적인 관리',
-          ],
-        },
-        {
-          image:
-            'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          title: '필라테스',
-          description:
-            '코어 근육 강화와 신체 정렬에 중점을 둔 전문 필라테스 프로그램입니다',
-          benefits: [
-            '코어 근력 강화',
-            '유연성 및 근력 향상',
-            '재활 및 컨디셔닝',
-            '체형 교정',
-          ],
-        },
-        {
-          image: '/main/powerPlate.jpg',
-          title: '파워플레이트',
-          description:
-            '3차원 진동 기술을 활용한 혁신적인 운동법으로 짧은 시간에 최대의 운동 효과를 경험하세요',
-          benefits: [
-            '근력 및 근지구력 향상',
-            '체지방 감소 및 순환 개선',
-            '시간 효율적인 운동',
-            '관절 부담 최소화',
-          ],
-        },
-      ],
-      healthcareServices: [
-        {
-          title: '무료 체험 서비스',
-          description: '최신 건강기기를 실제로 체험하고 효과를 직접 확인하세요',
-          image: '/main/card/service.jpg',
-        },
-        {
-          title: '전문가 맞춤 상담',
-          description: '개인의 건강 상태와 목표에 맞는 최적의 솔루션 제안',
-          image:
-            'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        },
-        {
-          title: '위탁판매 서비스',
-          description: '검증된 프리미엄 제품을 합리적인 가격으로 만나보세요',
-          image:
-            'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        },
-        {
-          title: '사후관리 서비스',
-          description: '구매 후에도 지속적인 사용법 안내와 관리 서비스 제공',
-          image:
-            'https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-        },
-      ],
-      galleryImages: [
-        `/main/mainImg1.jpg`,
-        `/main/mainImg2.jpg`,
-        `/main/mainImg3.jpg`,
-        `/main/mainImg4.jpg`,
-        `/main/mainImg5.jpg`,
-        `/main/mainImg6.jpg`,
-      ],
-      hasCountingStarted: false,
-      observer: null,
-      specialFeatures: [
-        {
-          icon: 'fas fa-calendar-alt',
-          title: '운영 연수',
-          number: 2,
-          unit: '년 +',
-          description: '축적된 전문 노하우',
-        },
-        {
-          icon: 'fas fa-medal',
-          title: '자격증 및 수상경력',
-          number: 20,
-          unit: '개 +',
-          description: '검증된 전문성',
-        },
-        {
-          icon: 'fas fa-redo-alt',
-          title: '재등록율',
-          number: 80,
-          unit: '% 이상',
-          description: '높은 회원 만족도',
-        },
-        {
-          icon: 'fas fa-star',
-          title: '프리미엄 장비',
-          number: 15,
-          unit: '대 +',
-          description: '최신 운동 장비',
-        },
-      ],
-      animatedNumbers: [0, 0, 0, 0], // 카운팅용 숫자 배열
-      currentSlide: 0,
-      isVisible: {
-        impactContent: false,
-        highlightTitle: false,
-        featureCards: false,
-        salesTitle: false,
-        productContent1: false,
-        productImage1: false,
-        productContent2: false,
-        productImage2: false,
-        salesDescription: false,
-        galleryTitle: false,
-        galleryCarousel: false,
-      },
-    };
+<script setup>
+import {
+  ref,
+  reactive,
+  inject,
+  onMounted,
+  onBeforeUnmount,
+} from 'vue';
+import { useReveal, animateCount } from '../composables/useReveal';
+
+useReveal();
+
+const contact = inject('contact');
+
+/* ─────────── 콘텐츠 데이터 ─────────── */
+
+const stats = [
+  { icon: 'fas fa-calendar-days', label: '운영 연수', value: 2, suffix: '년+' },
+  { icon: 'fas fa-medal', label: '자격증 및 수상', value: 20, suffix: '개+' },
+  { icon: 'fas fa-rotate-right', label: '재등록율', value: 80, suffix: '%↑' },
+  { icon: 'fas fa-star', label: '프리미엄 장비', value: 15, suffix: '대+' },
+];
+
+const values = [
+  '개인별 맞춤 트레이닝',
+  '프라이빗한 운동 환경',
+  '전문 자격 보유 트레이너',
+  '체계적인 회복 루틴',
+];
+
+const products = [
+  {
+    to: '/products/powerplate',
+    title: '파워플레이트 프리미엄',
+    tag: 'Power Plate',
+    image: '/main/card/powerPlate.jpg',
+    description:
+      '3차원 진동 기술을 활용한 혁신적인 운동법으로 근력강화, 체중감량, 순환개선에 탁월한 효과를 제공합니다.',
+    benefits: [
+      '근력 및 근지구력 향상',
+      '체지방 감소 및 순환 개선',
+      '시간 효율적인 운동',
+    ],
+    accent: 'bg-brand-600',
+    iconColor: 'text-brand-600',
   },
-  mounted() {
-    this.setupScrollAnimation();
-
-    // DOM 로드 후 텍스트 표시만 (카운팅 코드 제거)
-    setTimeout(() => {
-      this.contentVisible = true;
-    }, 500);
-
-    // 캐러셀 자동 재생
-    setInterval(() => {
-      this.nextSlide();
-    }, 5000);
-
-    // 전역 이벤트 리스너 추가
-    window.addEventListener('scroll', this.enableAutoplay, { once: true });
-    window.addEventListener('click', this.enableAutoplay, { once: true });
-    window.addEventListener('touchstart', this.enableAutoplay, { once: true });
+  {
+    to: '/products/oxygen',
+    title: '고압 산소캡슐',
+    tag: 'Oxygen',
+    image: '/products/cap/cap2.jpg',
+    description:
+      '높은 농도의 산소를 공급하여 피로회복과 면역력 강화에 도움을 주며, 운동 후 빠른 회복을 지원합니다.',
+    benefits: ['피로회복 및 면역력 강화', '운동 후 빠른 회복', '혈액순환 개선'],
+    accent: 'bg-accent-500',
+    iconColor: 'text-accent-600',
   },
+];
 
-  beforeUnmount() {
-    // 이벤트 리스너 정리
-    window.removeEventListener('scroll', this.enableAutoplay);
-    window.removeEventListener('click', this.enableAutoplay);
-    window.removeEventListener('touchstart', this.enableAutoplay);
-    if (this.observer) {
-      this.observer.disconnect();
-    }
+const otherProducts = [
+  { to: '/products/sasom7', label: 'SASO M7' },
+  { to: '/products/ace-body', label: '에이스바디 타워풀리' },
+  { to: '/products/align-pilates', label: '얼라인 필라테스' },
+  { to: '/products/fitness', label: '헬스 기구' },
+  { to: '/products/zeroi', label: '제로아이' },
+];
+
+// 캡션이 이미지 안에 들어 있는 홍보 카드 (1080×1350, 4:5)
+// 앞의 4장은 지정된 순서, 이후는 강사 자격 → 시설·장비 → 기능검사 순으로 이어진다.
+const gallery = [
+  {
+    src: '/main/gallery/01-wirye-only.png',
+    alt: '위례 유일 PowerPlate 진동운동 전문센터',
   },
-
-  methods: {
-    handleVideoLoaded() {
-      console.log('Video loaded');
-      this.videoLoaded = true;
-    },
-
-    handleVideoCanPlay() {
-      console.log('Video can play');
-      this.videoCanPlay = true;
-      this.attemptAutoplay();
-    },
-
-    handleVideoPlay() {
-      console.log('Video playing');
-      this.videoPlaying = true;
-      this.showPlayButton = false;
-    },
-
-    handleVideoPause() {
-      console.log('Video paused');
-      this.videoPlaying = false;
-    },
-
-    handleVideoError(error) {
-      console.log('Video error:', error);
-      this.videoLoaded = false;
-      this.videoCanPlay = false;
-      this.showPlayButton = true;
-    },
-
-    async attemptAutoplay() {
-      const video = this.$refs.heroVideo;
-      if (!video) return;
-
-      try {
-        await video.play();
-        console.log('Autoplay successful');
-      } catch (error) {
-        console.log('Autoplay blocked:', error.name);
-        // 자동재생이 차단되면 재생 버튼 표시
-        this.showPlayButton = true;
-      }
-    },
-
-    async playVideo() {
-      const video = this.$refs.heroVideo;
-      if (!video) return;
-
-      try {
-        await video.play();
-        console.log('Manual play successful');
-      } catch (error) {
-        console.log('Manual play failed:', error);
-      }
-    },
-
-    enableAutoplay() {
-      // 사용자 인터랙션 후 자동재생 시도
-      this.attemptAutoplay();
-    },
-
-    setupScrollAnimation() {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const target = entry.target;
-
-              // 각 섹션별 애니메이션 트리거
-              if (target === this.$refs.impactContent) {
-                this.isVisible.impactContent = true;
-              } else if (target === this.$refs.highlightTitle) {
-                this.isVisible.highlightTitle = true;
-              } else if (
-                this.$refs.featureCards &&
-                this.$refs.featureCards.includes(target)
-              ) {
-                this.isVisible.featureCards = true;
-                // 🎯 카운팅 애니메이션 시작 - 여기가 핵심!
-                if (!this.hasCountingStarted) {
-                  this.startCountingAnimation();
-                }
-              } else if (target === this.$refs.salesTitle) {
-                this.isVisible.salesTitle = true;
-              } else if (target === this.$refs.productContent1) {
-                this.isVisible.productContent1 = true;
-              } else if (target === this.$refs.productImage1) {
-                this.isVisible.productImage1 = true;
-              } else if (target === this.$refs.productContent2) {
-                this.isVisible.productContent2 = true;
-              } else if (target === this.$refs.productImage2) {
-                this.isVisible.productImage2 = true;
-              } else if (target === this.$refs.salesDescription) {
-                this.isVisible.salesDescription = true;
-              } else if (target === this.$refs.galleryTitle) {
-                this.isVisible.galleryTitle = true;
-              } else if (target === this.$refs.galleryCarousel) {
-                this.isVisible.galleryCarousel = true;
-              }
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px',
-        }
-      );
-
-      this.$nextTick(() => {
-        // 모든 요소들을 관찰
-        const elementsToObserve = [
-          this.$refs.impactContent,
-          this.$refs.highlightTitle,
-          this.$refs.salesTitle,
-          this.$refs.productContent1,
-          this.$refs.productImage1,
-          this.$refs.productContent2,
-          this.$refs.productImage2,
-          this.$refs.salesDescription,
-          this.$refs.galleryTitle,
-          this.$refs.galleryCarousel,
-        ];
-
-        elementsToObserve.forEach((element) => {
-          if (element) observer.observe(element);
-        });
-
-        // 특징 카드들 관찰 - 이것이 카운팅을 트리거함
-        if (this.$refs.featureCards) {
-          this.$refs.featureCards.forEach((card) => observer.observe(card));
-        }
-      });
-    },
-
-    // 캐러셀 메서드들
-    nextSlide() {
-      this.currentSlide = (this.currentSlide + 1) % this.galleryImages.length;
-    },
-
-    prevSlide() {
-      this.currentSlide =
-        this.currentSlide === 0
-          ? this.galleryImages.length - 1
-          : this.currentSlide - 1;
-    },
-
-    goToSlide(index) {
-      this.currentSlide = index;
-    },
-
-    // 숫자 카운팅 애니메이션 (스크롤시 한 번만)
-    startCountingAnimation() {
-      // 이미 카운팅이 시작되었다면 실행하지 않음
-      if (this.hasCountingStarted) return;
-
-      this.hasCountingStarted = true;
-
-      this.specialFeatures.forEach((feature, index) => {
-        this.animateNumber(index, feature.number);
-      });
-    },
-
-    animateNumber(index, targetNumber) {
-      const duration = 2000; // 2초
-      const stepTime = 50; // 50ms마다 업데이트
-      const steps = duration / stepTime;
-      const increment = targetNumber / steps;
-      let currentNumber = 0;
-
-      const timer = setInterval(() => {
-        currentNumber += increment;
-
-        if (currentNumber >= targetNumber) {
-          currentNumber = targetNumber;
-          clearInterval(timer);
-        }
-
-        // Vue 반응형 데이터 업데이트
-        this.animatedNumbers[index] = currentNumber;
-        this.$forceUpdate();
-      }, stepTime);
-    },
+  {
+    src: '/main/gallery/02-national-team.png',
+    alt: '국가대표 스탠다드 댄스스포츠 코치출신 원장직강',
   },
+  {
+    src: '/main/gallery/03-nasm.png',
+    alt: '미국 스포츠 의학(NASM) 인증센터 · 파워플레이트 교육 전문 센터',
+  },
+  {
+    src: '/main/gallery/04-vibration-academy.png',
+    alt: '진동 테라피 전문 교육센터 · 타센터 진동테라피 다수 교육인증',
+  },
+  {
+    src: '/main/gallery/05-exercise-prescription.png',
+    alt: '운동처방사 · 국가공인자격증 인증 · 기능성 원탑 베테랑 출신 강사',
+  },
+  {
+    src: '/main/gallery/06-rehab-equipment.png',
+    alt: '최신식 재활 기구 완비 · 한국 / 미국 / 독일 / 일본 재활기구',
+  },
+  {
+    src: '/main/gallery/07-therapy-program.png',
+    alt: '다양한 전문가 테라피 프로그램 · 글라스톤 · 싸소 · 제로아이 · PNF',
+  },
+  {
+    src: '/main/gallery/08-function-test.png',
+    alt: '재활·교정을 위한 다양한 기능검사 · ROM · APG · HRV · BPM TEST',
+  },
+  {
+    src: '/main/gallery/09-ans-test.png',
+    alt: '자율신경계 검사 · 맨탈 스트레스 & 피지컬 스트레스 검사',
+  },
+];
+
+/* ─────────── 히어로 ─────────── */
+
+const videoEl = ref(null);
+const videoPlaying = ref(false);
+const heroIn = ref(false);
+const scrolledPast = ref(false);
+
+// 브라우저가 자동재생을 막으면 첫 사용자 인터랙션 때 다시 시도한다.
+const tryPlay = () => videoEl.value?.play().catch(() => {});
+
+/* ─────────── 지표 카운트업 ─────────── */
+
+const statsEl = ref(null);
+const counts = reactive(stats.map(() => 0));
+let statsObserver = null;
+const cancels = [];
+
+/* ─────────── 갤러리 ─────────── */
+
+const slide = ref(0);
+let autoTimer = null;
+
+const goTo = (i) => {
+  slide.value = (i + gallery.length) % gallery.length;
 };
+
+const go = (step) => goTo(slide.value + step);
+
+const startAuto = () => {
+  stopAuto();
+  // 9장을 한 바퀴 도는 데 너무 오래 걸리지 않도록 간격을 짧게 잡는다
+  autoTimer = setInterval(() => go(1), 4000);
+};
+
+const stopAuto = () => {
+  if (autoTimer) {
+    clearInterval(autoTimer);
+    autoTimer = null;
+  }
+};
+
+const pauseAuto = stopAuto;
+const resumeAuto = startAuto;
+
+/* ─────────── 스크롤 ─────────── */
+
+let ticking = false;
+const handleScroll = () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    scrolledPast.value = window.scrollY > 120;
+    ticking = false;
+  });
+};
+
+/* ─────────── 라이프사이클 ─────────── */
+
+onMounted(() => {
+  requestAnimationFrame(() => (heroIn.value = true));
+
+  tryPlay();
+  window.addEventListener('click', tryPlay, { once: true });
+  window.addEventListener('touchstart', tryPlay, { once: true });
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  startAuto();
+
+  // 지표가 화면에 들어올 때 한 번만 카운트업
+  statsObserver = new IntersectionObserver(
+    (entries) => {
+      if (!entries[0].isIntersecting) return;
+      statsObserver.disconnect();
+
+      const reduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      stats.forEach((stat, i) => {
+        if (reduced) {
+          counts[i] = stat.value;
+          return;
+        }
+        cancels.push(
+          animateCount(stat.value, 1600 + i * 120, (v) => (counts[i] = v))
+        );
+      });
+    },
+    { threshold: 0.35 }
+  );
+
+  if (statsEl.value) statsObserver.observe(statsEl.value);
+});
+
+onBeforeUnmount(() => {
+  stopAuto();
+  statsObserver?.disconnect();
+  cancels.forEach((cancel) => cancel());
+  window.removeEventListener('click', tryPlay);
+  window.removeEventListener('touchstart', tryPlay);
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
-
-<style scoped>
-/* 애니메이션 정의 */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 애니메이션 클래스 */
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.6s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.6s ease-out forwards;
-}
-
-.animate-slide-in-up {
-  animation: slide-in-up 0.6s ease-out forwards;
-}
-
-/* 반응형 텍스트 */
-.logo-korean {
-  word-break: keep-all;
-  line-height: 1.2;
-}
-
-/* 호버 효과 */
-.program-card:hover,
-.product-card:hover {
-  transform: translateY(-8px);
-}
-
-.effect-card:hover {
-  transform: translateY(-4px);
-}
-
-.gallery-item:hover {
-  transform: scale(1.05);
-}
-
-/* 부드러운 전환 효과 */
-video {
-  transition: opacity 0.5s ease-in-out;
-}
-</style>

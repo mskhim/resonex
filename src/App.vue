@@ -1,46 +1,61 @@
 <template>
-  <div class="min-h-screen flex flex-col">
-    <Header />
+  <div class="min-h-screen flex flex-col bg-white">
+    <SiteHeader />
+
     <main class="flex-1">
-      <router-view />
+      <RouterView v-slot="{ Component }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </RouterView>
     </main>
-    <Footer />
+
+    <SiteFooter />
     <FloatingInquiry />
+    <BackToTop />
   </div>
 </template>
 
-<script>
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
+<script setup>
+import SiteHeader from './components/Header.vue';
+import SiteFooter from './components/Footer.vue';
 import FloatingInquiry from './components/FloatingInquiry.vue';
+import BackToTop from './components/BackToTop.vue';
+import { provide } from 'vue';
 
-export default {
-  components: {
-    Header,
-    Footer,
-    FloatingInquiry,
-  },
-  provide() {
-    return {
-      inquiryLink: 'http://pf.kakao.com/_RJVsn',
-    };
-  },
-};
+// 연락 수단은 여러 페이지에서 쓰이므로 한 곳에서 관리한다.
+provide('inquiryLink', 'http://pf.kakao.com/_RJVsn');
+provide('contact', {
+  kakao: 'http://pf.kakao.com/_RJVsn',
+  phone: '010-4429-2889',
+  email: 'cprh7677@naver.com',
+  instagram:
+    'https://www.instagram.com/resonancegym_wirye?igsh=cmVkZGg3a3dyMm8w&utm_source=qr',
+  address: '(13647) 경기도 성남시 수정구 창곡동 555, B1호',
+});
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap');
-
-.logo-korean {
-  font-family: 'Noto Serif KR', serif !important;
-  font-weight: 300 !important;
-  letter-spacing: -0.02em;
+/* 페이지 전환 — 짧고 가볍게 */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.28s var(--ease-out-quint),
+    transform 0.28s var(--ease-out-quint);
 }
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Square:wght@700&display=swap');
 
-.program-title {
-  font-family: 'Nanum Square', sans-serif !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.01em;
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
 }
 </style>

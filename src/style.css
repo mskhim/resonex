@@ -1,1 +1,460 @@
 @import 'tailwindcss';
+
+/* ============================================================
+   공명짐 디자인 시스템
+   ============================================================ */
+
+@theme {
+  /* 브랜드 컬러 — 진동/울림을 표현하는 딥 인디고 계열 */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+
+  /* 뉴트럴 — 잉크 계열 (배경/텍스트) */
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #020617;
+
+  /* 액센트 — 보조 강조용 */
+  --color-accent-400: #2dd4bf;
+  --color-accent-500: #14b8a6;
+  --color-accent-600: #0d9488;
+
+  /* 타이포 스케일 (clamp 기반 반응형) */
+  --text-display: clamp(2.25rem, 6vw, 4.5rem);
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-h1: clamp(1.875rem, 4.5vw, 3.25rem);
+  --text-h1--line-height: 1.15;
+  --text-h1--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.5rem, 3.2vw, 2.5rem);
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.025em;
+
+  --text-h3: clamp(1.25rem, 2.2vw, 1.625rem);
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.02em;
+
+  --text-lead: clamp(1rem, 1.4vw, 1.1875rem);
+  --text-lead--line-height: 1.7;
+
+  /* 이징 */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* 그림자 — 부드럽고 넓게 퍼지는 계층 */
+  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04),
+    0 4px 12px -2px rgb(15 23 42 / 0.06);
+  --shadow-card: 0 2px 4px rgb(15 23 42 / 0.04),
+    0 12px 28px -8px rgb(15 23 42 / 0.1);
+  --shadow-lift: 0 4px 8px rgb(15 23 42 / 0.05),
+    0 24px 48px -12px rgb(15 23 42 / 0.16);
+}
+
+/* ============================================================
+   폰트
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Pretendard:wght@300;400;500;600;700;800&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+:root {
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui,
+    'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-serif: 'Noto Serif KR', serif;
+
+  /* 헤더 높이 — 스크롤 오프셋 계산에 사용 */
+  --header-h: 64px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 112px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* 앵커 이동 시 고정 헤더에 가리지 않도록 */
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink-800);
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 모바일에서 가로 스크롤 방지 */
+  overflow-x: hidden;
+}
+
+/* 한글 줄바꿈을 단어 단위로 — 어색한 음절 분리 방지 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+span,
+button,
+a {
+  word-break: keep-all;
+}
+
+/* 기존 클래스 호환 유지 */
+.logo-korean {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.program-title {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* ============================================================
+   스크롤 리빌 애니메이션
+   data-reveal 속성을 가진 요소는 화면에 들어올 때 나타남.
+   useReveal 컴포저블이 .is-revealed 클래스를 붙여준다.
+   ============================================================ */
+
+[data-reveal] {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out-quint),
+    transform 0.8s var(--ease-out-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal='up'] {
+  transform: translate3d(0, 32px, 0);
+}
+[data-reveal='down'] {
+  transform: translate3d(0, -32px, 0);
+}
+[data-reveal='left'] {
+  transform: translate3d(-40px, 0, 0);
+}
+[data-reveal='right'] {
+  transform: translate3d(40px, 0, 0);
+}
+[data-reveal='scale'] {
+  transform: scale(0.94);
+}
+[data-reveal='fade'] {
+  transform: none;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
+/* ============================================================
+   재사용 유틸리티
+   ============================================================ */
+
+/* 섹션 컨테이너 — 모든 페이지 공통 가로 여백 */
+.container-page {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-wide {
+    padding-inline: 2rem;
+  }
+}
+
+/* 섹션 세로 여백 — 일관된 리듬 */
+.section-y {
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+
+.section-y-sm {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+/* 라벨 (섹션 상단 작은 태그) */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-600);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* 카드 기본형 */
+.card {
+  background: #fff;
+  border: 1px solid var(--color-ink-200);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.35s var(--ease-out-quint),
+    transform 0.35s var(--ease-out-quint),
+    border-color 0.35s var(--ease-out-quint);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--color-brand-200);
+}
+
+/* 버튼 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out-quint);
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--color-ink-900);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-brand-700);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-ink-900);
+  border: 1.5px solid var(--color-ink-300);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-ink-900);
+  background: var(--color-ink-900);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-ghost-light {
+  background: rgb(255 255 255 / 0.1);
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / 0.28);
+  backdrop-filter: blur(8px);
+}
+
+.btn-ghost-light:hover {
+  background: #fff;
+  color: var(--color-ink-900);
+  transform: translateY(-2px);
+}
+
+/* 링크에 밑줄이 자라나는 효과 */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out-quint);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* 이미지 줌 컨테이너 */
+.zoom-frame {
+  overflow: hidden;
+}
+
+.zoom-frame img {
+  transition: transform 0.7s var(--ease-out-quint);
+}
+
+.zoom-frame:hover img {
+  transform: scale(1.05);
+}
+
+/* 스크롤바 숨김 (가로 스크롤 영역용) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 얇은 스크롤바 */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-ink-300);
+  border-radius: 999px;
+}
+
+/* ============================================================
+   키프레임
+   ============================================================ */
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scroll-hint {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s var(--ease-out-quint) infinite;
+}
+
+.animate-scroll-hint {
+  animation: scroll-hint 2s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+/* ============================================================
+   접근성 — 모션 최소화 설정 존중
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

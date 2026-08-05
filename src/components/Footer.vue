@@ -1,156 +1,192 @@
 <template>
-  <!-- 푸터 -->
-  <footer class="bg-gray-800 text-white py-8 sm:py-10 md:py-12 mt-auto">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <footer class="mt-auto bg-ink-950 text-white">
+    <!-- 상단 CTA 밴드 -->
+    <div class="border-b border-white/10">
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+        class="container-page flex flex-col items-center gap-6 py-12 text-center md:flex-row md:justify-between md:py-14 md:text-left"
       >
-        <!-- 회사 정보 -->
-        <div class="text-center sm:text-left">
-          <h3
-            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
-          >
-            회사 정보
-          </h3>
-          <div
-            class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-300"
-          >
-            <p><span class="font-medium text-gray-200">회사명:</span> 공명짐</p>
-            <p><span class="font-medium text-gray-200">대표자:</span> 고종관</p>
-            <p>
-              <span class="font-medium text-gray-200">사업자등록번호:</span>
-              459-23-01817
-            </p>
-            <p>
-              <span class="font-medium text-gray-200">개인정보책임자:</span>
-              고종관
-            </p>
-          </div>
+        <div>
+          <p class="logo-korean text-2xl text-white md:text-3xl">
+            함께 울리는, 더 큰 울림
+          </p>
+          <p class="mt-2 text-sm text-white/55">
+            상담은 언제나 무료입니다. 편하게 문의해주세요.
+          </p>
         </div>
 
-        <!-- 연락처 정보 -->
-        <div class="text-center sm:text-left">
-          <h3
-            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a
+            :href="contact.kakao"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn bg-[#FEE500] text-ink-900 hover:-translate-y-0.5 hover:brightness-105"
           >
-            연락처
-          </h3>
-          <div
-            class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-300"
-          >
-            <p>
-              <span class="font-medium text-gray-200">전화:</span> 010-4429-2889
-            </p>
-            <p>
-              <span class="font-medium text-gray-200">이메일:</span>
-              cprh7677@naver.com
-            </p>
-            <p class="leading-relaxed">
-              <span class="font-medium text-gray-200">주소:</span> (13647)
-              경기도 성남시 수정구 창곡동 555, B1호
-            </p>
-          </div>
+            <i class="fas fa-comment" />
+            카카오톡 상담
+          </a>
+          <a :href="`tel:${contact.phone}`" class="btn btn-ghost-light">
+            <i class="fas fa-phone" />
+            {{ contact.phone }}
+          </a>
         </div>
+      </div>
+    </div>
 
-        <!-- 계좌 정보 -->
-        <div class="text-center sm:text-left">
-          <h3
-            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
-          >
-            입금 계좌
-          </h3>
-          <div
-            class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-300"
-          >
-            <p><span class="font-medium text-gray-200">국민은행</span></p>
-            <p class="font-mono text-sm sm:text-base text-blue-300">
-              229101-04-339256
-            </p>
-            <p>예금주: 고종관</p>
-          </div>
-        </div>
+    <!-- 정보 영역 -->
+    <div class="container-page py-12 md:py-16">
+      <div class="grid gap-10 md:grid-cols-12 md:gap-8">
+        <!-- 브랜드 -->
+        <div class="md:col-span-4">
+          <img
+            src="../img/mainLogo.png"
+            alt="공명짐"
+            class="h-9 w-auto object-contain brightness-0 invert"
+          />
+          <p class="mt-5 max-w-xs text-sm leading-relaxed text-white/50">
+            파워플레이트를 중심으로 한 통합 운동 전문 센터.
+            <br />
+            진동 운동으로 몸과 마음을 함께 깨웁니다.
+          </p>
 
-        <!-- 소셜 미디어 -->
-        <div class="text-center sm:text-left">
-          <h3
-            class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white"
-          >
-            소셜 미디어
-          </h3>
-
-          <!-- 소셜 아이콘들 -->
-          <div
-            class="flex justify-center sm:justify-start space-x-3 sm:space-x-4 mb-4"
-          >
-            <!-- 인스타그램 -->
+          <div class="mt-6 flex gap-3">
             <a
-              href="https://www.instagram.com/resonancegym_wirye?igsh=cmVkZGg3a3dyMm8w&utm_source=qr"
+              :href="contact.instagram"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 rounded-xl flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-300"
               aria-label="인스타그램"
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/8 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gradient-to-br hover:from-purple-500 hover:via-pink-500 hover:to-orange-400 hover:text-white"
             >
-              <i class="fab fa-instagram text-white text-lg sm:text-xl"></i>
+              <i class="fab fa-instagram text-lg" />
             </a>
-
-            <!-- 카카오톡 -->
             <a
-              href="http://pf.kakao.com/_RJVsn"
+              :href="contact.kakao"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-400 rounded-xl flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-300"
               aria-label="카카오톡"
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/8 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FEE500] hover:text-ink-900"
             >
-              <i class="fas fa-comment-dots text-black text-lg sm:text-xl"></i>
+              <i class="fas fa-comment-dots text-lg" />
+            </a>
+            <a
+              :href="`mailto:${contact.email}`"
+              aria-label="이메일"
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/8 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-ink-900"
+            >
+              <i class="fas fa-envelope text-lg" />
             </a>
           </div>
+        </div>
 
-          <!-- 연락처 빠른 링크 -->
-          <div class="space-y-2">
-            <a
-              href="tel:010-4429-2889"
-              class="flex items-center justify-center sm:justify-start text-xs sm:text-sm text-gray-300 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-gray-700"
+        <!-- 사이트맵 -->
+        <nav class="grid grid-cols-2 gap-8 md:col-span-5 md:grid-cols-3">
+          <div v-for="col in sitemap" :key="col.title">
+            <h3
+              class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-white/40"
             >
-              <i
-                class="fas fa-phone w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0"
-              ></i>
-              <span class="font-medium">전화 걸기</span>
-            </a>
-            <a
-              href="mailto:cprh7677@naver.com"
-              class="flex items-center justify-center sm:justify-start text-xs sm:text-sm text-gray-300 hover:text-white transition-colors duration-200 p-2 rounded-lg hover:bg-gray-700"
-            >
-              <i
-                class="fas fa-envelope w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0"
-              ></i>
-              <span class="font-medium">이메일 보내기</span>
-            </a>
+              {{ col.title }}
+            </h3>
+            <ul class="space-y-2.5">
+              <li v-for="link in col.links" :key="link.to">
+                <RouterLink
+                  :to="link.to"
+                  class="text-sm text-white/65 transition-colors hover:text-white"
+                >
+                  {{ link.label }}
+                </RouterLink>
+              </li>
+            </ul>
           </div>
+        </nav>
+
+        <!-- 연락처 / 사업자 정보 -->
+        <div class="md:col-span-3">
+          <h3
+            class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-white/40"
+          >
+            Contact
+          </h3>
+          <ul class="space-y-3 text-sm text-white/65">
+            <li class="flex gap-3">
+              <i class="fas fa-location-dot mt-1 w-4 shrink-0 text-white/35" />
+              <span class="leading-relaxed">{{ contact.address }}</span>
+            </li>
+            <li class="flex gap-3">
+              <i class="fas fa-phone mt-1 w-4 shrink-0 text-white/35" />
+              <a
+                :href="`tel:${contact.phone}`"
+                class="transition-colors hover:text-white"
+              >
+                {{ contact.phone }}
+              </a>
+            </li>
+            <li class="flex gap-3">
+              <i class="fas fa-envelope mt-1 w-4 shrink-0 text-white/35" />
+              <a
+                :href="`mailto:${contact.email}`"
+                class="break-all transition-colors hover:text-white"
+              >
+                {{ contact.email }}
+              </a>
+            </li>
+            <li class="flex gap-3">
+              <i class="fas fa-clock mt-1 w-4 shrink-0 text-white/35" />
+              <span class="leading-relaxed">
+                평일 06:00–23:00<br />
+                주말 08:00–20:00
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <!-- 구분선 및 카피라이트 -->
-      <div class="border-t border-gray-700 mt-6 sm:mt-8 pt-4 sm:pt-6">
-        <div
-          class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0"
-        >
-          <p class="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
-            &copy; {{ currentYear }} 공명짐. All rights reserved.
-          </p>
+      <!-- 사업자 정보 (작게, 접근 가능하게) -->
+      <div
+        class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs text-white/35 md:flex-row md:items-center md:justify-between"
+      >
+        <div class="flex flex-wrap gap-x-5 gap-y-1.5">
+          <span>공명짐</span>
+          <span>대표 고종관</span>
+          <span>사업자등록번호 459-23-01817</span>
+          <span>개인정보책임자 고종관</span>
+          <span>국민은행 229101-04-339256</span>
         </div>
+        <p class="shrink-0">&copy; {{ year }} 공명짐. All rights reserved.</p>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
-const currentYear = computed(() => new Date().getFullYear());
+const contact = inject('contact');
+const year = computed(() => new Date().getFullYear());
+
+const sitemap = [
+  {
+    title: 'About',
+    links: [
+      { to: '/about', label: '회사 소개' },
+      { to: '/location', label: '오시는 길' },
+    ],
+  },
+  {
+    title: 'Products',
+    links: [
+      { to: '/products/powerplate', label: '파워플레이트' },
+      { to: '/products/oxygen', label: '산소캡슐' },
+      { to: '/products/align-pilates', label: '얼라인 필라테스' },
+      { to: '/products/ace-body', label: '타워풀리' },
+    ],
+  },
+  {
+    title: 'Support',
+    links: [
+      { to: '/academy', label: '교육 아카데미' },
+      { to: '/franchise', label: '체인점 문의' },
+      { to: '/video-inquiry', label: '영상 제작 문의' },
+      { to: '/faq', label: '자주 묻는 질문' },
+    ],
+  },
+];
 </script>
-
-<style scoped>
-/* FontAwesome CDN을 HTML head에 추가해야 합니다:
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-*/
-</style>

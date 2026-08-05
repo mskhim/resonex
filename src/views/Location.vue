@@ -1,288 +1,202 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- 헤로 섹션 -->
-    <section class="relative bg-slate-900 text-white">
-      <div class="relative max-w-7xl mx-auto">
-        <!-- 대형 이미지 with 오버레이 -->
-        <div class="mb-6 relative">
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80"
-            alt="공명짐 위치"
-            class="w-full h-64 md:h-80 object-cover shadow-2xl"
-          />
-          <!-- 어두운 오버레이 -->
-          <div class="absolute inset-0 bg-black/60"></div>
+  <div>
+    <PageHero
+      image="/main/mainImg2.jpg"
+      eyebrow="Location"
+      title="오시는 길"
+      subtitle="8호선 남위례역에서 도보 5분 거리에 있습니다."
+      compact
+    />
 
-          <!-- 텍스트 내용 -->
-          <div class="absolute inset-0 flex items-center justify-center z-10">
-            <div class="text-center max-w-4xl mx-auto px-4 mt-10 md:mt-30">
-              <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
-                오시는 길
-              </h1>
+    <!-- ═══════════ 지도 & 정보 ═══════════ -->
+    <section class="section-y bg-white">
+      <div class="container-page">
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <!-- 지도 -->
+          <div data-reveal="up" class="lg:col-span-7">
+            <div
+              class="overflow-hidden rounded-2xl border border-ink-200 bg-ink-100 shadow-card"
+            >
+              <div id="map" class="h-[360px] w-full md:h-[520px]" />
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 지도 및 정보 섹션 -->
-    <section class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-4">
-        <div class="grid lg:grid-cols-2 gap-12 items-start">
-          <!-- 지도 영역 -->
-          <div
-            ref="mapSection"
-            :class="[
-              'order-2 lg:order-1 transition-all duration-1000 ease-out',
-              isVisible.mapSection
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-          >
-            <div class="bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
+            <!-- 교통 안내 -->
+            <div class="mt-5 grid gap-3 sm:grid-cols-2">
               <div
-                id="map"
-                class="w-full h-96 md:h-[500px] cursor-pointer"
-              ></div>
-            </div>
-
-            <!-- 지도 하단 정보 -->
-            <div class="mt-6 p-6 bg-gray-50 rounded-xl">
-              <h3 class="text-lg font-bold text-gray-900 mb-4">교통 안내</h3>
-              <div class="space-y-3">
-                <div class="flex items-start gap-3">
-                  <i class="fas fa-subway text-blue-600 mt-1"></i>
-                  <div>
-                    <div class="font-medium text-gray-900">지하철</div>
-                    <div class="text-sm text-gray-600">
-                      8호선 남위례역 3번 출구에서 도보 5분
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3"></div>
-                <div class="flex items-start gap-3">
-                  <i class="fas fa-car text-gray-600 mt-1"></i>
-                  <div>
-                    <div class="font-medium text-gray-900">주차</div>
-                    <div class="text-sm text-gray-600">
-                      건물 앞 공영주차장 이용 가능
-                    </div>
-                  </div>
+                v-for="transit in transits"
+                :key="transit.title"
+                class="flex gap-3.5 rounded-xl border border-ink-200 bg-ink-50 p-4"
+              >
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-brand-600 shadow-soft"
+                >
+                  <i :class="transit.icon" class="text-sm" />
+                </span>
+                <div>
+                  <p class="text-sm font-semibold text-ink-900">
+                    {{ transit.title }}
+                  </p>
+                  <p class="mt-0.5 text-sm text-ink-500">
+                    {{ transit.description }}
+                  </p>
                 </div>
               </div>
             </div>
+
+            <a
+              :href="naverMapUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline mt-4 w-full"
+            >
+              <i class="fas fa-map-location-dot" />
+              네이버 지도에서 크게 보기
+            </a>
           </div>
 
-          <!-- 정보 영역 -->
-          <div
-            ref="infoSection"
-            :class="[
-              'order-1 lg:order-2 transition-all duration-1000 ease-out delay-300',
-              isVisible.infoSection
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-          >
-            <div class="sticky top-8">
-              <div class="mb-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  <span class="text-slate-700">위치정보</span>
-                </h2>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                  8호선 남위례역과 가까운 위치에 있습니다.<br />
-                </p>
-              </div>
+          <!-- 정보 카드 -->
+          <div data-reveal="right" class="lg:col-span-5">
+            <div class="lg:sticky lg:top-32">
+              <p class="eyebrow">Information</p>
+              <h2 class="program-title mt-4 text-h2 text-ink-900">위치 정보</h2>
 
-              <!-- 연락처 정보 카드들 -->
-              <div class="space-y-6">
+              <div class="mt-8 space-y-3">
                 <!-- 주소 -->
-                <div
-                  ref="addressCard"
-                  :class="[
-                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-500',
-                    isVisible.addressCard
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 translate-x-4',
-                  ]"
-                >
-                  <div class="flex items-start gap-4">
-                    <div
-                      class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                <div class="card p-5">
+                  <div class="flex gap-4">
+                    <span
+                      class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
                     >
-                      <i
-                        class="fas fa-map-marker-alt text-xl text-slate-700"
-                      ></i>
-                    </div>
-                    <div>
-                      <h3 class="font-bold text-gray-900 mb-2">주소</h3>
-                      <p class="text-gray-600 leading-relaxed">
-                        (13647) 경기도 성남시 수정구<br />
-                        창곡동 555, B1호
+                      <i class="fas fa-location-dot" />
+                    </span>
+                    <div class="min-w-0 flex-1">
+                      <h3 class="font-bold text-ink-900">주소</h3>
+                      <p class="mt-1.5 text-sm leading-relaxed text-ink-500">
+                        (13647) 경기도 성남시 수정구<br />창곡동 555, B1호
                       </p>
                       <button
+                        type="button"
                         @click="copyAddress"
-                        class="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                        class="mt-3 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                        :class="copied ? 'text-accent-600' : 'text-brand-600 hover:text-brand-700'"
                       >
-                        <i class="fas fa-copy mr-1"></i>주소 복사
+                        <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" class="text-xs" />
+                        {{ copied ? '복사되었습니다' : '주소 복사' }}
                       </button>
                     </div>
                   </div>
                 </div>
 
-                <!-- 전화번호 -->
-                <div
-                  ref="phoneCard"
-                  :class="[
-                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-700',
-                    isVisible.phoneCard
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 translate-x-4',
-                  ]"
-                >
-                  <div class="flex items-start gap-4">
-                    <div
-                      class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                <!-- 전화 -->
+                <a :href="`tel:${contact.phone}`" class="card card-hover block p-5">
+                  <div class="flex gap-4">
+                    <span
+                      class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
                     >
-                      <i class="fas fa-phone text-xl text-slate-700"></i>
-                    </div>
+                      <i class="fas fa-phone" />
+                    </span>
                     <div>
-                      <h3 class="font-bold text-gray-900 mb-2">전화번호</h3>
-                      <p class="text-gray-600">
-                        <a
-                          href="tel:02-715-0607"
-                          class="hover:text-blue-600 transition-colors"
-                        >
-                          010-4429-2889
-                        </a>
+                      <h3 class="font-bold text-ink-900">전화번호</h3>
+                      <p class="mt-1.5 text-sm text-ink-500">
+                        {{ contact.phone }}
                       </p>
                     </div>
                   </div>
-                </div>
+                </a>
 
                 <!-- 운영시간 -->
-                <div
-                  ref="hoursCard"
-                  :class="[
-                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-900',
-                    isVisible.hoursCard
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 translate-x-4',
-                  ]"
-                >
-                  <div class="flex items-start gap-4">
-                    <div
-                      class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                <div class="card p-5">
+                  <div class="flex gap-4">
+                    <span
+                      class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
                     >
-                      <i class="fas fa-clock text-xl text-slate-700"></i>
-                    </div>
-                    <div class="w-full">
-                      <h3 class="font-bold text-gray-900 mb-3">운영시간</h3>
-                      <div class="space-y-2 text-sm">
-                        <div class="flex justify-between">
-                          <span class="text-gray-600">월 - 금</span>
-                          <span class="font-medium text-gray-900"
-                            >06:00 - 23:00</span
-                          >
+                      <i class="fas fa-clock" />
+                    </span>
+                    <div class="min-w-0 flex-1">
+                      <h3 class="font-bold text-ink-900">운영시간</h3>
+                      <dl class="mt-3 space-y-2 text-sm">
+                        <div class="flex justify-between gap-4">
+                          <dt class="text-ink-500">월 – 금</dt>
+                          <dd class="font-medium text-ink-900">06:00 – 23:00</dd>
                         </div>
-                        <div class="flex justify-between">
-                          <span class="text-gray-600">토 - 일</span>
-                          <span class="font-medium text-gray-900"
-                            >08:00 - 20:00</span
-                          >
+                        <div class="flex justify-between gap-4">
+                          <dt class="text-ink-500">토 – 일</dt>
+                          <dd class="font-medium text-ink-900">08:00 – 20:00</dd>
                         </div>
                         <div
-                          class="flex justify-between pt-2 border-t border-gray-200"
+                          class="flex justify-between gap-4 border-t border-ink-100 pt-2"
                         >
-                          <span class="text-gray-600">연중무휴</span>
-                          <span class="font-medium text-red-600"
-                            >설 명절 정상영업</span
-                          >
+                          <dt class="text-ink-500">연중무휴</dt>
+                          <dd class="font-medium text-accent-600">
+                            설 명절 정상영업
+                          </dd>
                         </div>
-                      </div>
+                      </dl>
                     </div>
                   </div>
                 </div>
 
                 <!-- 이메일 -->
-                <div
-                  ref="emailCard"
-                  :class="[
-                    'bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-700 ease-out delay-1000',
-                    isVisible.emailCard
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 translate-x-4',
-                  ]"
+                <a
+                  :href="`mailto:${contact.email}`"
+                  class="card card-hover block p-5"
                 >
-                  <div class="flex items-start gap-4">
-                    <div
-                      class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                  <div class="flex gap-4">
+                    <span
+                      class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
                     >
-                      <i class="fas fa-envelope text-xl text-slate-700"></i>
-                    </div>
-                    <div>
-                      <h3 class="font-bold text-gray-900 mb-2">이메일</h3>
-                      <p class="text-gray-600">
-                        <a
-                          href="mailto:cprh7677@naver.com"
-                          class="hover:text-blue-600 transition-colors"
-                        >
-                          cprh7677@naver.com
-                        </a>
+                      <i class="fas fa-envelope" />
+                    </span>
+                    <div class="min-w-0">
+                      <h3 class="font-bold text-ink-900">이메일</h3>
+                      <p class="mt-1.5 break-all text-sm text-ink-500">
+                        {{ contact.email }}
                       </p>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
+
+              <a
+                :href="contact.kakao"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary mt-5 w-full"
+              >
+                <i class="fas fa-comment" />
+                방문 상담 예약하기
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 추가 정보 섹션 -->
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-4xl mx-auto px-4 text-center">
+    <!-- ═══════════ 방문 전 안내 ═══════════ -->
+    <section class="section-y-sm bg-ink-50 pb-20 md:pb-24">
+      <div class="container-page">
         <h2
-          ref="tipsTitle"
-          :class="[
-            'text-2xl md:text-3xl font-bold text-gray-900 mb-6 transition-all duration-1000 ease-out',
-            isVisible.tipsTitle
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-8',
-          ]"
+          data-reveal="up"
+          class="program-title mb-10 text-center text-h3 text-ink-900"
         >
           방문 전 알아두세요
         </h2>
-        <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
           <div
-            ref="tip1"
-            :class="[
-              'bg-white p-6 rounded-xl shadow-sm transition-all duration-700 ease-out delay-300',
-              isVisible.tip1
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
+            v-for="(tip, i) in tips"
+            :key="tip.title"
+            data-reveal="up"
+            :data-reveal-delay="i * 110"
+            class="card card-hover p-6 text-center"
           >
-            <i class="fas fa-tshirt text-3xl text-slate-700 mb-4"></i>
-            <h3 class="font-bold text-gray-900 mb-2">운동복 준비</h3>
-            <p class="text-sm text-gray-600">
-              편안한 운동복과 운동화를 준비해주세요
-            </p>
-          </div>
-          <div
-            ref="tip2"
-            :class="[
-              'bg-white p-6 rounded-xl shadow-sm transition-all duration-700 ease-out delay-500',
-              isVisible.tip2
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8',
-            ]"
-          >
-            <i class="fas fa-bottle-water text-3xl text-slate-700 mb-4"></i>
-            <h3 class="font-bold text-gray-900 mb-2">수건/물병</h3>
-            <p class="text-sm text-gray-600">
-              개인 수건과 물병을 지참하시면 좋습니다
-            </p>
+            <span
+              class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand-600 shadow-soft"
+            >
+              <i :class="tip.icon" class="text-lg" />
+            </span>
+            <h3 class="font-bold text-ink-900">{{ tip.title }}</h3>
+            <p class="mt-2 text-sm text-ink-500">{{ tip.description }}</p>
           </div>
         </div>
       </div>
@@ -290,326 +204,180 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Location',
-  data() {
-    return {
-      map: null,
-      marker: null,
-      infoWindow: null,
-      // 실제 공명짐 위치 좌표 (위도: 37.4669221, 경도: 127.1390431)
-      gymPosition: {
-        lat: 37.4669221,
-        lng: 127.1390431,
-      },
-      // 네이버 지도 URL
-      naverMapUrl:
-        'https://map.naver.com/p/entry/place/1058817891?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.1390431&lat=37.4669221',
+<script setup>
+import { ref, inject, onMounted, onBeforeUnmount } from 'vue';
+import PageHero from '../components/PageHero.vue';
+import { useReveal } from '../composables/useReveal';
 
-      // 애니메이션 상태 관리
-      isVisible: {
-        mapSection: false,
-        infoSection: false,
-        addressCard: false,
-        phoneCard: false,
-        hoursCard: false,
-        emailCard: false,
-        tipsTitle: false,
-        tip1: false,
-        tip2: false,
-      },
-      observer: null,
-    };
-  },
-  mounted() {
-    window.scrollTo(0, 0);
-    this.setupMap();
-    this.setupScrollAnimation();
-  },
-  beforeUnmount() {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-  },
-  methods: {
-    setupScrollAnimation() {
-      // Intersection Observer 설정
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const target = entry.target;
+useReveal();
 
-              // ref 이름에 따라 isVisible 상태 업데이트
-              if (target === this.$refs.mapSection) {
-                this.isVisible.mapSection = true;
-              } else if (target === this.$refs.infoSection) {
-                this.isVisible.infoSection = true;
-              } else if (target === this.$refs.addressCard) {
-                this.isVisible.addressCard = true;
-              } else if (target === this.$refs.phoneCard) {
-                this.isVisible.phoneCard = true;
-              } else if (target === this.$refs.hoursCard) {
-                this.isVisible.hoursCard = true;
-              } else if (target === this.$refs.emailCard) {
-                this.isVisible.emailCard = true;
-              } else if (target === this.$refs.tipsTitle) {
-                this.isVisible.tipsTitle = true;
-              } else if (target === this.$refs.tip1) {
-                this.isVisible.tip1 = true;
-              } else if (target === this.$refs.tip2) {
-                this.isVisible.tip2 = true;
-              }
-            }
-          });
-        },
-        {
-          threshold: 0.1, // 10%가 보이면 트리거
-          rootMargin: '0px 0px -50px 0px', // 하단 50px 전에 트리거
-        }
-      );
+const contact = inject('contact');
+const copied = ref(false);
 
-      // 다음 틱에서 observer 등록
-      this.$nextTick(() => {
-        const elementsToObserve = [
-          this.$refs.mapSection,
-          this.$refs.infoSection,
-          this.$refs.addressCard,
-          this.$refs.phoneCard,
-          this.$refs.hoursCard,
-          this.$refs.emailCard,
-          this.$refs.tipsTitle,
-          this.$refs.tip1,
-          this.$refs.tip2,
-        ];
+const GYM = { lat: 37.4669221, lng: 127.1390431 };
+const ADDRESS = '(13647) 경기도 성남시 수정구 창곡동 555, B1호';
+const naverMapUrl =
+  'https://map.naver.com/p/entry/place/1058817891?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.1390431&lat=37.4669221';
 
-        elementsToObserve.forEach((element) => {
-          if (element) {
-            this.observer.observe(element);
-          }
-        });
-      });
-    },
+let copyTimer = null;
 
-    setupMap() {
-      // 기존 스크립트 제거
-      const existingScripts = document.querySelectorAll(
-        'script[src*="openapi.map.naver.com"]'
-      );
-      existingScripts.forEach((script) => script.remove());
+const copyAddress = async () => {
+  try {
+    await navigator.clipboard.writeText(ADDRESS);
+  } catch {
+    // 클립보드 API를 못 쓰는 환경(비 HTTPS 등) 대비
+    const el = document.createElement('textarea');
+    el.value = ADDRESS;
+    el.style.position = 'fixed';
+    el.style.opacity = '0';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  }
 
-      // 네이버 객체 초기화
-      if (window.naver) {
-        delete window.naver;
-      }
-
-      const clientId = import.meta.env.VITE_APP_NAVER_MAPS_CLIENT_ID;
-      const script = document.createElement('script');
-      script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}`;
-
-      script.onload = () => {
-        setTimeout(() => {
-          this.renderMap();
-        }, 800);
-      };
-
-      script.onerror = () => {
-        this.showFallback();
-      };
-
-      document.head.appendChild(script);
-    },
-
-    renderMap() {
-      try {
-        if (!window.naver?.maps) {
-          this.showFallback();
-          return;
-        }
-
-        const mapElement = document.getElementById('map');
-        if (!mapElement) {
-          return;
-        }
-
-        // 실제 공명짐 위치 좌표 사용
-        const position = new window.naver.maps.LatLng(
-          this.gymPosition.lat,
-          this.gymPosition.lng
-        );
-
-        this.map = new window.naver.maps.Map('map', {
-          center: position,
-          zoom: 17,
-          mapTypeControl: false,
-          zoomControl: false,
-          scaleControl: false,
-          logoControl: false,
-          mapDataControl: false,
-        });
-
-        // 마커 생성 및 클릭 이벤트 추가
-        this.marker = new window.naver.maps.Marker({
-          position: position,
-          map: this.map,
-          title: '공명짐 - 클릭하여 네이버 지도에서 보기',
-          icon: {
-            url:
-              'data:image/svg+xml;base64,' +
-              btoa(`
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#dc2626">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-              </svg>
-            `),
-            scaledSize: new window.naver.maps.Size(40, 40),
-            anchor: new window.naver.maps.Point(20, 40),
-          },
-        });
-
-        // 마커 클릭 이벤트 - 네이버 지도 팝업
-        window.naver.maps.Event.addListener(this.marker, 'click', () => {
-          this.openNaverMap();
-        });
-
-        // 지도 클릭 이벤트도 추가
-        window.naver.maps.Event.addListener(this.map, 'click', () => {
-          this.openNaverMap();
-        });
-
-        // 정보창 생성 - 기본적으로 표시
-        this.infoWindow = new window.naver.maps.InfoWindow({
-          content: `
-            <div style="padding: 15px; min-width: 200px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-              <h3 style="margin: 0 0 8px 0; color: #1f2937; font-weight: bold; font-size: 16px;">공명짐</h3>
-              <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 13px; line-height: 1.4;">경기도 성남시 수정구 창곡동 555, B1호</p>
-              <button 
-                onclick="window.open('${this.naverMapUrl}', '_blank')" 
-                style="background: #1e40af; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; transition: background-color 0.2s;"
-                onmouseover="this.style.background='#1d4ed8'"
-                onmouseout="this.style.background='#1e40af'"
-              >
-                네이버 지도에서 보기
-              </button>
-            </div>
-          `,
-          maxWidth: 280,
-          backgroundColor: '#fff',
-          borderColor: '#e5e7eb',
-          borderWidth: 1,
-          anchorSize: new window.naver.maps.Size(10, 10),
-          pixelOffset: new window.naver.maps.Point(0, -10),
-        });
-
-        // 정보창을 기본적으로 열어두기
-        this.infoWindow.open(this.map, this.marker);
-
-        // 마커 hover 이벤트는 유지
-        window.naver.maps.Event.addListener(this.marker, 'mouseover', () => {
-          if (!this.infoWindow.getMap()) {
-            this.infoWindow.open(this.map, this.marker);
-          }
-        });
-      } catch (error) {
-        this.showFallback();
-      }
-    },
-
-    openNaverMap() {
-      window.open(this.naverMapUrl, '_blank');
-    },
-
-    showFallback() {
-      const mapContainer = document.getElementById('map');
-      if (mapContainer) {
-        mapContainer.innerHTML = `
-          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 1rem; text-align: center; padding: 2rem;">
-            <i class="fas fa-map-marker-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-            <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">공명짐 위치</h3>
-            <div style="font-size: 1rem; line-height: 1.6;">
-              <p style="margin-bottom: 0.5rem;"><strong>주소:</strong> 경기도 성남시 수정구 창곡동 555, B1호</p>
-              <p style="margin-bottom: 0.5rem;"><strong>전화:</strong> 02-715-0607</p>
-              <p style="margin-bottom: 1rem;"><strong>교통:</strong> 8호선 남위례역 3번 출구 도보 5분</p>
-              <button 
-                onclick="window.open('${this.naverMapUrl}', '_blank')"
-                style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-size: 16px;"
-              >
-                네이버 지도에서 보기
-              </button>
-            </div>
-          </div>
-        `;
-      }
-    },
-
-    copyAddress() {
-      const address = '(13647) 경기도 성남시 수정구 창곡동 555, B1호';
-      navigator.clipboard
-        .writeText(address)
-        .then(() => {
-          alert('주소가 복사되었습니다!');
-        })
-        .catch(() => {
-          const textArea = document.createElement('textarea');
-          textArea.value = address;
-          document.body.appendChild(textArea);
-          textArea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textArea);
-          alert('주소가 복사되었습니다!');
-        });
-    },
-  },
+  copied.value = true;
+  clearTimeout(copyTimer);
+  copyTimer = setTimeout(() => (copied.value = false), 2000);
 };
+
+/* ─────────── 네이버 지도 ─────────── */
+
+const renderMap = () => {
+  const el = document.getElementById('map');
+  if (!el || !window.naver?.maps) return showFallback();
+
+  const position = new window.naver.maps.LatLng(GYM.lat, GYM.lng);
+
+  const map = new window.naver.maps.Map('map', {
+    center: position,
+    zoom: 17,
+    mapTypeControl: false,
+    zoomControl: true,
+    zoomControlOptions: { position: window.naver.maps.Position.RIGHT_BOTTOM },
+    scaleControl: false,
+    logoControl: false,
+    mapDataControl: false,
+  });
+
+  const marker = new window.naver.maps.Marker({
+    position,
+    map,
+    title: '공명짐',
+    icon: {
+      content: `<div style="position:relative;width:40px;height:48px">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 24 30" fill="#4f46e5">
+          <path d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"/>
+          <circle cx="12" cy="10" r="4" fill="#fff"/>
+        </svg>
+      </div>`,
+      anchor: new window.naver.maps.Point(20, 48),
+    },
+  });
+
+  const infoWindow = new window.naver.maps.InfoWindow({
+    content: `
+      <div style="padding:14px 16px;min-width:200px;text-align:center;font-family:Pretendard,-apple-system,sans-serif">
+        <h3 style="margin:0 0 6px;color:#0f172a;font-weight:700;font-size:15px">공명짐</h3>
+        <p style="margin:0 0 10px;color:#64748b;font-size:12px;line-height:1.5">경기도 성남시 수정구<br/>창곡동 555, B1호</p>
+        <a href="${naverMapUrl}" target="_blank" rel="noopener"
+           style="display:inline-block;background:#4f46e5;color:#fff;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none">
+          네이버 지도에서 보기
+        </a>
+      </div>`,
+    maxWidth: 260,
+    backgroundColor: '#fff',
+    borderColor: '#e2e8f0',
+    borderWidth: 1,
+    anchorSize: new window.naver.maps.Size(10, 10),
+    pixelOffset: new window.naver.maps.Point(0, -8),
+  });
+
+  infoWindow.open(map, marker);
+
+  window.naver.maps.Event.addListener(marker, 'click', () => {
+    infoWindow.getMap()
+      ? infoWindow.close()
+      : infoWindow.open(map, marker);
+  });
+};
+
+const showFallback = () => {
+  const el = document.getElementById('map');
+  if (!el) return;
+
+  el.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:#0f172a;color:#fff;text-align:center;padding:2rem;gap:.75rem">
+      <div style="font-size:2rem">📍</div>
+      <h3 style="font-size:1.125rem;font-weight:700">공명짐</h3>
+      <p style="font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.6">${ADDRESS}<br/>8호선 남위례역 3번 출구 도보 5분</p>
+      <a href="${naverMapUrl}" target="_blank" rel="noopener"
+         style="margin-top:.5rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:.7rem 1.4rem;border-radius:.75rem;font-size:.875rem;font-weight:600;text-decoration:none">
+        네이버 지도에서 보기
+      </a>
+    </div>`;
+};
+
+onMounted(() => {
+  // index.html에서 이미 로드되어 있으면 바로 렌더링
+  if (window.naver?.maps) {
+    renderMap();
+    return;
+  }
+
+  const clientId = import.meta.env.VITE_APP_NAVER_MAPS_CLIENT_ID;
+  const SCRIPT_ID = 'naver-maps-sdk';
+
+  const existing = document.getElementById(SCRIPT_ID);
+  if (existing) {
+    existing.addEventListener('load', renderMap, { once: true });
+    return;
+  }
+
+  const script = document.createElement('script');
+  script.id = SCRIPT_ID;
+  script.src = `https://openapi.map.naver.com/openapi/v3/maps.js${
+    clientId ? `?ncpClientId=${clientId}` : ''
+  }`;
+  script.onload = renderMap;
+  script.onerror = showFallback;
+  document.head.appendChild(script);
+});
+
+onBeforeUnmount(() => clearTimeout(copyTimer));
+
+/* ─────────── 콘텐츠 ─────────── */
+
+const transits = [
+  {
+    icon: 'fas fa-train-subway',
+    title: '지하철',
+    description: '8호선 남위례역 3번 출구 도보 5분',
+  },
+  {
+    icon: 'fas fa-car',
+    title: '주차',
+    description: '건물 앞 공영주차장 이용 가능',
+  },
+];
+
+const tips = [
+  {
+    icon: 'fas fa-shirt',
+    title: '운동복 준비',
+    description: '편안한 운동복과 운동화를 준비해주세요',
+  },
+  {
+    icon: 'fas fa-bottle-water',
+    title: '수건 / 물병',
+    description: '개인 수건과 물병을 지참하시면 좋습니다',
+  },
+];
 </script>
 
 <style scoped>
 #map {
-  border-radius: 1rem;
-  transition: all 0.3s ease;
   position: relative;
   z-index: 1;
-}
-
-#map:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-/* 네이버 지도 컨트롤 요소들의 z-index 강제 조정 */
-#map .nmap_control_panel,
-#map .nmap-control-scale,
-#map .nmap-logo,
-#map .nmap-control-maptype,
-#map .nmap-control-zoom {
-  z-index: 10 !important;
-}
-
-/* 애니메이션 최적화 - GPU 가속 활용 */
-.transition-all {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-
-/* 모바일 최적화 */
-@media (max-width: 768px) {
-  .sticky {
-    position: relative !important;
-    top: auto !important;
-  }
-
-  /* 모바일에서 애니메이션 부드럽게 */
-  .transition-all {
-    transition-duration: 0.8s !important;
-  }
-}
-
-/* 저성능 디바이스 대응 */
-@media (prefers-reduced-motion: reduce) {
-  .transition-all {
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }
 </style>
