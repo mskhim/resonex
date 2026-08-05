@@ -220,6 +220,7 @@ const naverMapUrl =
   'https://map.naver.com/p/entry/place/1058817891?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.1390431&lat=37.4669221';
 
 let copyTimer = null;
+let resizeObserver = null;
 
 const copyAddress = async () => {
   try {
@@ -318,33 +319,85 @@ const showFallback = () => {
     </div>`;
 };
 
-onMounted(() => {
-  // index.html에서 이미 로드되어 있으면 바로 렌더링
-  if (window.naver?.maps) {
+/**
+ * #map이 실제로 크기를 가진 뒤에 renderMap을 실행한다.
+ *
+ * 네이버 지도는 초기화 시점의 컨테이너 크기를 기준으로 타일을 그리기 때문에,
+ * 높이가 0인 상태에서 new Map()을 호출하면 아무것도 보이지 않는다.
+ * onMounted 시점에는 DOM에 붙어 있어도 아직 레이아웃이 끝나지 않았을 수 있다.
+ */
+const renderWhenSized = () => {
+  const el = document.getElementById('map');
+  if (!el) return;
+
+  if (el.clientWidth > 0 && el.clientHeight > 0) {
     renderMap();
     return;
   }
 
-  const clientId = import.meta.env.VITE_APP_NAVER_MAPS_CLIENT_ID;
-  const SCRIPT_ID = 'naver-maps-sdk';
+  // 크기가 잡히는 순간 한 번만 렌더링한다 (고정 setTimeout보다 정확하다)
+  const ro = new ResizeObserver(() => {
+    if (el.clientWidth > 0 && el.clientHeight > 0) {
+      ro.disconnect();
+      renderMap();
+    }
+  });
+  ro.observe(el);
+  resizeObserver = ro;
+};
 
+onMounted(() => {
+  // 인증에 실패하면 네이버가 이 훅을 부른다. 지도 대신 주소 안내를 보여준다.
+  window.navermap_authFailure = () => {
+    console.error(
+      '[NaverMaps] 인증 실패 — 클라이언트 ID가 없거나, 현재 도메인이 ' +
+        '네이버 클라우드 콘솔의 Web 서비스 URL에 등록되지 않았습니다.'
+    );
+    showFallback();
+  };
+
+  // 이미 인증된 SDK가 올라와 있으면 재사용
+  if (window.naver?.maps) {
+    renderWhenSized();
+    return;
+  }
+
+  const clientId = import.meta.env.VITE_APP_NAVER_MAPS_CLIENT_ID;
+
+  // 키 없이 로드하면 스크립트는 받아지지만 지도를 그릴 때 인증에 실패한다.
+  // undefined를 그대로 붙여 보내지 말고 여기서 멈춘다.
+  if (!clientId) {
+    console.warn(
+      '[Location] VITE_APP_NAVER_MAPS_CLIENT_ID 가 없어 지도를 불러오지 않았습니다.\n' +
+        '프로젝트 루트에 .env 파일을 만들고 아래 한 줄을 추가한 뒤 dev 서버를 재시작하세요.\n' +
+        'VITE_APP_NAVER_MAPS_CLIENT_ID=발급받은_클라이언트_ID'
+    );
+    showFallback();
+    return;
+  }
+
+  const SCRIPT_ID = 'naver-maps-sdk';
   const existing = document.getElementById(SCRIPT_ID);
+
   if (existing) {
-    existing.addEventListener('load', renderMap, { once: true });
+    existing.addEventListener('load', renderWhenSized, { once: true });
+    existing.addEventListener('error', showFallback, { once: true });
     return;
   }
 
   const script = document.createElement('script');
   script.id = SCRIPT_ID;
-  script.src = `https://openapi.map.naver.com/openapi/v3/maps.js${
-    clientId ? `?ncpClientId=${clientId}` : ''
-  }`;
-  script.onload = renderMap;
+  script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}`;
+  script.async = true;
+  script.onload = renderWhenSized;
   script.onerror = showFallback;
   document.head.appendChild(script);
 });
 
-onBeforeUnmount(() => clearTimeout(copyTimer));
+onBeforeUnmount(() => {
+  clearTimeout(copyTimer);
+  resizeObserver?.disconnect();
+});
 
 /* ─────────── 콘텐츠 ─────────── */
 

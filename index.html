@@ -9,11 +9,21 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <!-- 네이버 지도 API -->
-    <script
-      type="text/javascript"
-      src="https://openapi.map.naver.com/openapi/v3/maps.js"
-    ></script>
+    <!--
+      네이버 지도 SDK는 여기서 불러오지 않는다.
+      키 없이 로드하면 스크립트 자체는 받아지지만 지도를 그릴 때
+      런타임 인증에 실패한다("Naver Maps API 인증 실패").
+      오시는 길 페이지(Location.vue)에서 키와 함께 필요할 때만 로드한다.
+    -->
+    <script>
+      // SDK 인증 실패 시 네이버가 호출하는 훅. 원인을 콘솔에 남긴다.
+      window.navermap_authFailure = function () {
+        console.error(
+          '[NaverMaps] 인증 실패 — 클라이언트 ID가 없거나, 현재 도메인이 ' +
+            '네이버 클라우드 콘솔의 Web 서비스 URL에 등록되지 않았습니다.'
+        );
+      };
+    </script>
     <title>공명짐 - 진동 운동 전문 센터(통합운동전문센터)</title>
     <meta
       name="description"
